@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+
+@font-face {
+  font-family: 'yekanBakht';
+  src: url("./fonts/persian/YekanBakhRegular.otf");
+}
+@font-face {
+  font-family: 'yekanBakhtBold';
+  src: url("./fonts/persian/YekanBakhBold.otf");
+}
+@font-face {
+  font-family: 'iranSans';
+  src: url("./fonts/persian/iraniansans.ttf");
+}
+@font-face {
+  font-family: 'parastoo';
+  src: url("./fonts/persian/Parastoo.woff");
+}
+@font-face {
+  font-family: 'yekan';
+  src: url("./fonts/persian/yekan.ttf");
+}
+@font-face {
+  font-family: 'vazir';
+  src: url("./fonts/persian/Vazir-Light.ttf");
+}
+@font-face {
+  font-family: 'vazirBold';
+  src: url("./fonts/persian/Vazir-Light.ttf");
+}
+@font-face {
+  font-family: 'dima';
+  src: url("./fonts/persian/Dima\ Shekasteh.ttf");
+}
+
+@font-face {
+  font-family: 'dima';
+  src: url("./fonts/persian/Dima\ Shekasteh.ttf");
+}
+
+
+
+@font-face {
+  font-family: 'monsterItalic';
+  src: url("./fonts/english/Montserrat-Italic-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: 'playFair';
+  src: url("./fonts/english/PlayfairDisplay-Italic-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: 'rajdhani';
+  src: url("./fonts/english/Rajdhani-Medium.ttf");
+}
+
+@font-face {
+  font-family: 'tajawal';
+  src: url("./fonts/english/Tajawal-Light.ttf");
+}

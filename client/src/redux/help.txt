@@ -1,0 +1,20 @@
+// In Import part of component
+import { useDispatch, useSelector } from "react-redux";
+import { increase, decrease } from "@/redux/actions/testRedux";
+
+// In Functional part of component
+const dispatch = useDispatch();
+const numberSelector: any = useSelector((state: any) => state.testRedux.number);
+const increaseNumber = () => {
+  dispatch(increase({}));
+};
+const decreaseNumber = () => {
+  dispatch(decrease({}));
+};
+
+// Usage
+<div>
+      {numberSelector}
+      <button onClick={increaseNumber}>Increase</button>
+      <button onClick={decreaseNumber}>Decrease</button>
+</div>
