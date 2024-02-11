@@ -2,9 +2,7 @@
 export default function Component() {
   return (
     <>
-
-hi
+        <p className="text-dark">de</p>
     </>
-   
   )
 }
