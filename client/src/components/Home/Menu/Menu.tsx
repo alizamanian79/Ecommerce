@@ -2,12 +2,16 @@ import React from "react";
 import MenuDesktop from "./Desktop/MenuDesktop";
 import Phone from "./Phone/Phone";
 
-export default function Menu() {
+
+const Menu = () => {
+ 
+
   return (
     <>
-     <MenuDesktop />
-    <Phone />
+      <MenuDesktop />
+      <Phone />
     </>
-   
   );
-}
+};
+
+export default Menu;

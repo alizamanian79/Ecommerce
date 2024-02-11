@@ -9,6 +9,8 @@ const config: Config = {
   ],
   theme: {
     colors:{
+      //Home
+      'hBack':'#f4f4f4',
 
       'rmv':'transparent',
       'mainColor':'#232629',
@@ -20,7 +22,7 @@ const config: Config = {
       'brColor':'#606060',
       
       //Nav Items Color
-      
+      'mBackColor':'#ffffff',
       'nvColor':'#000000',
       'nvHoverColor':'#606060',
 
