@@ -10,20 +10,40 @@ const config: Config = {
   theme: {
     colors:{
 
+      'rmv':'transparent',
       'mainColor':'#232629',
+
 
       //Categories
       'ctColor':'#5f5f5f',
       'ctDesColor':'#606060',
       'brColor':'#606060',
       
-      //Menu Items Color
-      'miColor':'#606060'
-      'miHoverColor':'#606060',
+      //Nav Items Color
+      
+      'nvColor':'#000000',
+      'nvHoverColor':'#606060',
 
     },
 
     extend: {
+
+      width: (value:any) => {
+        const widthValues:any={};
+        for (let i = 1; i <= 100; i++) {
+          widthValues[i] = `${i}%`;
+        }
+        return widthValues;
+      },
+
+      height: (value:any) => {
+        const heightValues:any={};
+        for (let i = 1; i <= 100; i++) {
+          heightValues[i] = `${i}px`;
+        }
+        return heightValues;
+      },
+
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

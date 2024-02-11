@@ -1,8 +1,12 @@
 
+import Layout from "@/components/Home/Layout"
+
+
 export default function Component() {
   return (
-    <>
-        <p className="text-dark">de</p>
-    </>
+    
+    <Layout>
+      <p>s</p>
+    </Layout>
   )
 }
