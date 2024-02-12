@@ -17,10 +17,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   );
   return (
     <>
-    
       <Search /> 
-   
-   
       <div
       
         className={
