@@ -3,32 +3,27 @@ import Image from "next/image";
 import logo from "../../../../../public/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faBars } from "@fortawesome/free-solid-svg-icons";
-import Nav from "../Phone/NavItem";
+import NavItem from "../Phone/NavItem";
+
+import { menuStatus } from "@/redux/actions/menuRedux";
 import { useDispatch, useSelector } from "react-redux";
 
-interface Dt {
-  data: { title: string; link: string }[];
-}
+import NavIcons from "./NavIcons";
 
 const Phone: React.FC = () => {
-
-  // const dispatch = useDispatch();
-  // const status: any = useSelector(
-  //   (state: any) => state.searchRedux.searchStatus
-  // );
-
-  const [hamburgerMenu, setHamburgerMenu] = useState(false);
+  
+  const dispatch = useDispatch()
+  const isOpen:any = useSelector((state:any)=>state.menuRedux.isOpen);
 
   return (
     <>
-      {/* Black Screen */}
-     
-
-
-<Nav hamburger={hamburgerMenu} />
-
-
-
+      <div
+        className={
+          isOpen == true
+            ? `absolute z-[20] w-100 min-h-screen bg-[#4e4e4e79] opacity-[0.75px] block`
+            : `hidden z-[0] `
+        }
+      ></div>
 
       <div
         style={{ direction: "rtl" }}
@@ -42,13 +37,12 @@ const Phone: React.FC = () => {
           }
         >
           <div
-            onClick={() => setHamburgerMenu(!hamburgerMenu)}
             className={"w-1/2 h-full flex  justify-sart items-center"}
           >
             <FontAwesomeIcon
-              onClick={() => setHamburgerMenu(!hamburgerMenu)}
+              onClick={() =>dispatch(menuStatus({}))}
               icon={faBars}
-              className={`text-[25px] text-[black]`}
+              className={`text-[25px] text-[#772828]`}
             />
           </div>
 
@@ -57,6 +51,9 @@ const Phone: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <NavItem />
+      <NavIcons />
     </>
   );
 };
