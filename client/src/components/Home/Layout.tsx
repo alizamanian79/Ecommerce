@@ -2,7 +2,8 @@ import React, { FC, useState } from "react";
 import Menu from "./Menu/Menu";
 import Search from "./Search/Search";
 
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { isSearch } from "@/redux/actions/searchRedux";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -10,11 +11,18 @@ interface LayoutProps {
 
 const Layout: FC<LayoutProps> = ({ children }) => {
  
-const status:any = useSelector((state:any)=>state.searchRedux.searchStatus)
-
+  const dispatch = useDispatch();
+  const status: any = useSelector(
+    (state: any) => state.searchRedux.searchStatus
+  );
   return (
-    <><Search />
+    <>
+    
+      <Search /> 
+   
+   
       <div
+      
         className={
           status == false
             ? `w-100 min-h-screen flex bg-hBack flex-col items-center relative blur-[0]`
