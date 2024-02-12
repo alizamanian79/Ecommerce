@@ -15,7 +15,7 @@ export default function Nav() {
 
      {navItems.map((item,index)=>(
         <li key={index} onMouseEnter={(evt)=>handleMouseOver(index)} onMouseLeave={()=>setNavSpan(undefined)}
-         className={'relative w-auto h-auto z-1 rounded  px-4 py-1 m-1 font-[yekanBakht] text-[17.5px] text-nvColor hover:cursor-pointer flex justify-center items-center'}>
+         className={'relative w-auto h-auto z-1 rounded  lg:px-4 py-1 m-1 md:px-3 md:m-0  font-[yekanBakht] lg:text-[17.5px] sm:text-[16.5px] text-nvColor hover:cursor-pointer flex justify-center items-center'}>
        {item.title}
          <span className={navSpan===index 
          ? 'w-100 rounded h-[100%] bg-[#172a3439] absolute z-[0] right-0  top-[0] transition-[width] ease-in-out delay-150'

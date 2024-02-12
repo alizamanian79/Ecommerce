@@ -10,7 +10,7 @@ export const searchRedux = createSlice({
   name: "searchRedux",
   // Values
   initialState: <initialStateIF>{
-    searchStatus: true,
+    searchStatus: false,
   },
   //Functions Part
   reducers: {
