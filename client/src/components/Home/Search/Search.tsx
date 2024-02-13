@@ -14,7 +14,7 @@ const Search = () => {
   return (
     <div
     
-    onClick={() => dispatch(isSearch({ searchStatus:false }))}
+    
       className={
         status === true
           ? `w-100 min-h-screen bg-[#000000ad] absolute z-[11] 
