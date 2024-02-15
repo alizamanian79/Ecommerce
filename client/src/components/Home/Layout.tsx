@@ -22,7 +22,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
       
         className={
           status == false
-            ? `w-100 max-h-[100%] flex bg-hBack flex-col items-center relative blur-[0]`
+            ? `w-100 max-h-[100%] flex bg-hBack flex-col items-center relative blur-[0] relative`
             : `blur-[1px]`
         }
         style={{ direction: "rtl" }}
