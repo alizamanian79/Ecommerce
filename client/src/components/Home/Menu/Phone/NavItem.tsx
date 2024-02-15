@@ -15,36 +15,39 @@ interface Dt {
 
 const Nav: React.FC = () => {
   const dispatch = useDispatch()
-  const isOpen:any = useSelector((state:any)=>state.menuRedux.isOpen);
+  const isOpen:any = useSelector((state:any)=>state.menuRedux.isOpen)
+  
   const [data, setdData] = useState<Dt["data"]>(navStaticData.data);
 
-  
 
-
-  const handleMenu =()=>{
+  const handleMenu = ()=>{
     dispatch(menuStatus({}))
   }
+  
 
   return (
     <>
+   
       <div
         className={
           isOpen == true
-            ? `absolute right-0 z-20 w-62 h-full bg-[white] transition-all ease-out delay-100 `
-            : `absolute right-0 z-[-1] w-0 h-full bg-[white] transition-all ease-out delay-100`
+            ? `absolute z-[0] bg-[white] right-0 top-[10px] min-h-screen
+            w-50  transition-all ease-out delay-75 `
+            : `absolute z-[-1] bg-[white] right-0 top-[10px] min-h-screen
+            w-0  transition-all ease-out delay-300 `
         }
       >
         <div
           className={
             isOpen == true
               ? `w-100 px-5 h-[13%] border-b-[0.75px] border-[#a7a6a66b] flex 
-   justify-between items-center bg-[white] opacity-1 transition-all ease-out delay-75 translate-x-0`
+   justify-between items-center bg-rmv opacity-1 transition-all ease-out delay-75 translate-x-0`
               : `w-100 px-4 h-[13%]  border-b-[0.75px] border-[#a7a6a66b] flex
-  justify-between items-center bg-[white] opacity-0 transition-all ease-out delay-75 translate-x-[-8px]`
+  justify-between items-center bg-rmv opacity-0 transition-all ease-out delay-75 translate-x-[-8px]`
           }
         >
           <div>
-            {" "}
+          
             <FontAwesomeIcon
               onClick={handleMenu}
               icon={faClose}
@@ -52,7 +55,7 @@ const Nav: React.FC = () => {
             />
           </div>
           <div>
-            {" "}
+         
             <Image src={logo} height={100} width={100} alt="" />
           </div>
         </div>
@@ -77,6 +80,7 @@ const Nav: React.FC = () => {
           </ul>
         </div>
       </div>
+      
     </>
   );
 };
