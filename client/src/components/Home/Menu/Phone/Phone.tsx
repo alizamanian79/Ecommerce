@@ -17,23 +17,22 @@ const Phone: React.FC = () => {
 
   return (
     <>
-      <div
-        className={
-          isOpen == true
-            ? `absolute z-[20] w-100 min-h-screen bg-[#4e4e4e79] opacity-[0.75px] block`
-            : `hidden z-[0] `
-        }
-      ></div>
+     
+
+
 
       <div
         style={{ direction: "rtl" }}
         className={
-          "w-100 h-50 bg-[#ffffff] md:hidden sm:flex flex flex-wrap justify-center items-center"
+          `w-100 max-sm:h-[50px] bg-[white] md:hidden sm:flex flex
+           flex-wrap justify-center items-center
+          sticky top-0 z-[10]`
         }
       >
+        <NavItem />
         <div
           className={
-            "w-96 bg-rmv flex flex-wrap justify-center items-center h-full"
+            "w-96 bg-rmv flex flex-wrap justify-center items-center "
           }
         >
           <div
@@ -42,7 +41,7 @@ const Phone: React.FC = () => {
             <FontAwesomeIcon
               onClick={() =>dispatch(menuStatus({}))}
               icon={faBars}
-              className={`text-[25px] text-[#772828]`}
+              className={`text-[25px] text-[black]`}
             />
           </div>
 
@@ -52,7 +51,7 @@ const Phone: React.FC = () => {
         </div>
       </div>
 
-      <NavItem />
+     
       <NavIcons />
     </>
   );

@@ -27,11 +27,25 @@ const Nav: React.FC = () => {
 
   return (
     <>
+
+{isOpen && (
+  <div
+          className={
+  
+              `absolute  top-[0] z-[19] w-100 h-screen flex bg-[#2b2b2b6e] blur-[1px]`
+          }
+        >
+          
+        </div>
+)}
+
+
+
       <div
         className={
           isOpen == true
-            ? `absolute right-0 z-20 w-62 h-full bg-[white] transition-all ease-out delay-100 `
-            : `absolute right-0 z-[-1] w-0 h-full bg-[white] transition-all ease-out delay-100`
+            ? `absolute top-0 right-0 z-20 w-62 max-sm:h-screen bg-[white] transition-all ease-out delay-100 `
+            : `absolute top-0 right-0 z-[-1] w-0 max-sm:h-screen bg-[white] transition-all ease-out delay-100`
         }
       >
         <div

@@ -1,39 +1,41 @@
 import React, { FC, useState } from "react";
 import Menu from "./Menu/Menu";
-import Search from "./Search/Search";
 import Slider from "./Slider/Slider";
-import { useSelector,useDispatch } from "react-redux";
-import { isSearch } from "@/redux/actions/searchRedux";
+import { useSelector } from "react-redux";
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
+const Layout = () => {
+  const blackScreen: any = useSelector((state: any) => state.menuRedux.isOpen);
 
-const Layout: FC<LayoutProps> = ({ children }) => {
- 
-  const dispatch = useDispatch();
-  const status: any = useSelector(
-    (state: any) => state.searchRedux.searchStatus
-  );
+  console.log(blackScreen);
+
   return (
     <>
-      <Search /> 
-      <div
-      
-        className={
-          status == false
-            ? `w-100 max-h-[100%] flex bg-hBack flex-col items-center relative blur-[0] relative`
-            : `blur-[1px]`
-        }
-        style={{ direction: "rtl" }}
-      >
-         
-        <Menu />
-        <Slider />
+      <div className={`relative w-100 min-h-screen flex bg-hBack flex-col blur-[0]`}>
 
-        <div className="w-94 min-sm:w-95 min-h-screen flex bg-red flex-col items-center relative">
-          {children}
+       
+        <div
+          className={
+           
+               ` `
+          
+          }
+          style={{ direction: "rtl" }}
+        >
+          <Menu />
+          <Slider />
+          <Slider />
+          <Slider />
+          <Slider />
+          <Slider />
+
+
+          <div className="w-94 min-sm:w-95  flex bg-red flex-col items-center relative"></div>
         </div>
+
+
+
+
+
       </div>
     </>
   );
