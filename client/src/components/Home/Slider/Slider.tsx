@@ -70,7 +70,7 @@ const [screenSize, setScreenSize] = useState<number>(0)
   return (
     <>
       <div
-        className={"relative w-100 mt-[0]"}
+        className={"relative w-100 mt-[0rem]"}
       >
         <Buttons cb ={handleBTN}/>
         <div>
