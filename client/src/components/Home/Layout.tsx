@@ -8,8 +8,6 @@ import LineTitle from "./LineTitle/LineTitle";
 const Layout = () => {
   const blackScreen: any = useSelector((state: any) => state.menuRedux.isOpen);
 
-  console.log(blackScreen);
-
   return (
     <>
       <div
