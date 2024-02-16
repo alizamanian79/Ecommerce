@@ -3,6 +3,7 @@ import Menu from "./Menu/Menu";
 import Slider from "./Slider/Slider";
 import { useSelector } from "react-redux";
 import NavIcons from "./Menu/Phone/NavIcons";
+import LineTitle from "./LineTitle/LineTitle";
 
 const Layout = () => {
   const blackScreen: any = useSelector((state: any) => state.menuRedux.isOpen);
@@ -11,32 +12,21 @@ const Layout = () => {
 
   return (
     <>
-      <div className={`relative w-100 min-h-screen flex bg-hBack flex-col blur-[0]`}>
+      <div
+        className={`relative w-100 min-h-screen flex bg-hBack flex-col blur-[0] items-center`}
+        style={{ direction: "rtl" }}
+      >
+        <Menu />
+        <Slider />
 
-       
-        <div
-          className={
-           
-               ` `
-          
-          }
-          style={{ direction: "rtl" }}
-        >
-          <Menu />
-          <Slider />
-          <Slider />
-          <Slider />
-          <Slider />
-          <Slider />
-
-
-          <div className="w-94 min-sm:w-95  flex bg-red flex-col items-center relative"></div>
+        <div className={'w-94 h-auto flex items-center flex-col'}>
+        
+<LineTitle  tprops={null} dprops={null}/>
         </div>
+      
+        
 
         <NavIcons />
-
-
-
       </div>
     </>
   );
