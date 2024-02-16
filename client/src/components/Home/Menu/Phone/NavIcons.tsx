@@ -13,7 +13,7 @@ function NavIcons() {
   return (
     <div style={{direction:"ltr"}} className={
       `w-100 h-50 sticky bottom-0 max-sm:flex md:hidden justify-center items-center
-       bg-[#ffffff] z-[20]`}>
+       bg-[#ffffff]`}>
         
         <ul className='w-100 flex justify-center items-center h-[100%] '>
         <li className={`w-1/4 flex justify-center items-center h-[100%] hover:cursor-pointer `}><UserIcon /></li>

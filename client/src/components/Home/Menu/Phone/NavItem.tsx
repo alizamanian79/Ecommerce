@@ -33,7 +33,7 @@ const Nav: React.FC = () => {
         className={
           isOpen == true
             ? `absolute top-0 right-0 z-20 w-62 max-sm:h-screen bg-[white] transition-all ease-out delay-100 `
-            : `absolute top-0 right-0 z-[-1] w-0 max-sm:h-screen bg-[white] transition-all ease-out delay-100`
+            : `absolute top-0 right-0 z-[-10] w-0 max-sm:h-screen bg-[white] transition-all ease-out delay-100`
         }
       >
         <div
@@ -46,7 +46,7 @@ const Nav: React.FC = () => {
           }
         >
           <div>
-            {" "}
+          
             <FontAwesomeIcon
               onClick={handleMenu}
               icon={faClose}
@@ -54,7 +54,7 @@ const Nav: React.FC = () => {
             />
           </div>
           <div>
-            {" "}
+       
             <Image src={logo} height={100} width={100} alt="" />
           </div>
         </div>
@@ -66,7 +66,9 @@ const Nav: React.FC = () => {
               : `flex w-100  h-[80%] opacity-0 transition-all ease-out delay-75 translate-y-[10px]`
           }
         >
-          <ul className={"mt-[1.3rem] flex w-100 items-center px-5  flex-col"}>
+          <ul className={isOpen == true ? 
+          "mt-[1.3rem] flex w-100 items-center px-5  flex-col"
+        :"mt-[1.3rem] flex w-0 items-center px-0  flex-col"}>
             {data.map((item, key) => (
               <li
                 className={

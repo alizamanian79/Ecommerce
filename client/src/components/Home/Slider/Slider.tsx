@@ -82,6 +82,7 @@ const [screenSize, setScreenSize] = useState<number>(0)
           >
             {data.map((item, index) => (
               <Image
+              key={index}
                 src={item.src}
                 height={0}
                 width={0}
