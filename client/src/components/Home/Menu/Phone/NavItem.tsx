@@ -12,34 +12,22 @@ interface Dt {
   data: { title: string; link: string }[];
 }
 
-
 const Nav: React.FC = () => {
-  const dispatch = useDispatch()
-  const isOpen:any = useSelector((state:any)=>state.menuRedux.isOpen);
+  const dispatch = useDispatch();
+  const isOpen: any = useSelector((state: any) => state.menuRedux.isOpen);
   const [data, setdData] = useState<Dt["data"]>(navStaticData.data);
 
-  
-
-
-  const handleMenu =()=>{
-    dispatch(menuStatus({}))
-  }
+  const handleMenu = () => {
+    dispatch(menuStatus({}));
+  };
 
   return (
     <>
-
-{isOpen && (
-  <div
-          className={
-  
-              `absolute  top-[0] z-[19] w-100 h-screen flex bg-[#2b2b2b6e] blur-[1px]`
-          }
-        >
-          
-        </div>
-)}
-
-
+      {isOpen && (
+        <div
+          className={`absolute  top-[0] z-[19] w-100 h-screen flex bg-[#2b2b2b6e] blur-[1px]`}
+        ></div>
+      )}
 
       <div
         className={

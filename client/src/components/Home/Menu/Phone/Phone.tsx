@@ -30,6 +30,7 @@ const Phone: React.FC = () => {
         }
       >
         <NavItem />
+        
         <div
           className={
             "w-96 bg-rmv flex flex-wrap justify-center items-center "
@@ -49,10 +50,12 @@ const Phone: React.FC = () => {
             <Image src={logo} height={100} width={100} alt="" />
           </div>
         </div>
+
+         
       </div>
 
      
-      <NavIcons />
+     
     </>
   );
 };

@@ -2,6 +2,7 @@ import React, { FC, useState } from "react";
 import Menu from "./Menu/Menu";
 import Slider from "./Slider/Slider";
 import { useSelector } from "react-redux";
+import NavIcons from "./Menu/Phone/NavIcons";
 
 const Layout = () => {
   const blackScreen: any = useSelector((state: any) => state.menuRedux.isOpen);
@@ -32,7 +33,7 @@ const Layout = () => {
           <div className="w-94 min-sm:w-95  flex bg-red flex-col items-center relative"></div>
         </div>
 
-
+        <NavIcons />
 
 
 
