@@ -4,6 +4,7 @@ import Slider from "./Slider/Slider";
 import { useSelector } from "react-redux";
 import NavIcons from "./Menu/Phone/NavIcons";
 import LineTitle from "./LineTitle/LineTitle";
+import ProductCard from "./ProductCard/ProductCard";
 
 const Layout = () => {
   const blackScreen: any = useSelector((state: any) => state.menuRedux.isOpen);
@@ -17,12 +18,10 @@ const Layout = () => {
         <Menu />
         <Slider />
 
-        <div className={'w-94 h-auto flex items-center flex-col'}>
-        
-<LineTitle  tprops={null} dprops={null}/>
+        <div className={"w-94 h-auto flex items-center flex-col"}>
+          <LineTitle tprops={null} dprops={null} />
+          <ProductCard />
         </div>
-      
-        
 
         <NavIcons />
       </div>
