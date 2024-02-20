@@ -1,31 +1,90 @@
+import React, { ReactEventHandler } from "react";
+import Image from "next/image";
+import manCollection from "../../../../public/productCategories/mansCollection.png";
+import kidsCollection from "../../../../public/productCategories/kidsCollection.png";
+import womanCollection from "../../../../public/productCategories/womanCollection.png";
+import beautyCollection from "../../../../public/productCategories/beautyCollection.png";
+import homeCollection from "../../../../public/productCategories/Home and living collection.png";
+import Link from "next/link";
 
-
-import React from 'react'
+const imageStyles =
+  "w-97 h-[97%] object-cover rounded-[2px] hover:cursor-pointer hover:shadow-lg transition-all ease-out delay-75";
 
 export default function ProductCard() {
+  const handleClick = (e: React.ChangeEvent, value: string) => {
+    e.preventDefault();
+    alert(value);
+  };
+
   return (
-    <div className={`w-100 h-[500px] bg-[red] flex flex-wrap`}>
-        
-        <div className={'w-2/4 h-[1/2] max-sm:w-[50%] bg-[black]'}>
-de
+    <div className={`w-100 h-auto flex flex-wrap`}>
+      <Link href="/products/man">
+        <div
+          className={
+            "w-2/4 h-auto max-sm:w-[100%] rmv flex justify-center items-center hover:cursor-pointer "
+          }
+        >
+          <Image
+            src={manCollection}
+            className={imageStyles}
+            alt="Man Collection"
+          />
         </div>
-
-        <div className={'w-1/4 h-[1/2] max-sm:w-[50%] bg-[#2e62a5]'}>
-           de 
+      </Link>
+      <Link href="/products/man">
+        <div
+          className={
+            "w-1/4 h-auto max-sm:w-[50%] bg-rmv flex justify-center items-center hover:cursor-pointer "
+          }
+        >
+          <Image
+            src={kidsCollection}
+            className={imageStyles}
+            alt="Kids Collection"
+          />
         </div>
-
-        <div className={'w-1/4 h-[1/2] max-sm:w-[50%] bg-[#7937bb]'}>
-        de    
+      </Link>
+      <Link href="/products/man">
+        <div
+          className={
+            "w-1/4 h-auto max-sm:w-[50%] bg-rmv flex justify-center items-center hover:cursor-pointer "
+          }
+        >
+          <Image
+            src={womanCollection}
+            width={250}
+            height={250}
+            className={imageStyles}
+            alt="Woman Collection"
+          />
         </div>
-
-        <div className={'w-2/4 h-[1/2] max-sm:w-[50%] bg-mainColor'}>
-     ded       
+      </Link>
+      <Link href="/products/man">
+        <div
+          className={
+            "w-2/4 h-auto max-sm:w-[100%] flex justify-center items-center hover:cursor-pointer "
+          }
+        >
+          <Image
+            src={beautyCollection}
+            className={imageStyles}
+            alt="Beauty Collection"
+          />
         </div>
-
-        <div className={'w-2/4 h-[1/2] max-sm:w-full bg-mainColor'}>
-            de
+      </Link>
+      <Link href="/products/man">
+        <div
+          className={
+            "w-2/4 h-auto max-sm:w-full bg-rmv flex justify-center items-center hover:cursor-pointer "
+          }
+        >
+          <Image
+            src={homeCollection}
+            className={imageStyles}
+            alt="Home Collection"
+          />
         </div>
-        
+      </Link>
     </div>
-  )
+  );
 }
