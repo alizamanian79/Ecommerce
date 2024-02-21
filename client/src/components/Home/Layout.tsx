@@ -19,7 +19,7 @@ const Layout = () => {
         <Slider />
 
         <div className={"w-94 h-auto flex items-center flex-col"}>
-          <LineTitle tprops={null} dprops={null} />
+          <LineTitle tprops={null} sprops={null} dprops={null} />
           <ProductCard />
         </div>
 

@@ -17,9 +17,8 @@ const config: Config = {
 
 
       //Categories
-      'ctColor':'#5f5f5f',
       'ctDesColor':'#606060',
-      'brColor':'#606060',
+      'brColor':'#4c4c4c94',
       
       //Nav Items Color
       'mBackColor':'#ffffff',
