@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import NavIcons from "./Menu/Phone/NavIcons";
 import LineTitle from "./LineTitle/LineTitle";
 import ProductCard from "./ProductCard/ProductCard";
-
+import RecentlyProduct from "./RecentlyProduct/RecentlyProduct";
 const Layout = () => {
   const blackScreen: any = useSelector((state: any) => state.menuRedux.isOpen);
 
@@ -21,6 +21,10 @@ const Layout = () => {
         <div className={"w-94 h-auto flex items-center flex-col"}>
           <LineTitle tprops={null} sprops={null} dprops={null} />
           <ProductCard />
+
+          <LineTitle tprops={'ویژگی های'} sprops={'محصول'} dprops={'محصولات شگفت انگیز اخیراً در کاتالوگ ما اضافه شده است'} />
+          <RecentlyProduct />
+          
         </div>
 
         <NavIcons />

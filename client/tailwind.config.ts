@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     colors:{
+
+      'red':'red',
+
       //Home
       'hBack':'#f4f4f4',
 
