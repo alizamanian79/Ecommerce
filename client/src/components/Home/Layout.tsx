@@ -6,6 +6,7 @@ import NavIcons from "./Menu/Phone/NavIcons";
 import LineTitle from "./LineTitle/LineTitle";
 import ProductCard from "./ProductCard/ProductCard";
 import RecentlyProduct from "./RecentlyProduct/RecentlyProduct";
+import SeasonCollection from "./SeasonCollection/SeasonCollection";
 const Layout = () => {
   const blackScreen: any = useSelector((state: any) => state.menuRedux.isOpen);
 
@@ -25,6 +26,9 @@ const Layout = () => {
           <LineTitle tprops={'ویژگی های'} sprops={'محصول'} dprops={'محصولات شگفت انگیز اخیراً در کاتالوگ ما اضافه شده است'} />
           <RecentlyProduct />
           
+          <LineTitle tprops={'محصولات'} sprops={'زمستانی'} dprops={'محصولات شگفت انگیز اخیراً در کاتالوگ ما اضافه شده است'} />
+          <SeasonCollection />
+
         </div>
 
         <NavIcons />

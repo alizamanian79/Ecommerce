@@ -45,7 +45,7 @@ function RecentlyProduct() {
             
             starsRating
 
-            <div className={`lg:w-25 max-sm:w-25 md:w-38  
+            <div className={`lg:w-30 max-sm:w-25 md:w-38  
             
             flex justify-between items-center`}>
             <FontAwesomeIcon icon={faHeart} className={'py-[12px] px-[12px] md:py-[8px] md:px-[8px] bg-[#222529] text-[15px] text-[white] rounded-sm'} />
