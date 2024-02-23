@@ -13,7 +13,7 @@ function RecentlyProduct() {
     <div className="w-100 h-auto py-6  flex flex-wrap justify-start items-center bg-[black]">
 
 
-      <Link href="/" className={"w-1/4 h-[500px] bg-red"}>
+      <Link href="/" className={"w-1/4 h-[500px] bg-red rounded-md"}>
         <Image
           src={firstImage}
           width={0}
