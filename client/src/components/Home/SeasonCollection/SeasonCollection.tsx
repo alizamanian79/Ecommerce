@@ -16,7 +16,7 @@ const [data, setData] = useState(seasonStaticData)
         width={0}
         height={0}
         src={winter}
-        className={"w-100 h-[97%] object-cover"}
+        className={"w-100 h-[97%] object-cover hover:cursor-pointer h:transform:scale(10.2);"}
         alt="Man Collection"
       />
       </div>
@@ -27,7 +27,7 @@ const [data, setData] = useState(seasonStaticData)
 
 
     {data.map((item,key)=>(
-      <div className={'w-[49.5%] h-[49%] bg-sBack flex flex-col justify-center rounded-[5px] items-center object-cover relative'}>
+      <div className={'w-[49.5%] h-[49%] bg-sBack flex flex-col justify-center rounded-[5px] items-center object-cover relative hover:cursor-pointer'}>
         
       {item.image && (
          <Image src={item.image} width={0} height={0} alt="" className="w-100 h-[100%] object-cover rounded-[5px]"  />
