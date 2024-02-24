@@ -28,9 +28,21 @@ const config: Config = {
       'nvColor':'#000000',
       'nvHoverColor':'#606060',
 
+
+
+      //Season
+      'sBack':'#222529'
+
+
     },
 
     extend: {
+
+      backgroundImage: {
+        'heroPattern': "url('/public/season/woman.png')",
+        'footer-texture': "url('/img/footer-texture.png')",
+      },
+
 
       width: (value:any) => {
         const widthValues:any={};
