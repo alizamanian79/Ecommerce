@@ -1,6 +1,6 @@
 import { StaticImageData } from "next/image"
-import woman from "../../../../public/Season/woman.png"
-import man from "../../../../public/Season/man.png"
+import woman from "../../../../public/Categori/woman.png"
+import man from "../../../../public/Categori/man.png"
 
 interface dt {
     title?:string,

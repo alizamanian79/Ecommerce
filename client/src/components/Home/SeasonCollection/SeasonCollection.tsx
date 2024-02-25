@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 
 import seasonStaticData from "./seasonStaticData";
-import winter from "../../../../public/Season/winter.png";
+import winter from "../../../../public/Categori/winter.png";
 
 function SeasonCollection() {
   const [data, setData] = useState(seasonStaticData);
