@@ -10,7 +10,7 @@ const imageStyles = 'w-97 h-[97%] object-cover rounded-[2px] hover:cursor-pointe
 
 export default function ProductCard() {
 
-  const handleClick = (e:React.ChangeEvent,value:string) =>{
+  const handleClick = (e:any,value:string) =>{
     e.preventDefault()
     alert(value)
   }

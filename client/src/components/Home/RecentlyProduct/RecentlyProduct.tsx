@@ -43,9 +43,11 @@ function RecentlyProduct() {
 
         <div className={'w-100 h-[37px] bg-rmv mt-[5px] flex justify-between items-center'}>
             
-            starsRating
+           <div className={`w-75 lg:w-75 md:w-60 sm:w-80 `}>
+Stars
+           </div>
 
-            <div className={`lg:w-30 max-sm:w-25 md:w-38  
+            <div className={`w-25 lg:w-25 md:w-40 sm:w-20 
             
             flex justify-between items-center`}>
             <FontAwesomeIcon icon={faHeart} className={'py-[12px] px-[12px] md:py-[8px] md:px-[8px] bg-[#222529] text-[15px] text-[white] rounded-sm'} />
