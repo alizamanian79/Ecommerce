@@ -7,6 +7,7 @@ import LineTitle from "./LineTitle/LineTitle";
 import ProductCard from "./ProductCard/ProductCard";
 import RecentlyProduct from "./RecentlyProduct/RecentlyProduct";
 import SeasonCollection from "./SeasonCollection/SeasonCollection";
+import SendEmail from "./SendEmail/SendEmail";
 const Layout = () => {
   const blackScreen: any = useSelector((state: any) => state.menuRedux.isOpen);
 
@@ -28,6 +29,8 @@ const Layout = () => {
           
           <LineTitle tprops={'محصولات'} sprops={'زمستانی'} dprops={'محصولات شگفت انگیز اخیراً در کاتالوگ ما اضافه شده است'} />
           <SeasonCollection />
+
+          <SendEmail />
 
         </div>
 
