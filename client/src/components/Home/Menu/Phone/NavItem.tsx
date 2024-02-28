@@ -69,8 +69,9 @@ const Nav: React.FC = () => {
           <ul className={isOpen == true ? 
           "mt-[1.3rem] flex w-100 items-center px-5  flex-col"
         :"mt-[1.3rem] flex w-0 items-center px-0  flex-col"}>
-            {data.map((item, key) => (
+            {data.map((item, index) => (
               <li
+              key={index}
                 className={
                   "mt-[1rem] font-[yekanBakht] bg-rmv w-90 h-35 flex items-center rounded-[3px]"
                 }

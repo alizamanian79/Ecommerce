@@ -18,8 +18,10 @@ function RecentlyProduct() {
   return (
     <div className="w-100 h-auto py-6  flex flex-wrap justify-start items-center bg-rmv ">
 
-    {productData.map((item)=>(
-  <Link href="/" className={`lg:w-1/4 md:w-33 sm:w-100  lg:h-[500px] md:h-auto sm:h-auto
+    {productData.map((item,index)=>(
+  <Link href="/" 
+  key={index}
+  className={`lg:w-1/4 md:w-33 sm:w-100  lg:h-[500px] md:h-auto sm:h-auto
    flex justify-center items-cente
 
     px-2 py-2

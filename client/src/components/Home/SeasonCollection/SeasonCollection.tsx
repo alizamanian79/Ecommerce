@@ -31,8 +31,9 @@ function SeasonCollection() {
             "w-97 h-[97%] max-sm:w-100  flex flex-wrap justify-between items-center"
           }
         >
-          {data.map((item, key) => (
+          {data.map((item, index) => (
             <div
+            key={index}
               className={
                 "w-[49.5%] h-[49%] bg-sBack flex flex-col justify-center rounded-[5px] items-center object-cover relative hover:cursor-pointer"
               }
