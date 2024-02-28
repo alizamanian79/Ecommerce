@@ -38,10 +38,6 @@ const config: Config = {
 
     extend: {
 
-      backgroundImage: {
-        'heroPattern': "url('/public/season/woman.png')",
-        'footer-texture': "url('/img/footer-texture.png')",
-      },
 
 
       width: (value:any) => {
