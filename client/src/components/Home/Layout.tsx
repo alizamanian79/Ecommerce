@@ -8,6 +8,7 @@ import ProductCard from "./ProductCard/ProductCard";
 import RecentlyProduct from "./RecentlyProduct/RecentlyProduct";
 import SeasonCollection from "./SeasonCollection/SeasonCollection";
 import SendEmail from "./SendEmail/SendEmail";
+import Footer from "./Footer/Footer";
 const Layout = () => {
   const blackScreen: any = useSelector((state: any) => state.menuRedux.isOpen);
 
@@ -33,7 +34,7 @@ const Layout = () => {
           <SendEmail />
 
         </div>
-
+        <Footer />
         <NavIcons />
       </div>
     </>
