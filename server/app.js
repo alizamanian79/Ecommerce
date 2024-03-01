@@ -15,12 +15,13 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 // import Routes
-const apiTest = require('./routes/products')
-const apiUpload = require('./routes/upload')
+const apiProduct = require('./routes/products')
+const apiTest = require('./routes/test/testApi')
 
 
-app.use('/api',apiTest);
-app.use('/api/upload',apiUpload);
+app.use('/api/test',apiTest);
+app.use('/api',apiProduct);
+
 
 app.listen(port,()=>console.log(`App is Listening to port ${port}`))
 
