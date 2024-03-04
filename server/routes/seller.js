@@ -89,6 +89,8 @@ router.delete(`/${routerName}/${dml[4]}/:id`,async(req,res,next)=>{
     if (error) {
       throw error;
     } else 
+
+    deleteFolder(`${sID}`,`../uploads`)
       res.send("Item Deleted Successfuly . . .");
     
   });
