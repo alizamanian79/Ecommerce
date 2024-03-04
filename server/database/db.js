@@ -3,8 +3,8 @@
 const mysql = require('mysql2');
 require('dotenv').config();
 
-const conn=mysql.createPool({
-    host: process.env.HOST,
+const conn=mysql.createConnection({
+    host: process.env.DBHOST,
     database: process.env.DBNAME,
     user: process.env.DBUSER,
     password: process.env.DBPASSWORD,
