@@ -3,6 +3,10 @@ const express = require('express');
 const router =express.Router();
 const textConvert = require('../publicJS/textConverter/index');
 const {convertToUpperCase,convertToLowerCase}=textConvert;
+
+const folderManager = require("../publicJS/folderManager");
+const {createFolder,deleteFolder} = folderManager
+
 const conn = require("../database/db")
 const dml = [
   "pattern",
@@ -64,6 +68,7 @@ router.post(`/${routerName}/${dml[2]}`,async(req,res,next)=>{
     if (error) {
       throw error;
     } else 
+
       res.send("Item Added Successfuly . . .");
     
   });
@@ -94,33 +99,35 @@ router.delete(`/${routerName}/${dml[4]}/:id`,async(req,res,next)=>{
 
 
 
-//login
+//Login
+
+//select
 router.post(`/${routerName}/login`,async(req,res,next)=>{
   const {sUserName,sPassword,sResetToken}= req.body
-  const loginSP = `call ecommerceshop.SP_SELECT_SELLER(?, ?, null)`
-  const forgotten = `call ecommerceshop.SP_SELECT_SELLER(?, null, ?)`
 
-  if(sResetToken == null || "" || undefined || []){
-    conn.query(loginSP,[sUserName,sPassword], (error, result) => {
-      if (error) {
-        throw error;
-      } else 
-        res.send(result[0]);
-      
-    });
+  const SP = `call ecommerceshop.SP_SELECT_SELLER(?,?)`
 
-  }else{
 
-    conn.query(forgotten,[sUserName,sResetToken], (error, result) => {
-      if (error) {
-        throw error;
-      } else 
-        res.send(result[0]);
-      
-    });
+  if(sUserName == null || sPassword == null){
+    res.status(500).send("Emtiy value")
+return
 
   }
+else
+    conn.query(SP,[sUserName,sPassword], (error, result) => {
+      if (error) {
+        throw res.send("fuck");
+      } else 
+       response=result[0];
+       createFolder(`${response[0].sID}`,`../uploads`)
+      res.send(response)
+      
+    });
 
+  
+  
+
+  
 })
 
 
