@@ -52,30 +52,23 @@ router.post(`/${routerName}/${dml[2]}`,async(req,res,next)=>{
     sPhone,
     sUserName,
     sPassword,
-    sResetToken,
   }=req.body
-  const SP = `Call SP_${convertToUpperCase(dml[2])}_${convertToUpperCase(routerName)} (?,?,?,?,?,?g)`;
-  conn.query(SP,[  sName,
+  const SP = `call ecommerceshop.SP_${convertToUpperCase(dml[2])}_${convertToUpperCase(routerName)} (?, ?, ?, ?, ?) `;
+  conn.query(SP,[
+    sName,
     sLastName,
     sPhone,
     sUserName,
     sPassword,
-    sResetToken], (error, result) => {
+    ], (error, result) => {
     if (error) {
       throw error;
     } else 
-      res.send(JSON.stringify(result[0]));
+      res.send("Item Added Successfuly . . .");
     
   });
-
-
-
-
-
+ 
 })
-
-
-
 
 
 //update
@@ -85,14 +78,49 @@ router.put(`/${routerName}/${dml[3]}`,async(req,res,next)=>{
 
 //delete
 router.delete(`/${routerName}/${dml[4]}/:id`,async(req,res,next)=>{
-  const id =req.params.id;
-res.send(dml[4]+' '+id);
+  const sID =req.params.id;
+  const SP = `call ecommerceshop.SP_${convertToUpperCase(dml[4])}_${convertToUpperCase(routerName)} (?) `;
+  conn.query(SP,[sID], (error, result) => {
+    if (error) {
+      throw error;
+    } else 
+      res.send("Item Deleted Successfuly . . .");
+    
+  });
+
+
+
 })
 
-//ID
-router.get(`/${routerName}/:id`,async(req,res,next)=>{
-  const id = req.params.id
-  res.send(id);
+
+
+//login
+router.post(`/${routerName}/login`,async(req,res,next)=>{
+  const {sUserName,sPassword,sResetToken}= req.body
+  const loginSP = `call ecommerceshop.SP_SELECT_SELLER(?, ?, null)`
+  const forgotten = `call ecommerceshop.SP_SELECT_SELLER(?, null, ?)`
+
+  if(sResetToken == null || "" || undefined || []){
+    conn.query(loginSP,[sUserName,sPassword], (error, result) => {
+      if (error) {
+        throw error;
+      } else 
+        res.send(result[0]);
+      
+    });
+
+  }else{
+
+    conn.query(forgotten,[sUserName,sResetToken], (error, result) => {
+      if (error) {
+        throw error;
+      } else 
+        res.send(result[0]);
+      
+    });
+
+  }
+
 })
 
 

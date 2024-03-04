@@ -11,6 +11,8 @@ const port =9091;
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
