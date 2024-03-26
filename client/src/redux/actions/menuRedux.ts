@@ -7,7 +7,7 @@ interface initialStateIF {
 }
 
 const initialState: initialStateIF = {
-  menu: true,
+  menu: false,
   chosen: undefined,
 };
 
