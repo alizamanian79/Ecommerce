@@ -1,46 +1,52 @@
-import React from 'react'
-import { isSearch } from '@/redux/actions/searchRedux'
-import { useDispatch } from 'react-redux'
+import React, { useState } from "react";
+import { isSearch } from "@/redux/actions/searchRedux";
+import { useDispatch } from "react-redux";
 
 function NavIcons() {
-
   const dispath = useDispatch();
 
-  const handleSearchClick = ()=>{
-   dispath(isSearch({searchStatus:true})) 
-  }
+  // const handleSearchClick = () => {
+  //   dispath(isSearch({ searchStatus: true }));
+  // };
+
+  const [data, setData] = useState([
+    { title: UserIcon, url: "/" },
+    { title: ShoppingCartIcon, url: "/" },
+    { title: SearchIcon, url: "/" },
+    { title: HeartIcon, url: "/" },
+  ]);
+  const [selected, setSelected] = useState<number | undefined>(undefined);
+
+  const handleClick = (index: number) => {
+    selected === index ? setSelected(undefined) : setSelected(index);
+  };
 
   return (
-    <div style={{direction:"ltr"}} className={
-      `w-100 h-50 sticky bottom-0 max-sm:flex md:hidden justify-center items-center
-       bg-[#ffffff]`}>
-        
-        <ul className='w-100 flex justify-center items-center h-[100%] '>
-        <li className={`w-1/4 flex justify-center items-center h-[100%] hover:cursor-pointer `}><UserIcon /></li>
-        
-        <li  className={` relative w-1/4 flex justify-center items-center h-[100%] hover:cursor-pointer  `}>
-        <span className={`absolute top-[5px] right-[25px] 
-      rounded-full w-[16px] h-16 bg-[#ef4444] text-[10px] text-center flex justify-center items-center text-[white]`}>5</span> 
-     
-            <ShoppingCartIcon />
-            
-            </li>
-
-
-
-        <li onClick={handleSearchClick} className={`w-1/4 flex justify-center items-center h-[100%]  hover:cursor-pointer `}><SearchIcon /></li>
-        <li className={`w-1/4 flex justify-center items-center h-[100%] relative hover:cursor-pointer `}><HeartIcon
-         /></li>
-        </ul>
-
+    <div
+      style={{ direction: "ltr", boxShadow: "0px -2px 9px #e1e1e1" }}
+      className={`w-100 h-50 sticky bottom-0 max-sm:flex md:hidden justify-center items-center border-none
+       bg-[#ffffff]`}
+    >
+      <ul className="w-100 flex justify-center items-center h-[100%] ">
+        {data.map((item, index) => (
+          <li
+            onClick={() => handleClick(index)}
+            key={index}
+            className={
+              selected === index
+                ? `w-1/4 flex justify-center items-center h-[100%] hover:cursor-pointer bg-[#222529]`
+                : `w-1/4 flex justify-center items-center h-[100%] hover:cursor-pointer`
+            }
+          >
+            <item.title colorChange={selected === index ? `white` : undefined} />
+          </li>
+        ))}
+      </ul>
     </div>
-  )
+  );
 }
 
-export default NavIcons
-
-
-
+export default NavIcons;
 
 const iconWidth = "20px";
 const iconHeight = "20px";
@@ -53,8 +59,10 @@ function HeartIcon(props: any) {
       width={iconWidth}
       height={iconHeight}
       viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
+      fill={props.colorChange == undefined ? `none` : props.colorChange}
+      stroke={
+        props.colorChange == undefined ? `currentColor` : props.colorChange
+      }
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -71,8 +79,10 @@ function SearchIcon(props: any) {
       width={iconWidth}
       height={iconHeight}
       viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
+      fill={props.colorChange == undefined ? `none` : props.colorChange}
+      stroke={
+        props.colorChange == undefined ? `currentColor` : props.colorChange
+      }
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -90,8 +100,10 @@ function ShoppingCartIcon(props: any) {
       width={iconWidth}
       height={iconHeight}
       viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
+      fill={props.colorChange == undefined ? `none` : props.colorChange}
+      stroke={
+        props.colorChange == undefined ? `currentColor` : props.colorChange
+      }
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -110,8 +122,10 @@ function UserIcon(props: any) {
       width={iconWidth}
       height={iconHeight}
       viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
+      fill={props.colorChange == undefined ? `none` : props.colorChange}
+      stroke={
+        props.colorChange == undefined ? `currentColor` : props.colorChange
+      }
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
