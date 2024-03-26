@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import { isSearch } from "@/redux/actions/searchRedux";
-import { useDispatch } from "react-redux";
-
 function NavIcons() {
-  const dispath = useDispatch();
-
-  // const handleSearchClick = () => {
-  //   dispath(isSearch({ searchStatus: true }));
-  // };
 
   const [data, setData] = useState([
     { title: UserIcon, url: "/" },

@@ -4,16 +4,19 @@ import logo from "../../../../../public/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faBars } from "@fortawesome/free-solid-svg-icons";
 import NavItem from "../Phone/NavItem";
-
-import { menuStatus } from "@/redux/actions/menuRedux";
 import { useDispatch, useSelector } from "react-redux";
 
-import NavIcons from "./NavIcons";
+import menuRedux from "@/redux/actions/menuRedux";
+import { handleChangeMenuStatus } from "@/redux/actions/menuRedux";
+
+
 
 const Phone: React.FC = () => {
-  
-  const dispatch = useDispatch()
-  const isOpen:any = useSelector((state:any)=>state.menuRedux.isOpen);
+  const dispatch = useDispatch();
+let menuStatus: any = useSelector<any>((state) => state.menuRedux.menu);
+  const handleClick = ()=>{
+    dispatch(handleChangeMenuStatus(menuStatus))
+  }
 
   return (
     <>
@@ -40,7 +43,7 @@ const Phone: React.FC = () => {
             className={"w-1/2 h-full flex  justify-sart items-center"}
           >
             <FontAwesomeIcon
-              onClick={() =>dispatch(menuStatus({}))}
+              onClick={handleClick}
               icon={faBars}
               className={`text-[25px] text-[black]`}
             />

@@ -1,25 +1,28 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { createSlice  } from "@reduxjs/toolkit";
-
-//Interface of your Data Types in Redux
+// Interface of your Data Types in Redux
 interface initialStateIF {
-  isOpen: boolean;
+  menu: boolean;
+  chosen?: string | undefined;
 }
+
+const initialState: initialStateIF = {
+  menu: true,
+  chosen: undefined,
+};
 
 export const menuRedux = createSlice({
   name: "menuRedux",
-  // Values
-  initialState: <initialStateIF>{
-    isOpen: false,
-  },
-  //Functions Part
+  initialState,
   reducers: {
-    menuStatus: (state, action?) => {
-      state.isOpen = !state.isOpen;
+    handleChangeMenuStatus: (state) => {
+      state.menu = !state.menu;
     },
-    
+    handleChosen: (state, action: PayloadAction<{ chosen: string }>):void => {
+      state.chosen = action.payload.chosen;
+    },
   },
 });
 
-export const { menuStatus } = menuRedux.actions;
+export const { handleChangeMenuStatus, handleChosen } = menuRedux.actions;
 export default menuRedux.reducer;

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 //Interface of your Data Types in Redux
 interface initialStateIF {
-  number: number;
+  number?: number;
 }
 
 export const testRedux = createSlice({
