@@ -1,8 +1,6 @@
 import React, { FC, ReactNode, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
-
-import { isSearch } from "@/redux/actions/searchRedux";
 import { useDispatch, useSelector } from "react-redux";
 
 const Search = () => {
@@ -26,7 +24,7 @@ const Search = () => {
       <button
         className={`absolute top-[5.5rem] left-[24rem] 
         md:top-[5.6rem] md:left-[5rem] max-sm:top-[2rem] max-sm:left-[2.6rem]`}
-        onClick={() => dispatch(isSearch({ searchStatus: !status }))}
+        
       >
       <FontAwesomeIcon icon={faClose} className={`text-[25px] text-[white]`} />
       </button>
