@@ -27,9 +27,11 @@ function RecentlyProduct() {
     px-2 py-2
     
     max-sm:px-0 max-sm:py-1
+
+   
     
     `}>
-        <div className={`w-100 h-full shadow-lg bg-[white]`}>      
+        <div className={`w-100 h-full shadow-md  hover:shadow-xl transition-all ease-out delay-75 bg-[white]`}>      
         <Image
           src={firstImage}
           width={0}

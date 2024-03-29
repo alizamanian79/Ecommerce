@@ -1,4 +1,4 @@
-const routerName="seller";
+const routerName="sellers";
 const express = require('express');
 const router =express.Router();
 const textConvert = require('../publicJS/textConverter/index');
@@ -78,10 +78,35 @@ router.post(`/${routerName}/${dml[2]}`,async(req,res,next)=>{
 
 //update
 router.put(`/${routerName}/${dml[3]}`,async(req,res,next)=>{
-  res.send(dml[3]);
+  const {
+    sID,
+    sName,
+    sLastName,
+    sPhone,
+    sUserName,
+    sPassword,
+  }=req.body
+  const SP = `call ecommerceshop.SP_${convertToUpperCase(dml[3])}_${convertToUpperCase(routerName)} (?,?, ?, ?, ?, ?, null) `;
+  conn.query(SP,[
+    sID,
+    sName,
+    sLastName,
+    sPhone,
+    sUserName,
+    sPassword,
+  
+    ], (error, result) => {
+    if (error) {
+      throw error;
+    } else 
+
+      res.send("Item updated Successfuly . . .");
+    
+  });
+ 
 })
 
-//delete
+//Delete
 router.delete(`/${routerName}/${dml[4]}/:id`,async(req,res,next)=>{
   const sID =req.params.id;
   const SP = `call ecommerceshop.SP_${convertToUpperCase(dml[4])}_${convertToUpperCase(routerName)} (?) `;
@@ -101,37 +126,101 @@ router.delete(`/${routerName}/${dml[4]}/:id`,async(req,res,next)=>{
 
 
 
+
+
+//HandleToken
+
+router.post(`/${routerName}/login/sendtoken`, async (req, res, next) => {
+  const { sPhone } = req.body;
+  const SP = `CALL ecommerceshop.SP_SELLERS_TOKEN(?)`;
+  
+  conn.query(SP, [sPhone], (error, result) => {
+    if (error) {
+      throw error;
+    } else {
+      try {
+        setTimeout(() => {
+          expireToken(result[0]);
+        }, 30*1000);
+        
+        res.send(result[0]);
+      } catch (err) {
+        throw err;
+      }
+    }
+  });
+});
+
+async function expireToken(seller) {
+  const SP = `CALL ecommerceshop.SP_${convertToUpperCase(dml[3])}_${convertToUpperCase(routerName)} (?,?,?,?,?,?,null)`;
+  
+  conn.query(SP, [
+    seller[0].sID,
+    seller[0].sName,
+    seller[0].sLastName,
+    seller[0].sPhone,
+    seller[0].sUserName,
+    seller[0].sPassword,
+  
+  ], (error, result) => {
+    if (error) {
+      throw error;
+    } else {
+      console.log("deleted token")
+    }
+  });
+}
+
+
+
+
+
+
 //Login
+router.post(`/${routerName}/login`, async (req, res, next) => {
+  const { sUserName, sPassword, sResetToken } = req.body;
 
-//select
-router.post(`/${routerName}/login`,async(req,res,next)=>{
-  const {sUserName,sPassword,sResetToken}= req.body
-
-  const SP = `call ecommerceshop.SP_SELECT_SELLER(?,?)`
-
-
-  if(sUserName == null || sPassword == null){
-    res.status(500).send("Emtiy value")
-return
-
+  try {
+    if (sResetToken != null && sUserName == '' && sPassword == '') {
+      const result = await loginByToken(sResetToken);
+      console.log(result);
+      res.status(200).send(result);
+    } else {
+      const result = await login(sUserName, sPassword);
+      console.log(result);
+      res.status(200).send(result);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred");
   }
-else
-    conn.query(SP,[sUserName,sPassword], (error, result) => {
-      if (error) {
-        throw res.send("fuck");
-      } else 
-       response=result[0];
-       createFolder(`${response[0].sID}`,`../uploads`)
-      res.send(response)
-      
+});
+
+async function login(sUserName, sPassword) {
+  const SP = `CALL ecommerceshop.SP_SELECT_SELLERS (?, ?, null)`;
+  return new Promise((resolve, reject) => {
+    conn.query(SP, [sUserName, sPassword], (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result[0]);
+      }
     });
+  });
+}
 
-  
-  
-
-  
-})
-
+async function loginByToken(sResetToken) {
+  const SP = `call ecommerceshop.SP_SELECT_SELLERS('', '', ?);`;
+  return new Promise((resolve, reject) => {
+    conn.query(SP, [sResetToken], (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result[0]);
+      }
+    });
+  });
+}
 
 
 module.exports=router;
