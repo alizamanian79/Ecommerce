@@ -7,6 +7,7 @@ const folderManager = require("../publicJS/folderManager");
 const { createFolder, deleteFolder } = folderManager;
 
 const conn = require("../database/db");
+const { json } = require("body-parser");
 const dml = ["pattern", "list", "add", "update", "delete"];
 
 //Aysnc Router Apis Part
@@ -49,7 +50,6 @@ router.get(`/${routerName}/${dml[1]}`, async (req, res, next) => {
 
 //add
 router.post(`/${routerName}/${dml[2]}`, async (req, res, next) => {
-  console.log("add");
   const {
     pSellerID,
     pTitle,
@@ -64,19 +64,14 @@ router.post(`/${routerName}/${dml[2]}`, async (req, res, next) => {
     pPrice,
     pOff,
   } = req.body;
+  const pSizesJSON = JSON.stringify(pSizes);
+  const pColorsJSON = JSON.stringify(pColors);
+  const pCategoriJSON = JSON.stringify(pCategori);
+  const pImagesiJSON = JSON.stringify(pImages);
 
-  const pSizesArray = pSizes;
-  const pColorsArray = pColors;
-  const pCategoriArray = pCategori;
-  const pImagesArray = pImages;
-
-  const pSizesJSON = JSON.stringify(pSizesArray);
-  const pColorsJSON = JSON.stringify(pColorsArray);
-  const pCategoriJSON = JSON.stringify(pCategoriArray);
-  const pImagesiJSON = JSON.stringify(pImagesArray);
-
-
-  const SP = `call ecommerceshop.SP_ADD_PRODUCTS(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
+  const SP = `call ecommerceshop.SP_${convertToUpperCase(
+    dml[2]
+  )}_${convertToUpperCase(routerName)}(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
   conn.query(
     SP,
     [
@@ -105,127 +100,82 @@ router.post(`/${routerName}/${dml[2]}`, async (req, res, next) => {
 
 //update
 router.put(`/${routerName}/${dml[3]}`, async (req, res, next) => {
-  const { sID, sName, sLastName, sPhone, sUserName, sPassword } = req.body;
+  const {
+    pID,
+    pTitle,
+    pDescription,
+    pIntroduce,
+    pSizes,
+    pColors,
+    pCategori,
+    pImages,
+    pSeason,
+    pTotal,
+    pPrice,
+    pOff,
+    pRate,
+  } = req.body;
+  const pSizesJSON = JSON.stringify(pSizes);
+  const pColorsJSON = JSON.stringify(pColors);
+  const pCategoriJSON = JSON.stringify(pCategori);
+  const pImagesiJSON = JSON.stringify(pImages);
+
   const SP = `call ecommerceshop.SP_${convertToUpperCase(
     dml[3]
-  )}_${convertToUpperCase(routerName)} (?,?, ?, ?, ?, ?, null) `;
+  )}_${convertToUpperCase(routerName)}(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);`;
   conn.query(
     SP,
-    [sID, sName, sLastName, sPhone, sUserName, sPassword],
+    [
+      pID,
+      pTitle,
+      pDescription,
+      pIntroduce,
+      pSizesJSON,
+      pColorsJSON,
+      pCategoriJSON,
+      pImagesiJSON,
+      pSeason,
+      pTotal,
+      pPrice,
+      pOff,
+      pRate,
+    ],
     (error, result) => {
       if (error) {
         throw error;
-      } else res.send("Item updated Successfuly . . .");
+      } else {
+        res.send(`Item ${dml[3]} Successfully . . .`);
+      }
     }
   );
 });
 
 //Delete
 router.delete(`/${routerName}/${dml[4]}/:id`, async (req, res, next) => {
-  const sID = req.params.id;
+  const pID = req.params.id;
   const SP = `call ecommerceshop.SP_${convertToUpperCase(
     dml[4]
   )}_${convertToUpperCase(routerName)} (?) `;
-  conn.query(SP, [sID], (error, result) => {
+  conn.query(SP, [pID], (error, result) => {
     if (error) {
       throw error;
-    } else deleteFolder(`${sID}`, `../uploads`);
-    res.send("Item Deleted Successfuly . . .");
+    } else
+    res.send(`Item ${dml[4]}ed Successfully . . .`);
   });
 });
 
-//HandleToken
 
-router.post(`/${routerName}/login/sendtoken`, async (req, res, next) => {
-  const { sPhone } = req.body;
-  const SP = `CALL ecommerceshop.SP_SELLERS_TOKEN(?)`;
 
-  conn.query(SP, [sPhone], (error, result) => {
+//get by ID
+router.get(`/${routerName}/:id`, async (req, res, next) => {
+  const pID = req.params.id;
+  const SP = `call ecommerceshop.SP_SELECT_PRODUCTS(?);`
+  conn.query(SP, [pID], (error, result) => {
     if (error) {
       throw error;
-    } else {
-      try {
-        setTimeout(() => {
-          expireToken(result[0]);
-        }, 30 * 1000);
-
-        res.send(result[0]);
-      } catch (err) {
-        throw err;
-      }
-    }
+    } else
+    res.send(result[0]);
   });
 });
-
-async function expireToken(seller) {
-  const SP = `CALL ecommerceshop.SP_${convertToUpperCase(
-    dml[3]
-  )}_${convertToUpperCase(routerName)} (?,?,?,?,?,?,null)`;
-
-  conn.query(
-    SP,
-    [
-      seller[0].sID,
-      seller[0].sName,
-      seller[0].sLastName,
-      seller[0].sPhone,
-      seller[0].sUserName,
-      seller[0].sPassword,
-    ],
-    (error, result) => {
-      if (error) {
-        throw error;
-      } else {
-        console.log("deleted token");
-      }
-    }
-  );
-}
-
-//Login
-router.post(`/${routerName}/login`, async (req, res, next) => {
-  const { sUserName, sPassword, sResetToken } = req.body;
-
-  try {
-    if (sResetToken != null && sUserName == "" && sPassword == "") {
-      const result = await loginByToken(sResetToken);
-      console.log(result);
-      res.status(200).send(result);
-    } else {
-      const result = await login(sUserName, sPassword);
-      console.log(result);
-      res.status(200).send(result);
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("An error occurred");
-  }
-});
-
-async function login(sUserName, sPassword) {
-  const SP = `CALL ecommerceshop.SP_SELECT_SELLERS (?, ?, null)`;
-  return new Promise((resolve, reject) => {
-    conn.query(SP, [sUserName, sPassword], (err, result) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(result[0]);
-      }
-    });
-  });
-}
-
-async function loginByToken(sResetToken) {
-  const SP = `call ecommerceshop.SP_SELECT_SELLERS('', '', ?);`;
-  return new Promise((resolve, reject) => {
-    conn.query(SP, [sResetToken], (err, result) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(result[0]);
-      }
-    });
-  });
-}
 
 module.exports = router;
