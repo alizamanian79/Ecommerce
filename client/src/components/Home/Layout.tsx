@@ -10,13 +10,14 @@ import SeasonCollection from "./SeasonCollection/SeasonCollection";
 import SendEmail from "./SendEmail/SendEmail";
 import Footer from "./Footer/Footer";
 const Layout = () => {
-
+// console.log(process.env.HOSTADRESS)
   return (
     <>
       <div
         className={`relative w-100 min-h-screen flex bg-hBack flex-col blur-[0] items-center`}
         style={{ direction: "rtl" }}
       >
+       
         <Menu />
         <Slider />
 
