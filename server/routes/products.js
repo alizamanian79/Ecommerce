@@ -18,17 +18,16 @@ router.get(`/${routerName}/${dml[0]}`, async (req, res, next) => {
     pID: "Varcahar45",
     pSellerID: "Varcahar10",
     pTitle: "Varcahar45",
-    pDescription: "Varcahar450",
-    pIntroduce: "Varcahar50",
-    pSizes: "Json",
-    pColors: "Json",
-    pCategori: "Json",
+    pDescription: "Varcahar850",
+    pIntroduce: "Varcahar100",
+    pMaterial:"Json",
+    pSize: "Varcahar45",
+    pColor: "Varcahar45",
+    pCategori: "Varcahar45",
     pImages: "Json",
     pSeason: "Varcahar45",
     pTotal: "int",
     pPrice: "VARCHAR(60)",
-    pOff: "VARCHAR(45)",
-    pRate: "int",
   };
   res.send(JSON.stringify(data));
 });
@@ -55,18 +54,17 @@ router.post(`/${routerName}/${dml[2]}`, async (req, res, next) => {
     pTitle,
     pDescription,
     pIntroduce,
-    pSizes,
-    pColors,
+    pMaterial,
+    pSize,
+    pColor,
     pCategori,
     pImages,
     pSeason,
     pTotal,
     pPrice,
-    pOff,
   } = req.body;
-  const pSizesJSON = JSON.stringify(pSizes);
-  const pColorsJSON = JSON.stringify(pColors);
-  const pCategoriJSON = JSON.stringify(pCategori);
+
+  const pMaterialJson = JSON.stringify(pMaterial);
   const pImagesiJSON = JSON.stringify(pImages);
 
   const SP = `call ecommerceshop.SP_${convertToUpperCase(
@@ -79,14 +77,15 @@ router.post(`/${routerName}/${dml[2]}`, async (req, res, next) => {
       pTitle,
       pDescription,
       pIntroduce,
-      pSizesJSON,
-      pColorsJSON,
-      pCategoriJSON,
+      pMaterialJson,
+      pSize,
+      pColor,
+      pCategori,
       pImagesiJSON,
       pSeason,
       pTotal,
       pPrice,
-      pOff,
+    
     ],
     (error, result) => {
       if (error) {
@@ -105,24 +104,22 @@ router.put(`/${routerName}/${dml[3]}`, async (req, res, next) => {
     pTitle,
     pDescription,
     pIntroduce,
-    pSizes,
-    pColors,
+    pMaterial,
+    pSize,
+    pColor,
     pCategori,
     pImages,
     pSeason,
     pTotal,
     pPrice,
-    pOff,
-    pRate,
   } = req.body;
-  const pSizesJSON = JSON.stringify(pSizes);
-  const pColorsJSON = JSON.stringify(pColors);
-  const pCategoriJSON = JSON.stringify(pCategori);
+
+  const pMaterialJson = JSON.stringify(pMaterial);
   const pImagesiJSON = JSON.stringify(pImages);
 
   const SP = `call ecommerceshop.SP_${convertToUpperCase(
     dml[3]
-  )}_${convertToUpperCase(routerName)}(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);`;
+  )}_${convertToUpperCase(routerName)}(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
   conn.query(
     SP,
     [
@@ -130,15 +127,14 @@ router.put(`/${routerName}/${dml[3]}`, async (req, res, next) => {
       pTitle,
       pDescription,
       pIntroduce,
-      pSizesJSON,
-      pColorsJSON,
-      pCategoriJSON,
+      pMaterialJson,
+      pSize,
+      pColor,
+      pCategori,
       pImagesiJSON,
       pSeason,
       pTotal,
       pPrice,
-      pOff,
-      pRate,
     ],
     (error, result) => {
       if (error) {
