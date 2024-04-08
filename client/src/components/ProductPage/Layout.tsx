@@ -1,5 +1,4 @@
 import React from "react";
-import ProductPageComponent from "@/components/ProductPage/Layout";
 
 interface LAYOUTIF {
   param: any;
