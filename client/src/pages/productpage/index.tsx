@@ -1,7 +1,7 @@
 import React from 'react'
-import ProductLayout from '@/components/ProductPage/Layout'
-export default function productPage() {
+
+export default function Index() {
   return (
-    <ProductLayout />
+    <div>index</div>
   )
 }

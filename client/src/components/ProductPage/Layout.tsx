@@ -1,9 +1,23 @@
-import React from 'react'
+import React from "react";
+import ProductPageComponent from "@/components/ProductPage/Layout";
 
-function Layout() {
-  return (
-    <div>Layout</div>
-  )
+interface LAYOUTIF {
+  param: any;
 }
 
-export default Layout
+const Layout: React.FC<LAYOUTIF> = ({ param }) => {
+  console.log(param)
+  return (
+    <>
+    <p>
+   xs   {param}
+    </p>
+    </>
+  );
+  
+};
+
+
+  
+
+export default Layout;
