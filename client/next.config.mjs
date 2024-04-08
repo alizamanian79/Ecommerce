@@ -9,6 +9,7 @@ const nextConfig = {
 
   env: {
     HOSTADDRESS: process.env.HOSTADDRESS,
+    LOCALHOST: process.env.LOCALHOST,
   },
 };
 
