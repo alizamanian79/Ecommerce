@@ -20,7 +20,7 @@ router.get(`/${routerName}/${dml[0]}`, async (req, res, next) => {
     pTitle: "Varcahar45",
     pDescription: "Varcahar850",
     pIntroduce: "Varcahar100",
-    pMaterial:"Json",
+    pMaterial: "Json",
     pSize: "Varcahar45",
     pColor: "Varcahar45",
     pCategori: "Varcahar45",
@@ -85,7 +85,6 @@ router.post(`/${routerName}/${dml[2]}`, async (req, res, next) => {
       pSeason,
       pTotal,
       pPrice,
-    
     ],
     (error, result) => {
       if (error) {
@@ -155,23 +154,72 @@ router.delete(`/${routerName}/${dml[4]}/:id`, async (req, res, next) => {
   conn.query(SP, [pID], (error, result) => {
     if (error) {
       throw error;
-    } else
-    res.send(`Item ${dml[4]}ed Successfully . . .`);
+    } else res.send(`Item ${dml[4]}ed Successfully . . .`);
   });
 });
-
-
 
 //get by ID
 router.get(`/${routerName}/:id`, async (req, res, next) => {
   const pID = req.params.id;
-  const SP = `call ecommerceshop.SP_SELECT_PRODUCTS(?);`
+  const SP = `call ecommerceshop.SP_SELECT_PRODUCTS(?);`;
   conn.query(SP, [pID], (error, result) => {
     if (error) {
       throw error;
-    } else
-    res.send(result[0]);
+    } else res.send(result[0]);
   });
 });
+
+
+
+
+router.post(`/${routerName}/buy`, async (req, res, next) => {
+  const data = req.body.basket;
+  const SP = `call ecommerceshop.SP_BUY_PRODUCTS(?, ?)`;
+
+  for (let j = 0; j < data.length; j++) {
+    handelChecking(data[j].pID, data[j].value)
+      .then((result) => {
+        if (result) {
+          conn.query(SP, [data[j].pID, data[j].value], (error, result) => {
+            if (error) {
+              throw error;
+            } else {
+              console.log("Product bought successfully");
+            }
+          });
+        } else {
+          console.log("Product is not available or quantity is insufficient");
+          
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  res.send("Thank you for shopping");
+});
+
+async function handelChecking(pID, value) {
+  return new Promise((resolve, reject) => {
+    const SP = `call ecommerceshop.SP_SELECT_PRODUCTS(?);`;
+    conn.query(SP, [pID], (error, result) => {
+      if (error) {
+        reject(error);
+      } else {
+        const res = result[0];
+        const total = res[0].pTotal;
+
+        if (total - value <= 0 || value > total) {
+          resolve(false);
+        } else {
+          resolve(true);
+        }
+      }
+    });
+  });
+}
+
+
 
 module.exports = router;
