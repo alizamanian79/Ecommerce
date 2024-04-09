@@ -169,12 +169,9 @@ router.get(`/${routerName}/:id`, async (req, res, next) => {
   });
 });
 
-
-
 //Buy Process
-router.get(`/${routerName}/buy/help`,(req,res)=>{
-
-  const help =`
+router.get(`/${routerName}/buy/help`, (req, res) => {
+  const help = `
   const data = {
     basket: [
         { pID: "2VSkOiNmiI", value: 5 },
@@ -197,37 +194,50 @@ router.get(`/${routerName}/buy/help`,(req,res)=>{
     console.error('Error:', error);
   })
   `;
-res.send(help)
+  res.send(help);
 });
+
+
 
 router.post(`/${routerName}/buy`, async (req, res, next) => {
   const data = req.body.basket;
   const SP = `call ecommerceshop.SP_BUY_PRODUCTS(?, ?)`;
+  let status = [];
 
   for (let j = 0; j < data.length; j++) {
-    handelChecking(data[j].pID, data[j].value)
-      .then((result) => {
-
-        if (result) {
-          conn.query(SP, [data[j].pID, data[j].value], (error, result) => {
-            if (error) {
-              throw error;
-            } else {
-              console.log("Product bought successfully");
-            }
-          });
-        } else {
-          console.log("Product is not available or quantity is insufficient");
-          
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    try {
+      const result = await handelChecking(data[j].pID, data[j].value);
+      status.push(result);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  res.send("Thank you for shopping");
+  for (let i = 0; i < status.length; i++) {
+    if (status[i] === false) {
+      let message = "There was a problem with your basket. Please check your items.";
+      return res.status(400).send(message);
+    }
+  }
+
+  // If no errors, proceed with buying products
+  for (let i = 0; i < data.length; i++) {
+    conn.query(SP, [data[i].pID, data[i].value], (error, result) => {
+      if (error) {
+        throw error;
+      } else {
+        console.log("Product bought successfully");
+      }
+    });
+  }
+
+  res.status(200).send("All products bought successfully");
 });
+
+
+
+
+
 async function handelChecking(pID, value) {
   return new Promise((resolve, reject) => {
     const SP = `call ecommerceshop.SP_SELECT_PRODUCTS(?);`;
@@ -247,7 +257,5 @@ async function handelChecking(pID, value) {
     });
   });
 }
-
-
 
 module.exports = router;
