@@ -20,7 +20,7 @@ router.get(`/${routerName}/${dml[0]}`, async (req, res, next) => {
     pTitle: "Varcahar45",
     pDescription: "Varcahar850",
     pIntroduce: "Varcahar100",
-    pMaterial:"Json",
+    pMaterial: "Json",
     pSize: "Varcahar45",
     pColor: "Varcahar45",
     pCategori: "Varcahar45",
@@ -85,7 +85,6 @@ router.post(`/${routerName}/${dml[2]}`, async (req, res, next) => {
       pSeason,
       pTotal,
       pPrice,
-    
     ],
     (error, result) => {
       if (error) {
@@ -155,23 +154,108 @@ router.delete(`/${routerName}/${dml[4]}/:id`, async (req, res, next) => {
   conn.query(SP, [pID], (error, result) => {
     if (error) {
       throw error;
-    } else
-    res.send(`Item ${dml[4]}ed Successfully . . .`);
+    } else res.send(`Item ${dml[4]}ed Successfully . . .`);
   });
 });
-
-
 
 //get by ID
 router.get(`/${routerName}/:id`, async (req, res, next) => {
   const pID = req.params.id;
-  const SP = `call ecommerceshop.SP_SELECT_PRODUCTS(?);`
+  const SP = `call ecommerceshop.SP_SELECT_PRODUCTS(?);`;
   conn.query(SP, [pID], (error, result) => {
     if (error) {
       throw error;
-    } else
-    res.send(result[0]);
+    } else res.send(result[0]);
   });
 });
+
+//Buy Process
+router.get(`/${routerName}/buy/help`, (req, res) => {
+  const help = `
+  const data = {
+    basket: [
+        { pID: "2VSkOiNmiI", value: 5 },
+        { pID: "E4bpJ4QuFZ", value: 5 }
+    ]
+  };
+  
+  fetch('http://your-server-url/your-api-endpoint/buy', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  })
+  `;
+  res.send(help);
+});
+
+
+
+router.post(`/${routerName}/buy`, async (req, res, next) => {
+  const data = req.body.basket;
+  const SP = `call ecommerceshop.SP_BUY_PRODUCTS(?, ?)`;
+  let status = [];
+
+  for (let j = 0; j < data.length; j++) {
+    try {
+      const result = await handelChecking(data[j].pID, data[j].value);
+      status.push(result);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  for (let i = 0; i < status.length; i++) {
+    if (status[i] === false) {
+      let message = "There was a problem with your basket. Please check your items.";
+      return res.status(400).send(message);
+    }
+  }
+
+  // If no errors, proceed with buying products
+  for (let i = 0; i < data.length; i++) {
+    conn.query(SP, [data[i].pID, data[i].value], (error, result) => {
+      if (error) {
+        throw error;
+      } else {
+        console.log("Product bought successfully");
+      }
+    });
+  }
+
+  res.status(200).send("All products bought successfully");
+});
+
+
+
+
+
+async function handelChecking(pID, value) {
+  return new Promise((resolve, reject) => {
+    const SP = `call ecommerceshop.SP_SELECT_PRODUCTS(?);`;
+    conn.query(SP, [pID], (error, result) => {
+      if (error) {
+        reject(error);
+      } else {
+        const res = result[0];
+        const total = res[0].pTotal;
+
+        if (total - value < 0 || value > total) {
+          resolve(false);
+        } else {
+          resolve(true);
+        }
+      }
+    });
+  });
+}
 
 module.exports = router;
