@@ -171,6 +171,34 @@ router.get(`/${routerName}/:id`, async (req, res, next) => {
 
 
 
+//Buy Process
+router.get(`/${routerName}/buy/help`,(req,res)=>{
+
+  const help =`
+  const data = {
+    basket: [
+        { pID: "2VSkOiNmiI", value: 5 },
+        { pID: "E4bpJ4QuFZ", value: 5 }
+    ]
+  };
+  
+  fetch('http://your-server-url/your-api-endpoint/buy', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  })
+  `;
+res.send(help)
+});
 
 router.post(`/${routerName}/buy`, async (req, res, next) => {
   const data = req.body.basket;
@@ -179,6 +207,7 @@ router.post(`/${routerName}/buy`, async (req, res, next) => {
   for (let j = 0; j < data.length; j++) {
     handelChecking(data[j].pID, data[j].value)
       .then((result) => {
+
         if (result) {
           conn.query(SP, [data[j].pID, data[j].value], (error, result) => {
             if (error) {
@@ -199,7 +228,6 @@ router.post(`/${routerName}/buy`, async (req, res, next) => {
 
   res.send("Thank you for shopping");
 });
-
 async function handelChecking(pID, value) {
   return new Promise((resolve, reject) => {
     const SP = `call ecommerceshop.SP_SELECT_PRODUCTS(?);`;
@@ -210,7 +238,7 @@ async function handelChecking(pID, value) {
         const res = result[0];
         const total = res[0].pTotal;
 
-        if (total - value <= 0 || value > total) {
+        if (total - value < 0 || value > total) {
           resolve(false);
         } else {
           resolve(true);
