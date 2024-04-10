@@ -22,21 +22,21 @@ const Layout: React.FC<LAYOUTIF> = ({ param }) => {
   }, []);
 
   const handleLoad = (param: any) => {
-
     for (let i = 0; i < data.length; i++) {
-      if (data[i].pTitle==param){
-data[i].map((item: any) => {
-      return <p key={item.pID}>{item.pTitle}</p>
+      if (data[i].pTitle === param) {
+        return data[i].map((item: any) => {
+          return <p key={item.pID}>{item.pTitle}</p>;
+        });
       }
     }
-
-    return ;
-
-    });
+    return null;
   };
 
   console.log(data);
-  return <>{handleLoad(param)}</>;
+  return <>
+  {handleLoad(param)}
+  {param}
+  </>;
 };
 
 export default Layout;
