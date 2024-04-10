@@ -1,9 +1,9 @@
 import React from 'react'
-import Login from '@/components/Login/Layout'
-function LoginComponent() {
+import LoginComponent from '@/components/Login/Layout'
+function Login() {
   return (
-    <Login />
+    <LoginComponent />
   )
 }
 
-export default LoginComponent
+export default Login

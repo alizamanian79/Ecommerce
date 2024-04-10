@@ -6,7 +6,8 @@ import TextLayout from "./TextLayout";
 
 function SendEmail() {
   return (
-    <div className={`w-100 
+    <div
+      className={`w-100 
     lg:h-[550px] md:h-[400px] max-sm:h-[350px]  
     
     lg:mt-[5rem]
@@ -16,12 +17,10 @@ function SendEmail() {
     bg-rmv py-5
     
     
-    `}>
-
+    `}
+    >
       <div className="relative w-100 h-full">
-
         <TextLayout />
-
 
         <Image
           width={0}
@@ -31,9 +30,6 @@ function SendEmail() {
           alt="Winter"
         />
       </div>
-
-        
-
     </div>
   );
 }
