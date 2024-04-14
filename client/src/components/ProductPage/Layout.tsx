@@ -5,44 +5,35 @@ import AddressBar from "../GlobalComponents/AddressBar/AddressBar";
 
 import ImageComponent from "./ImageComponent/ImageComponent";
 import InformationComponent from "./InformationComponent/InformationComponent";
+import ConvertBuffer from "@/components/GlobalComponents/Buffer/ConvertBuffer/ConvertBuffer";
 
 interface LAYOUTIF {
   param: any;
 }
 
 const Layout: React.FC<LAYOUTIF> = ({ param }) => {
-  const [data, setData] = useState<any[] | string[] | string | any>([]);
-
+  const [data, setData] = useState<any>();
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const url = `${process.env.LOCALHOST}/api/products/list`;
-        const response = await axios.get(url);
-        setData(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
+    axios
+      .get(`${process.env.LOCALHOST}/api/products/list`)
+      .then((reponse) => {
+        const res = reponse.data;
+        for (let i = 0; i < res.length; i++) {
+          if (res[i].pTitle == param) {
+            setData(res[i]);
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
-  const handleLoad = (param: any) => {
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].pTitle === param) {
-        return data[i].map((item: any) => {
-          return <p key={item.pID}>{item.pTitle}</p>;
-        });
-      }
-    }
-    return null;
-  };
-
-  console.log(data);
   return (
     <>
       <Menu />
       <AddressBar
-        data={[
+        dataAddress={[
           { title: "خانه", router: "/" },
           { title: "فروشگاه", router: "" },
           { title: "محصول", router: "" },
@@ -53,13 +44,18 @@ const Layout: React.FC<LAYOUTIF> = ({ param }) => {
         className={`relative w-100 min-h-screen flex bg-hBack flex-col blur-[0] items-center`}
         style={{ direction: "rtl" }}
       >
-        <div className={`w-100 lg:w-94 md:w-94 h-auto flex-wrap flex flex-row min:flex-col 
-         justify-start md:mt-5`}>
-          <ImageComponent />
-          <InformationComponent />
+        <div
+          className={`w-100 lg:w-94 md:w-94 h-auto flex-wrap flex flex-row min:flex-col 
+         justify-start md:mt-5`}
+        >
+          {data && (
+            <>
+              <ImageComponent images={data.pImages} />
+              <InformationComponent />
+            </>
+          )}
 
-
-
+          <ConvertBuffer />
         </div>
       </div>
 

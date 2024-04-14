@@ -2,13 +2,22 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { IoIosSquareOutline } from "react-icons/io";
 import { FaSquare } from "react-icons/fa6";
-import LoadBuffer from "@/components/GlobalComponents/Buffer/LoadBuffer/LoadBuffer";
+import LoadBuffer from "@/components/GlobalComponents/Buffer/LoadBuffer";
 
-import data from "./Base6Image";
+import testData from './Base6Image'
 
-function ImageComponent() {
+interface imageComponentIF {
+    images?:any
+}
+
+const ImageComponent:React.FC<imageComponentIF>=({images})=>{
+
+
+    const [data, setData] = useState<any>(images)
   const [itemShow, setItemShow] = useState(0);
   const [selected, setSelected] = useState(0);
+
+
 
 const handleClick = (index:number)=>{
     setItemShow(index);
@@ -26,9 +35,12 @@ const handleClick = (index:number)=>{
       />
 
       {/* ImageScroll */}
-      <div className="w-auto h-[20px] px-2 py-2 rounded-sm bg-mainColor absolute bottom-[3%] left-[50%] translate-x-[-50%] flex">
+      
+      
+      <div className={data.length===0 ? `hidden`:`w-auto h-[20px] px-2 py-2 rounded-sm bg-mainColor absolute bottom-[3%] left-[50%] translate-x-[-50%] flex`}>
         <ul className="flex justify-center items-center w-100">
-          {data.map((item, index) => (
+    
+          {data.map((item:any, index:number) => (
             <li
               key={index}
               onClick={()=>handleClick(index)}
@@ -42,6 +54,7 @@ const handleClick = (index:number)=>{
           ))}
         </ul>
       </div>
+
     </div>
   );
 }

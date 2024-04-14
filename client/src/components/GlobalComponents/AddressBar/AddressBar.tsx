@@ -4,13 +4,13 @@ import { IoIosArrowBack } from "react-icons/io";
 import { useRouter } from "next/router";
 
 interface AddressBarProps {
-  data: {
+  dataAddress: {
     title: string;
     router?: string;
   }[];
 }
 
-const AddressBar: React.FC<AddressBarProps> = ({ data }) => {
+const AddressBar: React.FC<AddressBarProps> = ({ dataAddress }) => {
   const textColor = "#b2b1b1";
   const textColorHover = "#363636";
   const router = useRouter();
@@ -24,7 +24,7 @@ const AddressBar: React.FC<AddressBarProps> = ({ data }) => {
         style={{ direction: "rtl" }}
       >
         <IoHomeOutline className={`ml-2 text-[#b2b1b1] text-[17px]`} />
-        {data.map((item: any, index: number) => (
+        {dataAddress.map((item: any, index: number) => (
           <li
             key={item.title}
             onClick={() => router.push(item.router)}
@@ -32,7 +32,7 @@ const AddressBar: React.FC<AddressBarProps> = ({ data }) => {
            items-center justify-center hover:text-[${textColorHover}] hover:cursor-pointer`}
           >
             {item.title}
-            {index == data.length - 1 ? (
+            {index == dataAddress.length - 1 ? (
               ""
             ) : (
               <IoIosArrowBack className={`mr-1 `} />
