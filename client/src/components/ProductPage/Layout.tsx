@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Menu from "../GlobalComponents/Menu/Menu";
+import AddressBar from "../GlobalComponents/AddressBar/AddressBar";
+
+import ImageComponent from "./ImageComponent/ImageComponent";
+import InformationComponent from "./InformationComponent/InformationComponent";
 
 interface LAYOUTIF {
   param: any;
@@ -33,10 +38,34 @@ const Layout: React.FC<LAYOUTIF> = ({ param }) => {
   };
 
   console.log(data);
-  return <>
-  {handleLoad(param)}
-  {param}
-  </>;
+  return (
+    <>
+      <Menu />
+      <AddressBar
+        data={[
+          { title: "خانه", router: "/" },
+          { title: "فروشگاه", router: "" },
+          { title: "محصول", router: "" },
+        ]}
+      />
+
+      <div
+        className={`relative w-100 min-h-screen flex bg-hBack flex-col blur-[0] items-center`}
+        style={{ direction: "rtl" }}
+      >
+        <div className={`w-100 lg:w-94 md:w-94 h-auto flex-wrap flex flex-row min:flex-col 
+         justify-start md:mt-5`}>
+          <ImageComponent />
+          <InformationComponent />
+
+
+
+        </div>
+      </div>
+
+      {param}
+    </>
+  );
 };
 
 export default Layout;
