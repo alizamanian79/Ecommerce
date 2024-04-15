@@ -48,7 +48,7 @@ const Layout: React.FC<LAYOUTIF> = ({ param }) => {
         style={{ direction: "rtl" }}
       >
         <div
-          className={`w-100 lg:w-94 md:w-94 h-auto flex-wrap flex flex-row min:flex-col 
+          className={`w-100 lg:w-94 md:w-94 h-auto flex-wrap justify-center flex flex-row min:flex-col mt-3
          md:mt-5`} style={{direction:"ltr"}}
         >
           {data ? (

@@ -20,11 +20,16 @@ function Size() {
           onClick={()=>handleClick(item)}
             className={
               selected !=item ? 
-              `w-[80px] mr-1 rounded-[65%] h-[35px] border border-[#383838]
+              `w-[35px] h-[35px]
+              md:w-[80px] md:h-[35px]
+              mr-1 rounded-[65%]  border border-[#383838]
            bg-[#f1f1f1] flex justify-center items-center text-center hover:bg-mainColor
            cursor-pointer hover:text-[white] bg-rmv`
            :
-           `w-[80px] mr-1 rounded-[65%] h-[35px] border border-[#383838]
+           `
+           w-[35px] h-[35px]
+              md:w-[80px] md:h-[35px]
+           mr-1 rounded-[65%]  border border-[#383838]
             flex justify-center items-center text-center bg-mainColor
            cursor-pointer text-[white]`
           

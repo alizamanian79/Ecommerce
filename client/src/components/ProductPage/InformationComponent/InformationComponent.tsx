@@ -4,16 +4,17 @@ import SizeComponent from "./SizeComponent/Size";
 function InformationComponent() {
   return (
     <div
-      className={`w-100 lg:w-60 md:w-50  h-[300px]
+      className={`w-100 lg:w-60 md:w-50
      md:h-[500px] flex justify-start flex-col
      px-[1rem]
      py-[1rem]
-
+      min-h-[300px]
+      max-h-[auto]
      `}
       style={{ direction: "rtl" }}
     >
       <h3 className={`font-["yekanBakhtBold"] text-[30px]`}>لباس جدید ما</h3>
-      <h4 className={`font-["yekanBakht"] text-[19px] h-[200px]`}>
+      <h4 className={`font-["yekanBakht"] text-[15px] md:text-[19px]`}>
         لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده
         از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و
         سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای
