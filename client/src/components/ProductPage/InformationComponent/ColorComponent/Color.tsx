@@ -24,10 +24,17 @@ function Color() {
               className={
                 selected != item
                   ? `
-            w-[40px] h-[40px] border border-x-[5px] border-y-[5px]
+            w-[20px] h-[20px]
+            md:w-[30px] md:h-[30px]
+            
+            border border-x-[5px] border-y-[5px]
              border-rmv hover:border-[#494949] hover:cursor-pointer
             rounded-[50%] ml-2`
-                  : ` w-[40px] h-[40px] border border-x-[5px] border-y-[5px] hover:cursor-pointer
+                  : 
+                  ` w-[32px] h-[32px] 
+                  md:w-[50px] md:h-[50px]
+
+                  border border-x-[5px] border-y-[5px] hover:cursor-pointer
             border-[#494949]
            rounded-[50%] ml-2`
               }
