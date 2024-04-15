@@ -4,7 +4,7 @@ import { IoIosSquareOutline } from "react-icons/io";
 import { FaSquare } from "react-icons/fa6";
 import LoadBuffer from "@/components/GlobalComponents/Buffer/LoadBuffer";
 
-import testData from './Base6Image'
+// import testData from './Base6Image'
 
 interface imageComponentIF {
     images?:any
