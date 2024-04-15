@@ -18,8 +18,9 @@ const ImageComponent: React.FC<imageComponentIF> = ({ images }) => {
   const [selected, setSelected] = useState(0);
 
   const handleClick = (index: number) => {
-    setItemShow(index);
-    setSelected(index);
+setSelected(index);
+    setItemShow(selected);
+    
   };
 
   //Drag
@@ -32,7 +33,7 @@ const ImageComponent: React.FC<imageComponentIF> = ({ images }) => {
     if (startX !== null) {
       const deltaX = currentX - startX;
 
-      if (deltaX < 150) {
+      if (deltaX < -200) {
         const detail = itemShow + 1;
 
         if (detail >= data.length) {
@@ -47,7 +48,7 @@ const ImageComponent: React.FC<imageComponentIF> = ({ images }) => {
         console.log("left");
         // setItemShow((prev)=>prev-1)
       }
-       else if (deltaX > -150) {
+       else if (deltaX > 200) {
         const detail = itemShow - 1;
         if (detail < 0) {
           setItemShow(data.length - 1);
@@ -65,7 +66,7 @@ const ImageComponent: React.FC<imageComponentIF> = ({ images }) => {
   };
 
   return (
-    <div className="w-100 lg:w-40 md:w-50 h-[300px] md:h-[500px] flex justify-start relative">
+    <div className="w-94 lg:w-40 md:w-50 h-[300px] md:h-[500px] flex justify-start relative">
       <Image
         src={LoadBuffer(data, itemShow) as string}
         
