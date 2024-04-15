@@ -29,6 +29,9 @@ const Layout: React.FC<LAYOUTIF> = ({ param }) => {
       });
   }, []);
 
+
+  console.log(data)
+
   return (
     <>
       <Menu />
@@ -46,20 +49,30 @@ const Layout: React.FC<LAYOUTIF> = ({ param }) => {
       >
         <div
           className={`w-100 lg:w-94 md:w-94 h-auto flex-wrap flex flex-row min:flex-col 
-         justify-start md:mt-5`}
+         md:mt-5`} style={{direction:"ltr"}}
         >
-          {data && (
+          {data ? (
             <>
+             
               <ImageComponent images={data.pImages} />
               <InformationComponent />
+             
+            </>
+          ) : (
+            <>
+              <div
+                className={`w-100 h-auto flex justify-center md:justify-start`}
+              >
+                <p className={`w-94 font-[yekanBakht] text-[17px] `}>
+                  {param} پیدا نشد
+                </p>
+              </div>
             </>
           )}
-
-          <ConvertBuffer />
+          {/* 
+          <ConvertBuffer /> */}
         </div>
       </div>
-
-      {param}
     </>
   );
 };
