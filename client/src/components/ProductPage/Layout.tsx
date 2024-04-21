@@ -8,36 +8,45 @@ import InformationComponent from "./InformationComponent/InformationComponent";
 import ConvertBuffer from "@/components/GlobalComponents/Buffer/ConvertBuffer/ConvertBuffer";
 import noRepetition from "../GlobalComponents/Norepetition/Norepetition";
 
-
 interface LAYOUTIF {
   param: any;
 }
 
 const Layout: React.FC<LAYOUTIF> = ({ param }) => {
   const [data, setData] = useState<any>();
+  const [show, setShow] = useState<any>();
+
   useEffect(() => {
+    const dt: any[] = [];
     axios
       .get(`${process.env.LOCALHOST}/api/products/list`)
       .then((reponse) => {
         const res = reponse.data;
         for (let i = 0; i < res.length; i++) {
-          if (res[i].pTitle == param) {
-            setData(res[i]);
+          if (res[i].pTitle === param) {
+            dt.push(res[i]);
           }
         }
+        setData(dt);
+        findLowerPrice(dt);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  // console.log(data);
+  function findLowerPrice(data: any) {
+    let lowerPriceItem = data[0];
+    for (let i = 1; i < data.length; i++) {
+      if (parseInt(data[i].pPrice) < parseInt(lowerPriceItem.pPrice)) {
+        lowerPriceItem = data[i];
+      }
+    }
+    setShow(lowerPriceItem);
+  }
 
-  const myArr = ["red", "pink", "blue", "red", "blue", "green", "red"];
-  const result = noRepetition(myArr); // Call the function with your array
+
   
-  console.log("Unique Items:", result.uniqueItems); // Print unique items
-  console.log("Repetition Items:", result.repetitionItems); // Print repetition items
 
   return (
     <>
@@ -55,19 +64,18 @@ const Layout: React.FC<LAYOUTIF> = ({ param }) => {
         style={{ direction: "rtl" }}
       >
         <div
-          className={`w-100 lg:w-94 md:w-94 h-auto flex-wrap justify-center flex flex-row min:flex-col mt-3
-         md:mt-5`}
+          className={`w-100 lg:w-94 md:w-94 h-auto flex-wrap justify-center flex flex-row min:flex-col mt-3 md:mt-5`}
           style={{ direction: "ltr" }}
         >
-          {data ? (
+          {show ? (
             <>
-              <ImageComponent imagesProps={data.pImages} />
+              <ImageComponent imagesProps={show.pImages} />
               <InformationComponent
-                title={data.pTitle}
-                description={data.pDescription}
-                color={data.pColor}
-                introduce={data.pIntroduce}
-                size={data.pSize}
+                title={show.pTitle}
+                description={show.pDescription}
+                color={show.pColor}
+                introduce={show.pIntroduce}
+                size={show.pSize}
               />
             </>
           ) : (
@@ -85,8 +93,8 @@ const Layout: React.FC<LAYOUTIF> = ({ param }) => {
           {/* <ConvertBuffer /> */}
 
           {/* {myArr.map((item) => (
-            <p className="text-[black]">{item}</p>
-          ))} */}
+          <p className="text-[black]">{item}</p>
+        ))} */}
         </div>
       </div>
     </>

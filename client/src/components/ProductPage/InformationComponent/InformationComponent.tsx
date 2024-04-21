@@ -8,12 +8,11 @@ interface INFORMATIONPROPSIF{
   description?:string
   color?:string
   introduce?:string
-  size?:string
+  size?:any
 }
 
 const InformationComponent:React.FC<INFORMATIONPROPSIF>=({description,color,introduce,size,title})=>{
   
-  console.log(size)
   return (
     <div
       className={`w-100 lg:w-60 md:w-50

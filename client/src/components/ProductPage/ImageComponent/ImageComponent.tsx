@@ -43,9 +43,6 @@ setSelected(index);
         else
          setItemShow(itemShow + 1);
          setSelected(itemShow)
-        console.log("right");
-
-        console.log("left");
         // setItemShow((prev)=>prev-1)
       }
        else if (deltaX > 200) {
@@ -56,7 +53,7 @@ setSelected(index);
         } else 
         setItemShow(itemShow - 1);
         setSelected(itemShow)
-        console.log("right");
+        
       }
     }
   };
@@ -65,8 +62,6 @@ setSelected(index);
     setStartX(null);
   };
 
-
-  console.log(imagesProps)
 
   return (
     <div className="w-94 lg:w-40 md:w-50 h-[300px] md:h-[500px] flex justify-start relative">
