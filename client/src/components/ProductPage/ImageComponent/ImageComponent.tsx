@@ -7,13 +7,13 @@ import LoadBuffer from "@/components/GlobalComponents/Buffer/LoadBuffer";
 import testData from "./Base6Image";
 
 interface imageComponentIF {
-  images?: any;
+  imagesProps?: any;
 }
 
-const ImageComponent: React.FC<imageComponentIF> = ({ images }) => {
+const ImageComponent: React.FC<imageComponentIF> = ({ imagesProps }) => {
   const [startX, setStartX] = useState<number | null>(null);
 
-  const [data, setData] = useState<any>(images);
+  const [data, setData] = useState<any>(imagesProps);
   const [itemShow, setItemShow] = useState(0);
   const [selected, setSelected] = useState(0);
 
@@ -85,7 +85,7 @@ setSelected(index);
     </div>
     
 
-      {/* ImageScroll */}
+      {/* imagesPropscroll */}
 
       <div
         className={

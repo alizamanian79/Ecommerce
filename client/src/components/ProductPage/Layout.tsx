@@ -29,8 +29,9 @@ const Layout: React.FC<LAYOUTIF> = ({ param }) => {
       });
   }, []);
 
+  console.log(data);
 
-  console.log(data)
+ 
 
   return (
     <>
@@ -49,14 +50,18 @@ const Layout: React.FC<LAYOUTIF> = ({ param }) => {
       >
         <div
           className={`w-100 lg:w-94 md:w-94 h-auto flex-wrap justify-center flex flex-row min:flex-col mt-3
-         md:mt-5`} style={{direction:"ltr"}}
+         md:mt-5`}
+          style={{ direction: "ltr" }}
         >
           {data ? (
             <>
-             
-              <ImageComponent images={data.pImages} />
-              <InformationComponent />
-             
+              <ImageComponent imagesProps={data.pImages} />
+              <InformationComponent 
+              description={data.pDescription}
+               color={data.pColor}
+               introduce={data.pIntroduce}
+               size={data.pSize}
+               />
             </>
           ) : (
             <>
