@@ -19,7 +19,7 @@ const ImageToBase64Converter: React.FC = () => {
           return;
         }
 
-        var base64WithoutPrefix = base64String.replace(/^data:image\/(jpeg|jpg|png|avif);base64,/, '');
+        var base64WithoutPrefix = base64String.replace(/^data:image\/(jpeg|jpg|png|avif|webp);base64,/, '');
 
         setBase64Buffers((prevBuffers) => {
           const newBuffers = [...prevBuffers];

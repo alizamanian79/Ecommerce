@@ -4,13 +4,14 @@ import SizeComponent from "./SizeComponent/Size";
 
 
 interface INFORMATIONPROPSIF{
+  title?:string
   description?:string
   color?:string
   introduce?:string
   size?:string
 }
 
-const InformationComponent:React.FC<INFORMATIONPROPSIF>=({description,color,introduce,size})=>{
+const InformationComponent:React.FC<INFORMATIONPROPSIF>=({description,color,introduce,size,title})=>{
   
   console.log(size)
   return (
@@ -24,8 +25,8 @@ const InformationComponent:React.FC<INFORMATIONPROPSIF>=({description,color,intr
      `}
       style={{ direction: "rtl" }}
     >
-      <h3 className={`font-["yekanBakhtBold"] text-[30px]`}>لباس جدید ما</h3>
-      <h4 className={`font-["yekanBakht"] text-[15px] md:text-[19px]`}>
+      <h3 className={`font-["yekanBakhtBold"] text-[30px]`}>{title}</h3>
+      <h4 className={`font-["yekanBakht"] text-[15px] md:text-[19px] h-[150px]`}>
        {description}
       </h4>
 

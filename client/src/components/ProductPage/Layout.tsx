@@ -6,6 +6,8 @@ import AddressBar from "../GlobalComponents/AddressBar/AddressBar";
 import ImageComponent from "./ImageComponent/ImageComponent";
 import InformationComponent from "./InformationComponent/InformationComponent";
 import ConvertBuffer from "@/components/GlobalComponents/Buffer/ConvertBuffer/ConvertBuffer";
+import noRepetition from "../GlobalComponents/Norepetition/Norepetition";
+
 
 interface LAYOUTIF {
   param: any;
@@ -29,9 +31,13 @@ const Layout: React.FC<LAYOUTIF> = ({ param }) => {
       });
   }, []);
 
-  console.log(data);
+  // console.log(data);
 
- 
+  const myArr = ["red", "pink", "blue", "red", "blue", "green", "red"];
+  const result = noRepetition(myArr); // Call the function with your array
+  
+  console.log("Unique Items:", result.uniqueItems); // Print unique items
+  console.log("Repetition Items:", result.repetitionItems); // Print repetition items
 
   return (
     <>
@@ -56,12 +62,13 @@ const Layout: React.FC<LAYOUTIF> = ({ param }) => {
           {data ? (
             <>
               <ImageComponent imagesProps={data.pImages} />
-              <InformationComponent 
-              description={data.pDescription}
-               color={data.pColor}
-               introduce={data.pIntroduce}
-               size={data.pSize}
-               />
+              <InformationComponent
+                title={data.pTitle}
+                description={data.pDescription}
+                color={data.pColor}
+                introduce={data.pIntroduce}
+                size={data.pSize}
+              />
             </>
           ) : (
             <>
@@ -74,8 +81,12 @@ const Layout: React.FC<LAYOUTIF> = ({ param }) => {
               </div>
             </>
           )}
-          {/* 
-          <ConvertBuffer /> */}
+
+          {/* <ConvertBuffer /> */}
+
+          {/* {myArr.map((item) => (
+            <p className="text-[black]">{item}</p>
+          ))} */}
         </div>
       </div>
     </>
