@@ -60,7 +60,7 @@ const Layout: React.FC<LAYOUTIF> = ({ param }) => {
       />
 
       <div
-        className={`relative w-100 min-h-screen flex bg-hBack flex-col blur-[0] items-center`}
+        className={`relative w-100 min-h-screen flex bg-[#f5f5f5bc] flex-col blur-[0] items-center`}
         style={{ direction: "rtl" }}
       >
         <div
@@ -71,6 +71,7 @@ const Layout: React.FC<LAYOUTIF> = ({ param }) => {
             <>
               <ImageComponent imagesProps={show.pImages} />
               <InformationComponent
+                id={show.pID}
                 title={show.pTitle}
                 description={show.pDescription}
                 color={show.pColor}
