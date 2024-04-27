@@ -45,7 +45,7 @@ const Layout: React.FC<LAYOUTIF> = ({ param }) => {
     setShow(lowerPriceItem);
   }
 
-
+console.log(show)
   
 
   return (
@@ -77,6 +77,7 @@ const Layout: React.FC<LAYOUTIF> = ({ param }) => {
                 color={show.pColor}
                 introduce={show.pIntroduce}
                 size={show.pSize}
+                total={show.pTotal}
               />
             </>
           ) : (
