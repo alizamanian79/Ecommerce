@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Card from "@/components/Shop/Card/Card";
 import Menu from "../GlobalComponents/Menu/Menu";
 import AddressBar from "../GlobalComponents/AddressBar/AddressBar";
+import NavIcons from "../GlobalComponents/Menu/Phone/NavIcons";
 interface Product {
   pTitle: string;
   pPrice: string;
@@ -22,8 +23,9 @@ interface ShopComponentProps {
 }
 
 const ShopComponent: React.FC<ShopComponentProps> = ({ dataShop }) => {
-  const [products, setProducts] = useState(offlineData);
-  
+  const [products, setProducts] = useState(dataShop);
+  console.log(products)
+
   return (
     <div className="w-100 h-auto flex flex-wrap">
       <Menu />
@@ -40,13 +42,11 @@ const ShopComponent: React.FC<ShopComponentProps> = ({ dataShop }) => {
         ))}
       </div>
 
-
-
-
       <div className={`w-18 h-auto bg-red`}>
 
-</div>
+      </div>
 
+      <NavIcons />
     </div>
   );
 };
