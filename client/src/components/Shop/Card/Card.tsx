@@ -59,18 +59,20 @@ const Card: React.FC<CARDIF> = ({ data }) => {
 
       <div className={`w-100 h-[auto] mt-2  flex flex-col`}>
         <span
-          className={`w-100 flex justify-end font-[yekanBakhtBold] text-[21px]`}
+          className={`w-100 h-[61px] flex justify-end font-[yekanBakhtBold] text-[21px]`}
+          style={{textAlign:"right"}}
         >
           {data.pTitle}
         </span>
 
         <div className={`w-100 flex justify-between mt-1 px-1`}>
-          <button
+          <button 
+          
             onClick={() => handleClick(data.pTitle)}
             className={`w-auto h-auto px-6 py-1 rounded-md
             
             transition-all ease-out delay-[0.5]
-
+            
             border-[1.7px] border-[#e3e2e2] hover:bg-color2 hover:border-color2 hover:text-[white]
             
             bg-rmv font-[yekanBakhtBold] text-[13px] text-[#373737]`}

@@ -121,7 +121,7 @@ const Products: React.FC = () => {
     "pTotal":formData.pTotal,
     "pPrice":formData.pPrice}
 
-    fetch("http://localhost:9091/api/products/add", {
+    fetch(`${process.env.LOCALHOST}/api/products/add`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -141,13 +141,36 @@ const Products: React.FC = () => {
       });
   };
 
+
+  const handleDelete =async(item:any)=>{
+    try {
+      const response = await fetch(`${process.env.LOCALHOST}/api/products/delete/${item}`, {
+        method: 'DELETE'
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to delete post');
+      }
+      
+      const data = await response.json();
+      alert("Item deleted")
+    } catch (error) {
+      console.error('Error deleting post:', error);
+    }
+  }
+
+  
+  
   return (
     <div>
      
       <div className="w-100 h-auto flex flex-wrap">
-        {data.map((item: any, index: number) => {
-          return <Card key={index} data={item} />;
-        })}
+        {data.map((item: any, index: number) => (
+          <>
+          <Card key={index} data={item} />
+          <button onClick={()=>handleDelete(item.pID)}>Delete</button>
+          </> 
+           ))}
       </div>
       <form onSubmit={handleSubmit}>
         <label>
