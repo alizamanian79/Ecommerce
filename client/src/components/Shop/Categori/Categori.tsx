@@ -37,9 +37,9 @@ const  Categori:React.FC<CategoriIF> =({callbackCategori})=> {
             className={
               selected === item.title
                 ? `min-w-[50px] h-[50px] bg-color2 transition-all ease-out delay-100 blur-0
-            rounded-[50%] flex justify-center items-center ml-2 text-[white]`
+            rounded-[50%] flex justify-center items-center ml-2 text-[white] cursor-pointer`
                 : `min-w-[50px] h-[50px] bg-[#313131] transition-all ease-out delay-100 blur-[0.6px]
-       rounded-[50%] flex justify-center items-center ml-2 text-[white]`
+       rounded-[50%] flex justify-center items-center ml-2 text-[white] cursor-pointer`
             }
           >
             <item.icon style={{ fontSize: "25px" }} />
