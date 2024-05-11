@@ -14,10 +14,16 @@ export const testRedux = createSlice({
   //Functions Part
   reducers: {
     increase: (state, action?) => {
-      state.number = state.number + 1;
+      if (state.number){
+        state.number = state.number + 1;
+      }
+      
     },
     decrease: (state, action?) => {
-      state.number = state.number - 1;
+      if (state.number){
+        state.number = state.number - 1;
+      }
+      
     },
   },
 });

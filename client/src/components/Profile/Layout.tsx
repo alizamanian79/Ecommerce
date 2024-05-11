@@ -16,7 +16,9 @@ const ProfileComponent: React.FC<ProfileComponentIF> = ({ param }) => {
       >
        
         <Menu />
-        <AddressBar />
+        <AddressBar  dataAddress={[
+          { title: "پروفایل", router: "/" },
+        ]}/>
         
         <div className={"w-94 h-auto flex items-center flex-col"}>
      
