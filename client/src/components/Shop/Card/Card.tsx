@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 
 import aks from "../../../../public/productCategories/beautyCollection.png";
 import LoadBuffer from "@/components/GlobalComponents/Buffer/LoadBuffer";
+import { title } from "process";
 
 interface CARDIF {
   data: any;
@@ -30,6 +31,7 @@ const Card: React.FC<CARDIF> = ({ data }) => {
 
   return (
     <div
+      onClick={() => handleClick(data.pTitle)}
       className={`
     w-[100%] h-[auto] mx-[0%] mt-5
     md:w-[31%] md:h-[auto] md:mx-[1%] md:mt-5
@@ -39,7 +41,18 @@ const Card: React.FC<CARDIF> = ({ data }) => {
     relative
     flex flex-col 
     
-    py-1
+
+    py-3
+    px-3
+    rounded-md
+    border-[1px]
+    border-[#d5d5d5]
+
+    hover:shadow-lg
+
+    transition-all delay-75
+
+    mb-3
 
     `}
     >
@@ -51,7 +64,11 @@ const Card: React.FC<CARDIF> = ({ data }) => {
 
       <Image
         className={`w-100 h-[15rem] rounded-lg object-cover`}
-        src={ data.pImages[1]==null? aks :  LoadBuffer(data.pImages, 1) as string}
+        src={
+          data.pImages[1] == null
+            ? aks
+            : (LoadBuffer(data.pImages, 1) as string)
+        }
         width={0}
         height={0}
         alt="image"
@@ -60,14 +77,13 @@ const Card: React.FC<CARDIF> = ({ data }) => {
       <div className={`w-100 h-[auto] mt-2  flex flex-col`}>
         <span
           className={`w-100 h-[61px] flex justify-end font-[yekanBakhtBold] text-[21px]`}
-          style={{textAlign:"right"}}
+          style={{ textAlign: "right" }}
         >
           {data.pTitle}
         </span>
 
         <div className={`w-100 flex justify-between mt-1 px-1`}>
-          <button 
-          
+          <button
             onClick={() => handleClick(data.pTitle)}
             className={`w-auto h-auto px-6 py-1 rounded-md
             

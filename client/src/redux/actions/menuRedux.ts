@@ -8,7 +8,7 @@ interface initialStateIF {
 
 const initialState: initialStateIF = {
   menu: false,
-  chosen: undefined,
+  chosen: "خانه",
 };
 
 export const menuRedux = createSlice({
@@ -19,6 +19,7 @@ export const menuRedux = createSlice({
       state.menu = !state.menu;
     },
     handleChosen: (state, action: PayloadAction<{ chosen: string }>):void => {
+      state.menu = !state.menu;
       state.chosen = action.payload.chosen;
     },
   },

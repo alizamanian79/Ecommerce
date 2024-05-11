@@ -4,11 +4,12 @@ import logo from "../../../../../public/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faBars } from "@fortawesome/free-solid-svg-icons";
 import navStaticData from "../navStaticData";
-
-
 import { useDispatch, useSelector } from "react-redux";
-import { handleChangeMenuStatus,handleChosen } from "@/redux/actions/menuRedux";
-
+import {
+  handleChangeMenuStatus,
+  handleChosen,
+} from "@/redux/actions/menuRedux";
+import { useRouter } from "next/router";
 
 interface Dt {
   data: { title: string; link: string }[];
@@ -19,19 +20,19 @@ const Nav: React.FC = () => {
   const [data, setdData] = useState<Dt["data"]>(navStaticData.data);
   const dispatch = useDispatch();
   let isOpen: any = useSelector<any>((state) => state.menuRedux.menu);
-  let chosen = useSelector<any>(state=>state.menuRedux.chosen)
- 
+  let chosen = useSelector<any>((state) => state.menuRedux.chosen);
+  const router = useRouter();
   //handleMenu Click
-  const handleMenu = ():void => {
+  const handleMenu = (): void => {
     dispatch(handleChangeMenuStatus());
   };
 
-
   //handle li Click
-  const handleliClick = (item:string)=>{
-    dispatch(handleChosen({ chosen: item }));
-
-  }
+  const handleliClick = (title:string,link: string) => {
+    dispatch(handleChosen({chosen:title}))
+    router.push(link);
+    
+  };
 
   return (
     <>
@@ -55,7 +56,8 @@ const Nav: React.FC = () => {
             isOpen == true
               ? `w-100 px-5 h-[13%] border-b-[0.75px] border-[#a7a6a66b] flex  z-[10]
    justify-between items-center bg-[#ffffff] transition-all ease-out delay-75 translate-x-0`
-              : `w-0`
+              : `w-0 px-5 h-[13%] border-b-[0.75px] border-[#a7a6a66b]   z-[10]
+              justify-between items-center bg-[#ffffff] transition-all ease-out delay-75 translate-x-0 hidden`
           }
         >
           <FontAwesomeIcon
@@ -83,19 +85,18 @@ const Nav: React.FC = () => {
           <ul
             className={
               isOpen == true
-                ? "mt-[1.3rem] flex w-100 items-center px-5  flex-col"
-                : "mt-[1.3rem] flex w-0 items-center px-0  flex-col"
+                ? "mt-[1.3rem]  flex w-100 items-center px-5  flex-col"
+                : "mt-[1.3rem] flex w-100 items-center px-5  flex-col"
             }
           >
             {data.map((item, index) => (
               <li
-              onClick={()=>handleliClick(item.title)}
+                onClick={() => handleliClick(item.title,item.link)}
                 key={index}
                 className={
-                  chosen == item.title ? 
-                  "mt-[1rem] text-[#282828] font-[yekanBakhtBold] bg-rmv w-90 h-35 flex items-center rounded-[3px]"
-                  :
-                  "mt-[1rem] font-[yekanBakht] bg-rmv w-90 h-35 flex items-center rounded-[3px]"
+                  chosen == item.title
+                    ? "mt-[1rem] text-[#282828] font-[yekanBakhtBold] bg-rmv w-90 h-35 flex items-center rounded-[3px]"
+                    : "mt-[1rem] font-[yekanBakht] bg-rmv w-90 h-35 flex items-center rounded-[3px]"
                 }
               >
                 {item.title}

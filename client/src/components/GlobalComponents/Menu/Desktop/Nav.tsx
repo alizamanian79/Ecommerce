@@ -1,26 +1,69 @@
 import React, { useState } from "react";
 import data from "../navStaticData";
+import { useRouter } from "next/router";
+
+//
+import { useDispatch, useSelector } from "react-redux";
+import menuRedux, {
+  handleChangeMenuStatus,
+  handleChosen,
+} from "@/redux/actions/menuRedux";
+
+
+
 interface Dt {
   data: { title: string; link: string }[];
 }
 export default function Nav() {
+
+  const dispatch = useDispatch();
+ 
+
   const [navItems, setNavItems] = useState<Dt["data"]>(data.data);
   const [navSpan, setNavSpan] = useState<number | undefined>(undefined);
+  const router = useRouter();
+
+  const selected =useSelector<any>((state) => state.menuRedux.chosen);
+
+
+
   const handleMouseOver = (index: number) => {
     setNavSpan(index);
   };
+
+const handleClickRouter = (title:string,link:string)=>{
+dispatch(handleChosen({chosen:title}))
+router.push({
+  pathname:link
+})
+}
+
+console.log('menu is : ' + selected)
   return (
     <nav className={`w-3/5 h-[100%] bg-white flex justify-center items-center`}>
       <ul className="w-100 h-[100%]  flex justify-center items-center ">
         {navItems.map((item, index) => (
           <li
+         onClick={()=>handleClickRouter(item.title,item.link)}
             key={index}
             onMouseEnter={(evt) => handleMouseOver(index)}
             onMouseLeave={() => setNavSpan(undefined)}
-            className={`relative
+            className={selected==item.title ? ` 
+            
+            relative
+            transition-all ease-out delay-100
+              bg-[black]
+              text-[#ffffff] 
+              w-auto h-auto z-1 rounded  lg:px-4 py-1 m-1 md:px-3 md:m-1 
+               font-[yekanBakht] lg:text-[17.5px] sm:text-[16.5px] 
+              hover:cursor-pointer flex justify-center items-center
+            
+            
+            `: `relative
             transition-all ease-out delay-100
                hover:text-[white]
-              text-[black] 
+               bg-rmv
+              text-[#000000] 
               w-auto h-auto z-1 rounded  lg:px-4 py-1 m-1 md:px-3 md:m-1 
                font-[yekanBakht] lg:text-[17.5px] sm:text-[16.5px] 
               hover:cursor-pointer flex justify-center items-center

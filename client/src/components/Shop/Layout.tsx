@@ -26,12 +26,12 @@ interface ShopComponentProps {
 
 const ShopComponent: React.FC<ShopComponentProps> = ({ dataShop }) => {
   const [products, setProducts] = useState<any>(dataShop);
-  
 
-const handleFilter =(data:string)=>{
-console.log(data)
-}
+  const handleFilter = (data: string) => {
+    console.log(data);
+  };
 
+  console.log(products)
   return (
     <div className="w-100 h-auto flex flex-wrap justify-center">
       <Menu />
@@ -42,16 +42,7 @@ console.log(data)
         ]}
       />
 
-
-<Categori callbackCategori={handleFilter}/>
-
-
-
-
-
-
-
-
+      <Categori callbackCategori={handleFilter} />
 
       <div
         className={`w-82 h-auto 

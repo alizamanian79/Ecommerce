@@ -4,8 +4,8 @@ interface Dt {
 
 const data: Dt = {
     data: [
-        { title: "خانه", link: "" },
-        { title: "فروشگاه", link: "" },
+        { title: "خانه", link: "/" },
+        { title: "فروشگاه", link: "/shop" },
         { title: "تماس", link: "" },
         { title: "بلاگ", link: "" },
         { title: "ارتباط با ما", link: "" },

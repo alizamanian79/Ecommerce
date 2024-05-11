@@ -4,7 +4,7 @@ import { IoMdPhonePortrait } from "react-icons/io";
 import { CiPenpot } from "react-icons/ci";
 
 interface CategoriIF {
-    callbackCategori :(data:string|undefined)=>void;
+    callbackCategori :any;
 }
 
 const  Categori:React.FC<CategoriIF> =({callbackCategori})=> {
