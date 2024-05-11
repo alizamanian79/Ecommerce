@@ -58,9 +58,9 @@ const Card: React.FC<CARDIF> = ({ data }) => {
     >
       <IoHeart
         onClick={() => handleAddToFavorite(data)}
-        className="z-[1] top-[8px] left-[5px] cursor-pointer hover:text-color2 text-[20px] absolute flex justify-center items-end"
+        className="z-[0] top-[8px] left-[5px] cursor-pointer hover:text-color2 text-[20px] absolute flex justify-center items-end"
       />
-      <FaShareNodes className="z-[1] top-[8px] left-[30px] cursor-pointer hover:text-color2  text-[20px] absolute flex justify-center items-end" />
+      <FaShareNodes className="z-[0] top-[8px] left-[30px] cursor-pointer hover:text-color2  text-[20px] absolute flex justify-center items-end" />
 
       <Image
         className={`w-100 h-[15rem] rounded-lg object-cover`}

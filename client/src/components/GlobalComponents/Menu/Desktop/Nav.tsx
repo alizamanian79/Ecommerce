@@ -37,8 +37,6 @@ router.push({
   pathname:link
 })
 }
-
-console.log('menu is : ' + selected)
   return (
     <nav className={`w-3/5 h-[100%] bg-white flex justify-center items-center`}>
       <ul className="w-100 h-[100%]  flex justify-center items-center ">

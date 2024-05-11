@@ -14,7 +14,7 @@ const ImageComponent: React.FC<imageComponentIF> = ({ imagesProps }) => {
   const [startX, setStartX] = useState<number | null>(null);
 
   const [data, setData] = useState<any>(imagesProps);
-  const [itemShow, setItemShow] = useState(0);
+  const [itemShow, setItemShow] = useState(1);
   const [selected, setSelected] = useState(0);
 
   const handleClick = (index: number) => {
