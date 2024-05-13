@@ -1,24 +1,53 @@
 import React, { FC, useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
-
+import { blackScreenChanger } from "@/redux/actions/blackScreen";
 
 export default function Icons() {
+const dispatch = useDispatch();
+const statusBlackScreen = useSelector<any>((state) => state.blackScreen.stScreen);
+
+  const handleClick=(mode:string)=>{
+   
+    switch (mode) {
+      case "Profile":
+        dispatch(blackScreenChanger({ modalShow:"Profile" }));
+        break;
+
+
+        case "Heart":
+        dispatch(blackScreenChanger({ modalShow:"Heart" }));
+        break;
+
+
+        case "Basket":
+          dispatch(blackScreenChanger({ modalShow:"Basket" }));
+          break;
+
+          case "Search":
+            dispatch(blackScreenChanger({ modalShow:"Search" }));
+            break;
+
+    
+      default:
+        break;
+    }
+  }
  
   return (
     <div className={`w-1/5 h-[100%] bg-white flex justify-end items-center`}>
      <ul className={`flex`}>
-      <li className={`px-2 py-2 relative hover:cursor-pointer`}><SearchIcon /></li>
-      <li className={`px-2 py-2 relative hover:cursor-pointer`}><HeartIcon /></li>
 
+      <li className={`px-2 py-2 relative hover:cursor-pointer`} onClick={()=>handleClick("Search")}><SearchIcon /></li>
+      <li className={`px-2 py-2 relative hover:cursor-pointer`} onClick={()=>handleClick("Heart")}><HeartIcon /></li>
 
-      <li className={`px-2 py-2  relative hover:cursor-pointer`}> 
+      <li className={`px-2 py-2  relative hover:cursor-pointer`} onClick={()=>handleClick("Basket")}> 
       <span className={`absolute top-[-6px] right-[-3px] 
       rounded-full w-[16px] h-16 bg-[#ef4444] text-[10px] text-center flex justify-center items-center text-[white]`}>5</span> 
       <ShoppingCartIcon />
       </li>
 
 
-      <li className={`px-2 py-2 relative hover:cursor-pointer`}><UserIcon /></li>
+      <li className={`px-2 py-2 relative hover:cursor-pointer`} onClick={()=>handleClick("Profile")} ><UserIcon /></li>
       </ul> 
       
       

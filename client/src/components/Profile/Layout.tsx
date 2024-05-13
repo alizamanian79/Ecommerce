@@ -3,6 +3,8 @@ import axios from "axios";
 import Menu from "../GlobalComponents/Menu/Menu";
 import SendEmail from "../GlobalComponents/SendEmail/SendEmail";
 import AddressBar from "../GlobalComponents/AddressBar/AddressBar";
+
+
 interface ProfileComponentIF {
   param: any;
 }

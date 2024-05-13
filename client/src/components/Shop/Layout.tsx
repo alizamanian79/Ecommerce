@@ -4,7 +4,7 @@ import Menu from "../GlobalComponents/Menu/Menu";
 import AddressBar from "../GlobalComponents/AddressBar/AddressBar";
 import NavIcons from "../GlobalComponents/Menu/Phone/NavIcons";
 import Categori from "./Categori/Categori";
-import { useDispatch,useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 
 import BlackScreen from "../GlobalComponents/BlackScreen/BlackScreen";
 
@@ -29,40 +29,50 @@ interface ShopComponentProps {
 
 const ShopComponent: React.FC<ShopComponentProps> = ({ dataShop }) => {
   const [products, setProducts] = useState<any>(dataShop);
-  const statusBlackScreen =useSelector<any>((state) => state.blackScreen.stScreen);
+  const statusBlackScreen = useSelector<any>(
+    (state) => state.blackScreen.stScreen
+  );
 
   const handleFilter = (data: string) => {
     // console.log(data);
   };
 
   return (
-    <div className={statusBlackScreen!=true ? `w-100 h-[100vh] flex flex-wrap justify-center relative blur-[0]`:`w-100 h-[100vh] flex flex-wrap justify-center relative blur-[2px]`}>
-
-    <BlackScreen /> 
-    
-      <Menu />
-      <AddressBar
-        dataAddress={[
-          { title: "خانه", router: "/" },
-          { title: "فروشگاه", router: "#" },
-        ]}
-      />
-
-      <Categori callbackCategori={handleFilter} />
-
+    <>
+      <BlackScreen />
       <div
-        className={`w-82 h-auto 
+        className={
+          statusBlackScreen != true
+            ? `w-100 h-[100%] flex flex-wrap justify-center 
+    relative blur-[0]`
+            : `w-100 h-[100%] flex flex-wrap justify-center relative blur-[2px]`
+        }
+      >
+
+        <Menu />
+        <AddressBar
+          dataAddress={[
+            { title: "خانه", router: "/" },
+            { title: "فروشگاه", router: "#" },
+          ]}
+        />
+
+        <Categori callbackCategori={handleFilter} />
+
+        <div
+          className={`w-82 h-auto 
       
       
       flex flex-wrap`}
-      >
-        {products.map((item: any, index: number) => (
-          <Card key={index} data={item} />
-        ))}
-      </div>
+        >
+          {products.map((item: any, index: number) => (
+            <Card key={index} data={item} />
+          ))}
+        </div>
 
-      <NavIcons />
-    </div>
+        <NavIcons />
+      </div>
+    </>
   );
 };
 

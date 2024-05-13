@@ -7,7 +7,8 @@ functional
 
 const dispatch = useDispatch();
 const statusBlackScreen =useSelector<any>((state) => state.blackScreen.stScreen);
+const modalShow =useSelector<any>((state) => state.blackScreen.modalShow);
 
 const handleClick = ()=>{
-dispatch(blackScreenChanger(statusBlackScreen))
+  dispatch(blackScreenChanger({ modalShow:"Search" }));
 }
