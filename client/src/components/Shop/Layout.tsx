@@ -4,6 +4,9 @@ import Menu from "../GlobalComponents/Menu/Menu";
 import AddressBar from "../GlobalComponents/AddressBar/AddressBar";
 import NavIcons from "../GlobalComponents/Menu/Phone/NavIcons";
 import Categori from "./Categori/Categori";
+import { useDispatch,useSelector } from 'react-redux'
+
+import BlackScreen from "../GlobalComponents/BlackScreen/BlackScreen";
 
 interface Product {
   pTitle: string;
@@ -26,14 +29,17 @@ interface ShopComponentProps {
 
 const ShopComponent: React.FC<ShopComponentProps> = ({ dataShop }) => {
   const [products, setProducts] = useState<any>(dataShop);
+  const statusBlackScreen =useSelector<any>((state) => state.blackScreen.stScreen);
 
   const handleFilter = (data: string) => {
-    console.log(data);
+    // console.log(data);
   };
 
-  console.log(products)
   return (
-    <div className="w-100 h-auto flex flex-wrap justify-center">
+    <div className={statusBlackScreen!=true ? `w-100 h-[100vh] flex flex-wrap justify-center relative blur-[0]`:`w-100 h-[100vh] flex flex-wrap justify-center relative blur-[2px]`}>
+
+    <BlackScreen /> 
+    
       <Menu />
       <AddressBar
         dataAddress={[
