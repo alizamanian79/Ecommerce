@@ -4,7 +4,7 @@ import { blackScreenChanger } from "@/redux/actions/blackScreen";
 
 
 //Modal Components
-import Profile from "@/components/ModalComponents/Profile";
+import Profile from "@/components/ModalComponents/ProfileComponents/Profile";
 import Heart from "@/components/ModalComponents/Heart";
 import Search from "@/components/ModalComponents/Search";
 import Basket from "@/components/ModalComponents/Basket";
@@ -51,7 +51,7 @@ switch (modalShow) {
     <>
       {statusBlackScreen ? (
         <div
-          onClick={handleClick}
+          // onClick={handleClick}
           className={`bg-[#000000b8] w-100 h-[100%] fixed z-[7] flex justify-center items-center`}
         >
           {handleChangeModal()}
