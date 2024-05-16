@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { IoIosSquareOutline } from "react-icons/io";
 import { FaSquare } from "react-icons/fa6";
-import LoadBuffer from "@/components/GlobalComponents/Buffer/LoadBuffer";
+import LoadBuffer from "@/components/GlobalComponents/Buffer/LoadBuffer/LoadBuffer";
 
 import testData from "./Base6Image";
 
@@ -18,9 +18,8 @@ const ImageComponent: React.FC<imageComponentIF> = ({ imagesProps }) => {
   const [selected, setSelected] = useState(0);
 
   const handleClick = (index: number) => {
-setSelected(index);
+    setSelected(index);
     setItemShow(selected);
-    
   };
 
   //Drag
@@ -38,22 +37,17 @@ setSelected(index);
 
         if (detail >= data.length) {
           setItemShow(0);
-          setSelected(itemShow)
-        } 
-        else
-         setItemShow(itemShow + 1);
-         setSelected(itemShow)
+          setSelected(itemShow);
+        } else setItemShow(itemShow + 1);
+        setSelected(itemShow);
         // setItemShow((prev)=>prev-1)
-      }
-       else if (deltaX > 200) {
+      } else if (deltaX > 200) {
         const detail = itemShow - 1;
         if (detail < 0) {
           setItemShow(data.length - 1);
-          setSelected(itemShow)
-        } else 
-        setItemShow(itemShow - 1);
-        setSelected(itemShow)
-        
+          setSelected(itemShow);
+        } else setItemShow(itemShow - 1);
+        setSelected(itemShow);
       }
     }
   };
@@ -62,26 +56,21 @@ setSelected(index);
     setStartX(null);
   };
 
-
   return (
     <div className="w-94 lg:w-40 md:w-50 h-[300px] md:h-[500px] flex justify-start relative">
       <Image
         src={LoadBuffer(data, itemShow) as string}
-        
         alt="Base64 Image"
         width={0}
         height={0}
         className="w-100 h-[100%] object-cover rounded-none md:rounded-[1%]"
       />
-    <div 
-    onTouchStart={handleTouchStart}
-    onTouchMove={handleTouchMove}
-    onTouchEnd={handleTouchEnd}
-    className="w-100 h-[100%] bg-rmv absolute z-[1]"
-    >
-
-    </div>
-    
+      <div
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        className="w-100 h-[100%] bg-rmv absolute z-[1]"
+      ></div>
 
       {/* imagesPropscroll */}
 

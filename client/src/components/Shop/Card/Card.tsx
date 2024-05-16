@@ -5,7 +5,7 @@ import { FaShareNodes } from "react-icons/fa6";
 import { useRouter } from "next/router";
 
 import aks from "../../../../public/productCategories/beautyCollection.png";
-import LoadBuffer from "@/components/GlobalComponents/Buffer/LoadBuffer";
+import LoadBuffer from "@/components/GlobalComponents/Buffer/LoadBuffer/LoadBuffer";
 import { title } from "process";
 
 interface CARDIF {

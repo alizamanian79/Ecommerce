@@ -21,11 +21,11 @@ const MyForm: React.FC<MyFormProps> = ({ labels }) => {
 
   return (
     <div
-      className={`w-2/3 h-auto flex justify-end flex-col `}
+      className={`w-2/3 h-auto flex justify-center flex-col `}
       style={{ direction: `rtl` }}
     >
       {Object.keys(formData).map((key) => (
-        <div key={key} className="w-100 h-[auto] flex flex-wrap mt-3">
+        <div key={key} className="w-90 h-[auto] flex flex-wrap mt-3">
           <label className="w-100 text-[17px] font-[yekanBakhtBold]">
             {formData[key as keyof typeof formData].label}
           </label>
