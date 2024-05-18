@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 
 interface MyFormProps {
-  labels?: string[] | string;
+  labels?: string[] | string,
+  callBack:any
 }
 
-const MyForm: React.FC<MyFormProps> = ({ labels }) => {
-  const [formData, setFormData] = useState({
-    name: { label: "نام", value: "" },
-    lastName: { label: "نام خانوادگی", value: "" },
-    number: { label: "شماره", value: "" },
+
+
+
+const MyForm: React.FC<MyFormProps> = ({ labels,callBack }) => {
+  const [formData, setFormData] = useState<any>({
+    name: {label: "نام", value: "" },
+    lastName: {label: "نام خانوادگی", value: "" },
+    number: {label: "شماره", value: "" },
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,11 +21,27 @@ const MyForm: React.FC<MyFormProps> = ({ labels }) => {
       ...prevData,
       [name]: { ...prevData[name], value: value },
     }));
+    handleSender
   };
+
+
+  const handleSender = () => {
+    const arr = []
+
+    for (const key in formData) {
+      console.log(`${key}: ${formData[key].label} - ${formData[key].value}`);
+      arr.push({ [formData[key].title]: formData[key].value });
+    }
+    
+    console.log(arr)
+}
+
+   callBack(handleSender);
+
 
   return (
     <div
-      className={`w-2/3 h-auto flex justify-center flex-col `}
+      className={`w-100 md:w-2/3 lg:w-2/3 h-auto flex justify-center flex-col `}
       style={{ direction: `rtl` }}
     >
       {Object.keys(formData).map((key) => (
