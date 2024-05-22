@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 
 interface MyFormProps {
-  labels?: string[] | string,
-  callBack:any
+  labels?: string[] | string;
+  callBack: any;
+  fillData: any;
 }
 
-
-
-
-const MyForm: React.FC<MyFormProps> = ({ labels,callBack }) => {
-  const [formData, setFormData] = useState<any>({
-    name: {label: "نام", value: "" },
-    lastName: {label: "نام خانوادگی", value: "" },
-    number: {label: "شماره", value: "" },
+const MyForm: React.FC<MyFormProps> = ({ labels, callBack, fillData }) => {
+  const [formData, setFormData] = useState({
+    name: { label: "نام", value: fillData.name || "" },
+    lastName: { label: "نام خانوادگی", value: fillData.lastName || "" },
+    phone: { label: "شماره", value: fillData.phone || "" },
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,23 +19,9 @@ const MyForm: React.FC<MyFormProps> = ({ labels,callBack }) => {
       ...prevData,
       [name]: { ...prevData[name], value: value },
     }));
-    handleSender
   };
 
-
-  const handleSender = () => {
-    const arr = []
-
-    for (const key in formData) {
-      console.log(`${key}: ${formData[key].label} - ${formData[key].value}`);
-      arr.push({ [formData[key].title]: formData[key].value });
-    }
-    
-    console.log(arr)
-}
-
-   callBack(handleSender);
-
+  callBack(formData);
 
   return (
     <div

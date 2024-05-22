@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import ImageComponent from "./ImageComponent";
 import Form from "./Form";
 import { IoClose } from "react-icons/io5";
-
-
+import Button from "@/components/GlobalComponents/Button/Button";
 
 const ModalProfile: React.FC = () => {
   const [image, setImage] = useState(null);
-  const [formData, setFormData] = useState(null)
+  const [formData, setFormData] = useState<any>({
+    name: "Ali",
+    lastName: "Zamanian",
+    phone: "066",
+  });
 
   const handleCallBackImage = (data: any) => {
     setImage(data);
@@ -17,7 +20,14 @@ const ModalProfile: React.FC = () => {
   };
 
   function handleSubmit() {
-    alert(formData);
+    let arr = {
+      uImage:image,
+      uName: formData.name.value,
+      uLastName: formData.lastName.value,
+      uPhone: formData.phone.value,
+    };
+
+    console.log(arr);
   }
 
   return (
@@ -34,11 +44,10 @@ const ModalProfile: React.FC = () => {
       <div className={`w-100 h-auto bg-[#ffffff] flex flex-wrap`}>
         <ImageComponent callBack={handleCallBackImage} />
 
-        <Form callBack={handleCallBackFormData} />
-       
+        <Form callBack={handleCallBackFormData} fillData={formData} />
       </div>
 
-      <button onClick={handleSubmit}>sssss</button>
+      <Button  />
 
     </div>
   );
