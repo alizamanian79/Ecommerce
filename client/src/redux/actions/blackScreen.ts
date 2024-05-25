@@ -10,7 +10,7 @@ export const blackScreen = createSlice({
   name: "blackScreen",
   // Values
   initialState: <initialStateIF>{
-    stScreen: true,
+    stScreen: false,
     modalShow: "Profile" // Assign the component directly without JSX syntax
   },
   // Functions Part

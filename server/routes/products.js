@@ -206,7 +206,7 @@ router.get(`/${routerName}/search/:name`, (req, res) => {
       res.status(500).send('Internal Server Error');
     } else {
     const dt= result[0]
-      res.status(200).send(dt[0]);
+      res.status(200).send(dt);
     }
   });
 });

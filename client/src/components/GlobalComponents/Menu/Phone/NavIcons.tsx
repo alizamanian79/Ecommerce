@@ -1,49 +1,12 @@
 import React, { useState } from "react";
-function NavIcons() {
-
-  const [data, setData] = useState([
-    { title: UserIcon, url: "/" },
-    { title: ShoppingCartIcon, url: "/" },
-    { title: SearchIcon, url: "/" },
-    { title: HeartIcon, url: "/" },
-  ]);
-  const [selected, setSelected] = useState<number | undefined>(undefined);
-
-  const handleClick = (index: number) => {
-    selected === index ? setSelected(undefined) : setSelected(index);
-  };
-
-  return (
-    <div
-      style={{ direction: "ltr", boxShadow: "0px -2px 9px #e1e1e1" }}
-      className={`w-100 h-50 sticky bottom-0 max-sm:flex md:hidden justify-center items-center border-none
-       bg-[#ffffff]`}
-    >
-      <ul className="w-100 flex justify-center items-center h-[100%] ">
-        {data.map((item, index) => (
-          <li
-            onClick={() => handleClick(index)}
-            key={index}
-            className={
-              selected === index
-                ? `w-1/4 flex justify-center items-center h-[100%] hover:cursor-pointer bg-[#222529]`
-                : `w-1/4 flex justify-center items-center h-[100%] hover:cursor-pointer`
-            }
-          >
-            <item.title colorChange={selected === index ? `white` : undefined} />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export default NavIcons;
 
 const iconWidth = "20px";
 const iconHeight = "20px";
 
-function HeartIcon(props: any) {
+function HeartIcon({ colorChange, ...props }) {
+  const fill = colorChange ? colorChange : 'none';
+  const stroke = colorChange ? colorChange : 'currentColor';
+
   return (
     <svg
       {...props}
@@ -51,10 +14,8 @@ function HeartIcon(props: any) {
       width={iconWidth}
       height={iconHeight}
       viewBox="0 0 24 24"
-      fill={props.colorChange == undefined ? `none` : props.colorChange}
-      stroke={
-        props.colorChange == undefined ? `currentColor` : props.colorChange
-      }
+      fill={fill}
+      stroke={stroke}
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -63,7 +24,11 @@ function HeartIcon(props: any) {
     </svg>
   );
 }
-function SearchIcon(props: any) {
+
+function SearchIcon({ colorChange, ...props }) {
+  const fill = colorChange ? colorChange : 'none';
+  const stroke = colorChange ? colorChange : 'currentColor';
+
   return (
     <svg
       {...props}
@@ -71,10 +36,8 @@ function SearchIcon(props: any) {
       width={iconWidth}
       height={iconHeight}
       viewBox="0 0 24 24"
-      fill={props.colorChange == undefined ? `none` : props.colorChange}
-      stroke={
-        props.colorChange == undefined ? `currentColor` : props.colorChange
-      }
+      fill={fill}
+      stroke={stroke}
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -84,7 +47,11 @@ function SearchIcon(props: any) {
     </svg>
   );
 }
-function ShoppingCartIcon(props: any) {
+
+function ShoppingCartIcon({ colorChange, ...props }) {
+  const fill = colorChange ? colorChange : 'none';
+  const stroke = colorChange ? colorChange : 'currentColor';
+
   return (
     <svg
       {...props}
@@ -92,10 +59,8 @@ function ShoppingCartIcon(props: any) {
       width={iconWidth}
       height={iconHeight}
       viewBox="0 0 24 24"
-      fill={props.colorChange == undefined ? `none` : props.colorChange}
-      stroke={
-        props.colorChange == undefined ? `currentColor` : props.colorChange
-      }
+      fill={fill}
+      stroke={stroke}
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -106,7 +71,11 @@ function ShoppingCartIcon(props: any) {
     </svg>
   );
 }
-function UserIcon(props: any) {
+
+function UserIcon({ colorChange, ...props }) {
+  const fill = colorChange ? colorChange : 'none';
+  const stroke = colorChange ? colorChange : 'currentColor';
+
   return (
     <svg
       {...props}
@@ -114,10 +83,8 @@ function UserIcon(props: any) {
       width={iconWidth}
       height={iconHeight}
       viewBox="0 0 24 24"
-      fill={props.colorChange == undefined ? `none` : props.colorChange}
-      stroke={
-        props.colorChange == undefined ? `currentColor` : props.colorChange
-      }
+      fill={fill}
+      stroke={stroke}
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -127,3 +94,44 @@ function UserIcon(props: any) {
     </svg>
   );
 }
+
+function NavIcons() {
+
+  const [data, setData] = useState([
+    { title: UserIcon, url: "/" },
+    { title: ShoppingCartIcon, url: "/" },
+    { title: SearchIcon, url: "/" },
+    { title: HeartIcon, url: "/" },
+  ]);
+
+  const [selected, setSelected] = useState<number | undefined>(undefined);
+
+  const handleClick = (index: number) => {
+    setSelected(selected === index ? undefined : index);
+  };
+
+  return (
+    <div
+      style={{ direction: "ltr", boxShadow: "0px -2px 9px #e1e1e1" }}
+      className={`w-100 h-50 sticky bottom-0 max-sm:flex md:hidden justify-center items-center border-none bg-[#ffffff]`}
+    >
+      <ul className="w-100 flex justify-center items-center h-[100%]">
+        {data.map((item, index) => (
+          <li
+            onClick={() => handleClick(index)}
+            key={index}
+            className={
+              selected === index
+                ? `w-1/4 flex justify-center items-center h-[100%] hover:cursor-pointer bg-[#222529]`
+                : `w-1/4 flex justify-center items-center h-[100%] hover:cursor-pointer`
+            }
+          >
+            <item.title colorChange={selected === index ? 'white' : undefined} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default NavIcons;

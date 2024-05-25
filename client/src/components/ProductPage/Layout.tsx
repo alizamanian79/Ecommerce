@@ -13,15 +13,16 @@ interface LAYOUTIF {
 }
 
 const Layout: React.FC<LAYOUTIF> = ({ param }) => {
-  const [data, setData] = useState<any>();
+  // const [data, setData] = useState<any>();
   const [show, setShow] = useState<any>();
 
 
-const getProducts=()=>{
+const getProduct= async()=>{
   axios
-  .get(`${process.env.LOCALHOST}/api/products/list`)
+  .get(`${process.env.LOCALHOST}/api/products/search/${param}`)
   .then((reponse) => {
-    setData(reponse);
+    setShow(reponse.data[0]);
+    
   })
   .catch((error) => {
     console.log(error);
@@ -29,24 +30,14 @@ const getProducts=()=>{
 
 }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await getProducts();
-    };
 
-    const interval = setInterval(fetchData, 5000);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+useEffect(() => {
+ getProduct()
+}, [])
 
 
 
-
-
-
-console.log(show)
   
 
   return (
