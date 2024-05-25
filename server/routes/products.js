@@ -197,17 +197,19 @@ router.get(`/${routerName}/buy/help`, (req, res) => {
   res.send(help);
 });
 
-
-
-
-
-router.post(`/${routerName}/find`,(req,res)=>{
-res.send("fuck you")
-})
-
-
-
-
+router.get(`/${routerName}/search/:name`, (req, res) => {
+  const name = req.params.name;
+  const sql = `CALL ecommerceshop.SP_SEARCH_PRODUCT(?)`;
+  conn.query(sql, [name], (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+    } else {
+    const dt= result[0]
+      res.status(200).send(dt[0]);
+    }
+  });
+});
 
 
 //buy
@@ -227,7 +229,8 @@ router.post(`/${routerName}/buy`, async (req, res, next) => {
 
   for (let i = 0; i < status.length; i++) {
     if (status[i] === false) {
-      let message = "There was a problem with your basket. Please check your items.";
+      let message =
+        "There was a problem with your basket. Please check your items.";
       return res.status(400).send(message);
     }
   }
@@ -245,9 +248,6 @@ router.post(`/${routerName}/buy`, async (req, res, next) => {
 
   res.status(200).send("All products bought successfully");
 });
-
-
-
 
 async function handelChecking(pID, value) {
   return new Promise((resolve, reject) => {
