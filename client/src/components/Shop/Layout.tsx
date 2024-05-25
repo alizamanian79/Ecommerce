@@ -48,7 +48,6 @@ const ShopComponent: React.FC<ShopComponentProps> = ({ dataShop }) => {
             : `w-100 h-[100%] flex flex-wrap justify-center relative blur-[2px]`
         }
       >
-
         <Menu />
         <AddressBar
           dataAddress={[

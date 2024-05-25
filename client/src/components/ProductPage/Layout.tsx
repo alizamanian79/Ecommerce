@@ -16,34 +16,35 @@ const Layout: React.FC<LAYOUTIF> = ({ param }) => {
   const [data, setData] = useState<any>();
   const [show, setShow] = useState<any>();
 
+
+const getProducts=()=>{
+  axios
+  .get(`${process.env.LOCALHOST}/api/products/list`)
+  .then((reponse) => {
+    setData(reponse);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+}
+
   useEffect(() => {
-    const dt: any[] = [];
-    axios
-      .get(`${process.env.LOCALHOST}/api/products/list`)
-      .then((reponse) => {
-        const res = reponse.data;
-        for (let i = 0; i < res.length; i++) {
-          if (res[i].pTitle === param) {
-            dt.push(res[i]);
-          }
-        }
-        setData(dt);
-        findLowerPrice(dt);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const fetchData = async () => {
+      await getProducts();
+    };
+
+    const interval = setInterval(fetchData, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
-  function findLowerPrice(data: any) {
-    let lowerPriceItem = data[0];
-    for (let i = 1; i < data.length; i++) {
-      if (parseInt(data[i].pPrice) < parseInt(lowerPriceItem.pPrice)) {
-        lowerPriceItem = data[i];
-      }
-    }
-    setShow(lowerPriceItem);
-  }
+
+
+
+
 
 console.log(show)
   

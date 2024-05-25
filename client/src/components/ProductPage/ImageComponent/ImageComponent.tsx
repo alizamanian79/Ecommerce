@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { IoIosSquareOutline } from "react-icons/io";
 import { FaSquare } from "react-icons/fa6";
-import LoadBuffer from "@/components/GlobalComponents/Buffer/LoadBuffer/LoadBuffer";
+import defaultProductImage from "@/components/Shop/Card/defaultProductImage";
 
-import testData from "./Base6Image";
 
 interface imageComponentIF {
   imagesProps?: any;
@@ -14,12 +13,12 @@ const ImageComponent: React.FC<imageComponentIF> = ({ imagesProps }) => {
   const [startX, setStartX] = useState<number | null>(null);
 
   const [data, setData] = useState<any>(imagesProps);
-  const [itemShow, setItemShow] = useState(1);
+  const [itemShow, setItemShow] = useState(0);
   const [selected, setSelected] = useState(0);
 
   const handleClick = (index: number) => {
     setSelected(index);
-    setItemShow(selected);
+    setItemShow(index);
   };
 
   //Drag
@@ -56,10 +55,12 @@ const ImageComponent: React.FC<imageComponentIF> = ({ imagesProps }) => {
     setStartX(null);
   };
 
+
+
   return (
     <div className="w-94 lg:w-40 md:w-50 h-[300px] md:h-[500px] flex justify-start relative">
       <Image
-        src={LoadBuffer(data, itemShow) as string}
+        src={imagesProps[itemShow]!==null? `data:image/png;base64,${imagesProps[itemShow]}`:`data:image/png;base64,${defaultProductImage}`}
         alt="Base64 Image"
         width={0}
         height={0}

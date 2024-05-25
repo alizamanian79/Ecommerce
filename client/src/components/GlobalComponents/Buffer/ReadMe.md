@@ -14,3 +14,17 @@ return(
        <ConvertBuffer imagesNumber={5}  handleCallback={handleCallbackImages} />
 
 )
+
+
+
+
+Load
+
+      <Image
+        className={`w-100 h-[15rem] rounded-lg object-cover`}
+        src={data.pImages[1]!==null? `data:image/png;base64,${data.pImages[1]}`:`data:image/png;base64,${defaultProductImage}`}
+       
+        width={0}
+        height={0}
+        alt="image"
+      />

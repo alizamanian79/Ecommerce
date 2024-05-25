@@ -199,6 +199,18 @@ router.get(`/${routerName}/buy/help`, (req, res) => {
 
 
 
+
+
+router.post(`/${routerName}/find`,(req,res)=>{
+res.send("fuck you")
+})
+
+
+
+
+
+
+//buy
 router.post(`/${routerName}/buy`, async (req, res, next) => {
   const data = req.body.basket;
   const SP = `call ecommerceshop.SP_BUY_PRODUCTS(?, ?)`;
@@ -233,7 +245,6 @@ router.post(`/${routerName}/buy`, async (req, res, next) => {
 
   res.status(200).send("All products bought successfully");
 });
-
 
 
 

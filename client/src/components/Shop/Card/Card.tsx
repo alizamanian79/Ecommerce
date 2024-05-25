@@ -4,7 +4,7 @@ import { IoHeart } from "react-icons/io5";
 import { FaShareNodes } from "react-icons/fa6";
 import { useRouter } from "next/router";
 
-import aks from "../../../../public/productCategories/beautyCollection.png";
+import defaultProductImage from "./defaultProductImage";
 import LoadBuffer from "@/components/GlobalComponents/Buffer/LoadBuffer/LoadBuffer";
 import { title } from "process";
 
@@ -28,6 +28,9 @@ const Card: React.FC<CARDIF> = ({ data }) => {
   const handleAddToFavorite = (data: any) => {
     alert(data.pTitle);
   };
+
+
+
 
   return (
     <div
@@ -64,11 +67,8 @@ const Card: React.FC<CARDIF> = ({ data }) => {
 
       <Image
         className={`w-100 h-[15rem] rounded-lg object-cover`}
-        src={
-          data.pImages[1] == null
-            ? aks
-            : (LoadBuffer(data.pImages, 1) as string)
-        }
+        src={data.pImages[1]!==null? `data:image/png;base64,${data.pImages[1]}`:`data:image/png;base64,${defaultProductImage}`}
+       
         width={0}
         height={0}
         alt="image"

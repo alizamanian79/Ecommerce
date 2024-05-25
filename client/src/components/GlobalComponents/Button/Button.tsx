@@ -61,14 +61,19 @@ const Button:React.FC<BTNIFY> =({btnData})=> {
     <button
     onClick={handleClick}
       className={`
-        w-10 h-[auto]
+        w-22 h-[auto]
+
+        md:w-13 md:h-[auto]
+        lg:-13 lg:w-13
+
+        
 
         text-[white]
         px-2 py-2
         font-[yekanBakht]
         rounded-sm
          flex justify-evenly items-center`}
-      style={{ direction: `ltr`, backgroundColor: `${data.bgColor}` }}
+      style={{ direction: `ltr`, backgroundColor: `${data.bgColor}`,margin:`${data.mrg}` }}
     >
       <p>{data.title}</p>
       <span>{IconComponent && <IconComponent />}</span>
