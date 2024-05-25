@@ -47,7 +47,16 @@ const ModalProfile: React.FC = () => {
         <Form callBack={handleCallBackFormData} fillData={formData} />
       </div>
 
-      <Button  />
+      <Button btnData={
+        {
+          title: "ویرایش",
+          icon: "edit",
+          bgColor: "blue",  
+          api: "api test",
+          apiMethod:"POST",
+          apiData: { name: "Hi" },
+        }
+      } />
 
     </div>
   );
