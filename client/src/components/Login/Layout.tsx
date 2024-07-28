@@ -20,9 +20,7 @@ const MyForm: React.FC = () => {
     if(isSignUp===true){
        const resAdd = await fetch(
           `${
-            process.env.DOMAIN == undefined
-              ? "http://localhost:3000"
-              : process.env.DOMAIN
+          process.env.DOMAIN  
           }/api/user/add`,
           {
             method: "POST",
@@ -50,11 +48,7 @@ const MyForm: React.FC = () => {
     }
     else{
       const res = await fetch(
-        `${
-          process.env.DOMAIN == undefined
-            ? "http://localhost:3000"
-            : process.env.DOMAIN
-        }/api/user/authorization`,
+        `${process.env.DOMAIN}/api/user/authorization`,
         {
           method: "POST",
           headers: {

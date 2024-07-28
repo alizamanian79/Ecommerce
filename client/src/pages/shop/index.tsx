@@ -7,7 +7,13 @@ interface SHOPIF {
 }
 
 const Shop: React.FC<SHOPIF> = ({ data }) => {
-  return <ShopComponent dataShop={data} />;
+  return(
+    <>
+    shop
+    {/* <ShopComponent dataShop={data} /> */}
+    </>
+  )
+   
 };
 
 async function fetchingProducts() {

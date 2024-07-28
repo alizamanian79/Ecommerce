@@ -6,7 +6,12 @@ type Props = {
 };
 
 const Page = ({ id }: Props) => {
-  return <PageProductComponent param={id} />;
+  return (
+    <>
+    Hi
+    {/* <PageProductComponent param={id} /> */}
+    </>
+  )
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async (
