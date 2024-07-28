@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import LoadBuffer from "@/components/GlobalComponents/Buffer/LoadBuffer/LoadBuffer";
 import defaultImage from "./base64";
 
 interface img  {
