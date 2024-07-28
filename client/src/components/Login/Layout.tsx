@@ -14,6 +14,7 @@ const MyForm: React.FC = () => {
   const router = useRouter();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
     const res = await fetch(
       `${
         process.env.DOMAIN == undefined
@@ -37,7 +38,7 @@ const MyForm: React.FC = () => {
       console.log(data.uID);
       router.push(`/login/${data.uID}`);
     } else {
-      setIsWrong(!isWrong)
+      setIsWrong(true)
       console.error("Error:", res.statusText);
     }
   };
@@ -54,7 +55,7 @@ const MyForm: React.FC = () => {
     <div className="w-100 h-screen bg-[#efefef] flex justify-center items-center">
       <form
         onSubmit={handleSubmit}
-        className="w-[30%] border-[#484848] border-[2px] rounded-md px-[10px] py-[10px] flex flex-col"
+        className="w-[90%] md:w-[30%] border-[#484848] border-[2px] rounded-md px-[10px] py-[10px] flex flex-col"
       >
         <h1 className="text-[black] font-bold text-[31px]">Login</h1>
         <h2 className="mb-5">
