@@ -19,7 +19,7 @@ const MyForm: React.FC = () => {
 
     if(isSignUp===true){
        const resAdd = await fetch(
-          `http://localhost:3000/api/user/add`,
+          `/api/user/add`,
           {
             method: "POST",
             headers: {
@@ -46,7 +46,7 @@ const MyForm: React.FC = () => {
     }
     else{
       const res = await fetch(
-        `http://localhost:3000/api/user/authorization`,
+        `/api/user/authorization`,
         {
           method: "POST",
           headers: {
@@ -156,7 +156,7 @@ const MyForm: React.FC = () => {
         </h4>
 
         <input
-          className="h-[44px] rounded-md bg-[black] text-[white] mt-4"
+          className="h-[44px] rounded-md bg-[black] text-[white] mt-4 cursor-pointer"
           type="submit"
           value={isSignUp === false ? "SignIn" : "SignUp"}
         />
