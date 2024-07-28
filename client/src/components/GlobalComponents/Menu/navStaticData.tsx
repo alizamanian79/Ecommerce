@@ -6,9 +6,8 @@ const data: Dt = {
     data: [
         { title: "خانه", link: "/" },
         { title: "فروشگاه", link: "/shop" },
-        { title: "تماس", link: "" },
-        { title: "بلاگ", link: "" },
-        { title: "ارتباط با ما", link: "" },
+        { title: "ورود / عضویت", link: "/login" },
+       
     ],
 };
 

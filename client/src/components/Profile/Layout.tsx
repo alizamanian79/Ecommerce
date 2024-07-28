@@ -4,32 +4,28 @@ import Menu from "../GlobalComponents/Menu/Menu";
 import SendEmail from "../GlobalComponents/SendEmail/SendEmail";
 import AddressBar from "../GlobalComponents/AddressBar/AddressBar";
 
-
 interface ProfileComponentIF {
-  param: any;
+  data: any;
 }
 
-const ProfileComponent: React.FC<ProfileComponentIF> = ({ param }) => {
+const ProfileComponent: React.FC<ProfileComponentIF> = ({ data }) => {
   
-  return <>
+
+  return (
+    <>
       <div
         className={`relative w-100 min-h-screen flex bg-hBack flex-col blur-[0] items-center`}
         style={{ direction: "rtl" }}
       >
-       
         <Menu />
-        <AddressBar  dataAddress={[
-          { title: "پروفایل", router: "/" },
-        ]}/>
-        
-        <div className={"w-94 h-auto flex items-center flex-col"}>
-     
-        </div>
-        <SendEmail />
+        <AddressBar dataAddress={[{ title: "پروفایل", router: "/" }]} />
 
+        <div className={"w-100 bg-[white] h-auto flex items-center flex-col"}>salam {data.uName}</div>
+
+        <SendEmail />
       </div>
-  {param}
-  </>;
+    </>
+  );
 };
 
 export default ProfileComponent;
