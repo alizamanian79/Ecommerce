@@ -11,7 +11,7 @@ export default async function handler(
 
     try {
       const response = await fetch(
-        `${process.env.DOMAIN || "http://localhost:3000"}/api/user/list`
+        `http://localhost:3000/api/user/list`
       );
       const users = await response.json();
 

@@ -19,9 +19,7 @@ const MyForm: React.FC = () => {
 
     if(isSignUp===true){
        const resAdd = await fetch(
-          `${
-          process.env.DOMAIN  
-          }/api/user/add`,
+          `http://localhost:3000/api/user/add`,
           {
             method: "POST",
             headers: {
@@ -48,7 +46,7 @@ const MyForm: React.FC = () => {
     }
     else{
       const res = await fetch(
-        `${process.env.DOMAIN}/api/user/authorization`,
+        `http://localhost:3000/api/user/authorization`,
         {
           method: "POST",
           headers: {
