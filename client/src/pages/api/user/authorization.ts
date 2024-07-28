@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const requestMethod = "POST";
+const url =  `https://ecommerceshop.liara.run/api/user/list` || 'http://localhost:3000/api/user/list'
 
 export default async function handler(
   req: NextApiRequest,
@@ -11,7 +12,7 @@ export default async function handler(
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/user/list`
+        url
       );
       const users = await response.json();
 

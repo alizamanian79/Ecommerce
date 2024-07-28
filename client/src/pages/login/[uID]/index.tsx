@@ -15,7 +15,7 @@ const Profile = ({ data }: Props) => {
 
 async function getInformation(id: string) {
   try {
-    const res = await fetch(`${process.env.DOMAIN}/api/user/${id}`);
+    const res = await fetch(`http://localhost:3000/api/user/${id}`);
     if (!res.ok) {
       throw new Error(`Failed to fetch data: ${res.statusText}`);
     }
