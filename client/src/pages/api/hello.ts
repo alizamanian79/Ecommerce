@@ -1,44 +1,31 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-const api = process.env.API;
-const requestMethod = 'GET';
+const key="accessGranted"
+import type { NextApiRequest, NextApiResponse } from 'next';
+
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const requiredHeaders = ['static-header'];
+  const method = "GET";
+  const apiKey = req.headers['static-header'];
+  const validApiKey = key; 
+
+  for (const header of requiredHeaders) {
+    if (!req.headers[header]) {
+      return res.status(400).json({ error: `Missing required Header` });
+    }
+  }
+
+
+  if (apiKey !== validApiKey) {
+    return res.status(403).json({ error: "Forbidden: Invalid API Key" });
+  }
 
 
 
-type resData = {
-  message?: string;
-  userId?: number;
-  id?: number;
-  title?: string;
-  completed?: boolean;
+
+  if (req.method === method) {
+    res.status(200).send("It works");
+  } else {
+    res.status(405).json({ error: "Method Not Allowed" });
+  }
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<resData>,
-) {
-  if (req.method === requestMethod) {
-    // Check if the api environment variable is set
-    if (!api) {
-      console.log("API environment variable is not set");
-      return res.status(500).json({ message: "API environment variable is not set" });
-    }
-
-    // Process a GET request
-    fetch(`${api}/1`)
-      .then((response) => response.json())
-      .then((response) =>
-        res.status(200).json(response)
-      )
-
-
-
-    //Handler Api erros
-      .catch((error) => {
-        console.log("Error fetching data:", error);
-        res.status(500).json({ message: "Error fetching data" });
-        return
-      });
-  } else {
-    res.status(401).json({ message: "Request method does not matched !" });
-  }
-}
+export default handler;

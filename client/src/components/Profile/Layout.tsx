@@ -20,7 +20,7 @@ const ProfileComponent: React.FC<ProfileComponentIF> = ({ data }) => {
         <Menu />
         <AddressBar dataAddress={[{ title: "پروفایل", router: "/" }]} />
 
-        <div className={"w-100 bg-[white] h-auto flex items-center flex-col"}>salam {data.uName}</div>
+        <div className={"w-100 bg-[white] h-auto flex items-center flex-col"}>salam {data.uName}- {data.uLastName}</div>
 
         <SendEmail />
       </div>

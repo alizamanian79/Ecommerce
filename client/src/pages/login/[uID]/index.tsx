@@ -8,14 +8,20 @@ type Props = {
 const Profile = ({ data }: Props) => {
   return (
     <>
-      <Dashboard data={data[0]} />
+      <Dashboard data={data} />
     </>
   );
 };
 
 async function getInformation(id: string) {
   try {
-    const res = await fetch(`http://localhost:3000/api/user/${id}`);
+    const res = await fetch(`http://localhost:3000/api/user/${id}`, {
+      method: 'GET',
+      headers: {
+        'headerLock': `${process.env.VALID_API_KEY}`
+      }
+    });
+
     if (!res.ok) {
       throw new Error(`Failed to fetch data: ${res.statusText}`);
     }

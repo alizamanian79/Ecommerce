@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const requestMethod = "POST";
-const url =  `https://ecommerceshop.liara.run/api/user/list` || 'http://localhost:3000/api/user/list'
+const url = 'http://localhost:3000/api/user/list';
 
 export default async function handler(
   req: NextApiRequest,
@@ -11,10 +11,22 @@ export default async function handler(
     const data = { uPhone: req.body.uPhone, uPassword: req.body.uPassword };
 
     try {
-      const response = await fetch(
-        url
-      );
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'headerLock': `${process.env.VALID_API_KEY}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error fetching data: ${response.statusText}`);
+      }
+
       const users = await response.json();
+
+      if (!Array.isArray(users)) {
+        throw new Error('Fetched data is not an array');
+      }
 
       const user = users.find(
         (item: any) =>
@@ -22,14 +34,12 @@ export default async function handler(
       );
 
       if (user) {
-        res.status(200).json({uID:user.uID});
+        res.status(200).json({ uID: user.uID });
       } else {
         res.status(401).json({ message: "Invalid phone number or password" });
       }
     } catch (error: any) {
-      res
-        .status(500)
-        .json({ message: "Internal server error", error: error.message });
+      res.status(500).json({ message: "Internal server error", error: error.message });
     }
   } else {
     res.status(405).json({ message: "Request method not allowed" });
