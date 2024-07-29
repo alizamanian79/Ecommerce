@@ -17,7 +17,6 @@ else{
       console.log('Encoded JWT:', encoded);
       res.status(200).json({ "Token": encoded });
     } catch (error) {
-      console.error('Error encoding JWT:', error);
       res.status(500).json({ "Error": "Failed to encode JWT" });
     }
     return;
@@ -26,7 +25,6 @@ else{
   if (mode === "decodeJwt") {
     try {
       const decoded = decodeJwt(value);
-      console.log('Decoded JWT:', decoded);
       res.status(200).json({ "Decoded": decoded });
     } catch (error) {
       console.error('Error decoding JWT:', error);

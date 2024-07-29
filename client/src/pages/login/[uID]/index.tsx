@@ -1,6 +1,7 @@
 import Dashboard from "@/components/Profile/Layout";
 import { GetServerSideProps } from "next";
-
+import { decodeJwt } from "../../../../utils/jwt/decodeJwt";
+import { useRouter } from "next/router";
 type Props = {
   data: any;
 };
@@ -13,37 +14,35 @@ const Profile = ({ data }: Props) => {
   );
 };
 
-async function getInformation(id: string) {
-  try {
-    const res = await fetch(`http://localhost:3000/api/user/${id}`, {
-      method: 'GET',
-      headers: {
-        'headerLock': `${process.env.VALID_API_KEY}`
-      }
-    });
+async function getInformation(id: string) {  
+  try {  
+    const data = decodeJwt(id);  
+    return data;  
+  } catch (error) {  
+    console.error("Error fetching data:", error);  
+    return null;  
+  }  
+}  
 
-    if (!res.ok) {
-      throw new Error(`Failed to fetch data: ${res.statusText}`);
-    }
-    const jsonData = await res.json(); // Correctly parsing the JSON data from the response body
-    return jsonData;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return null;
-  }
-}
-
-export const getServerSideProps: GetServerSideProps<Props> = async (
-  context
-) => {
-  const { params } = context;
-  const id = params?.uID as string;
-  const data = await getInformation(id);
-  return {
-    props: {
-      data,
-    },
-  };
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {  
+  const { params } = context;  
+  const id = params?.uID as string;  
+  const data = await getInformation(id);  
+  
+  // Redirect to login if data is not found  
+  if (!data) {  
+    return {  
+      redirect: {  
+        destination: '/login',  
+        permanent: false, // Set to true if this redirect should be cached  
+      },  
+    };  
+  }  
+  
+  return {  
+    props: {  
+      data,  
+    },  
+  };  
 };
-
 export default Profile;

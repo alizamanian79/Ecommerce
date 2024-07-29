@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-const SECRET_KEY = process.env.JWT_SECRET_KEY
+const SECRET_KEY:any = process.env.JWT_SECRET_KEY;
 
 export const encodeJwt = (payload: object, expiresIn: string = '20m'): string => {
   try {
@@ -8,7 +8,7 @@ export const encodeJwt = (payload: object, expiresIn: string = '20m'): string =>
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn });
     return token;
   } catch (error) {
-    console.error('Error encoding JWT:', error);
+    
     throw new Error('Failed to create JWT');
   }
 };

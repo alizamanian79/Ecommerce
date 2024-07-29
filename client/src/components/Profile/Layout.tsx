@@ -3,6 +3,7 @@ import axios from "axios";
 import Menu from "../GlobalComponents/Menu/Menu";
 import SendEmail from "../GlobalComponents/SendEmail/SendEmail";
 import AddressBar from "../GlobalComponents/AddressBar/AddressBar";
+import { useRouter } from "next/router";
 
 interface ProfileComponentIF {
   data: any;

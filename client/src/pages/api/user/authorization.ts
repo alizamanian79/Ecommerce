@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { encodeJwt } from "../../../../utils/jwt/encodeJwt";
 
 const requestMethod = "POST";
 const url = 'http://localhost:3000/api/user/list';
@@ -34,7 +35,8 @@ export default async function handler(
       );
 
       if (user) {
-        res.status(200).json({ uID: user.uID });
+        const Token = encodeJwt(user)
+        res.status(200).json({"Token":Token});
       } else {
         res.status(401).json({ message: "Invalid phone number or password" });
       }

@@ -8,6 +8,8 @@ const initFormData = {
   uGmail: "",
 };
 
+import { encodeJwt } from "../../../utils/jwt/encodeJwt";
+
 const MyForm: React.FC = () => {
   const [formData, setFormData] = useState(initFormData);
   const [isWrong, setIsWrong] = useState(false);
@@ -51,6 +53,7 @@ const MyForm: React.FC = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "headerLock":`${process.env.VALID_API_KEY}`
           },
           body: JSON.stringify({
             uPhone: formData.uPhone,
@@ -61,8 +64,14 @@ const MyForm: React.FC = () => {
 
       if (res.ok) {
         const data = await res.json();
-        console.log(data.uID);
-        router.push(`/login/${data.uID}`);
+        console.log(data.Token);
+
+        router.push(`/login/${data.Token}`);
+
+
+
+
+
       } else {
         setIsWrong(true);
         console.error("Error:", res.statusText);
