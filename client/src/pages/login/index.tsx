@@ -52,16 +52,13 @@ const MyForm: React.FC = () => {
         }
     }
     else{
-      handleSignIn(undefined)
+      handleSignIn()
     }
   };
 
 
-const handleSignIn=async(token:any)=>{
+const handleSignIn=async()=>{
 
-  if(token!=undefined){
-    router.push(`/login/admin-pannel`);
-  }
 
   const res = await fetch(
     `/api/user/authorization`,
@@ -104,8 +101,7 @@ const handleSignIn=async(token:any)=>{
 
 
 useEffect(() => {
-  setIsWrong(undefined)
-  handleSignIn(cookieValue? cookieValue : undefined)
+  cookieValue!=undefined ?router.push("/login/admin-pannel"):undefined
 }, [])
 
 
