@@ -38,12 +38,11 @@ const ProfileComponent: React.FC = () => {
           className="relative w-100 min-h-screen flex bg-hBack flex-col blur-[0] items-center"  
           style={{ direction: "rtl" }}  
         >  
-          <Menu />  
-          <AddressBar dataAddress={[{ title: "پروفایل", router: "/" }]} />  
+          
           <div className="w-100 bg-[white] h-auto flex items-center flex-col">  
             salam {data.uName}  
           </div>  
-          <SendEmail />  
+         
         </div>  
       )}  
     </>  

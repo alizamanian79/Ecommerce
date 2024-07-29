@@ -1,100 +1,72 @@
-import React, { useState , useRef , useEffect } from "react";
+import React, { useState } from "react";
 import Image, { StaticImageData } from "next/image";
-import Buttons from "./Buttons";
-
 import first from "../../../../public/Sliders/1.png";
-import seccond from "../../../../public/Sliders/2.jpg";
+import second from "../../../../public/Sliders/2.jpg";
 import third from "../../../../public/Sliders/1.png";
+
+
+
+import { Navigation, Pagination, Scrollbar, A11y,Autoplay  } from 'swiper/modules';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+
+
+// Import Swiper styles
+import 'swiper/css';
+
 
 interface SliderIF {
   title: string;
   src: StaticImageData;
 }
 
-
-
-
 const Slider = () => {
-  const [data, setData] = useState<SliderIF[]>([
-    { title: "salam", src: first },
-    { title: "salam", src: seccond },
-    { title: "salam", src: third },
+  const [data] = useState<SliderIF[]>([
+    { title: "First Image", src: first },
+    { title: "Second Image", src: second },
+    { title: "Third Image", src: third },
   ]);
 
-
-
-  const [scrollX, setScrollX] = useState<number>(0);
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
-
-const [screenSize, setScreenSize] = useState<number>(0)
-
-
-
-
-  const handleBTN = (value: string) => {
-    switch (value) {
-      case "prev":
-        if (scrollX >= 0) {
-          setScrollX(data.length * - screenSize +screenSize);
-          return;
-        }
-        const plus = scrollX + screenSize;
-        setScrollX(plus);
-        break;
-
-      case "after":
-        if (scrollX <= data.length *-screenSize +screenSize ) {
-          setScrollX(0);
-          return;
-        }
-        const num = scrollX - screenSize;
-        setScrollX(num);
-        break;
-
-      default:
-        break;
-    }
-  };
-  useEffect(() => {
-    if (scrollX !== null && containerRef.current) {
-      containerRef.current.scrollTo({
-        left: scrollX,
-        behavior: "smooth",
-      });
-   
-      setScreenSize(window.innerWidth)
-    }
-  }, [scrollX]);
-
   return (
-    <>
-      <div
-        className={"relative w-100 mt-[0rem]"}
+    <div className="w-full snap-proximity h-[60vh] md:h-[85vh] flex justify-center items-center">
+      <div className="w-full h-full overflow-x-scroll flex snap-x " 
       >
-        <Buttons cb ={handleBTN}/>
-        <div>
-          <div
-            ref={containerRef}
-            className={
-              "flex overflow-hidden justify-start items-center"
-            }
-          >
-            {data.map((item, index) => (
-              <Image
-              key={index}
-                src={item.src}
-                height={0}
-                width={0}
-                alt={""}
-                className={"w-100 h-[50%] "}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
 
-     </>
+
+      <Swiper
+          modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+          spaceBetween={1}
+          slidesPerView={1}
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 3000 }} // Slide change every 3 seconds
+          onSwiper={(swiper) => console.log(swiper)}
+          // onSlideChange={() => console.log('slide change')}
+       >
+      
+       {data.map((item, index) => (
+          <div key={index}>
+            <SwiperSlide>
+            <Image
+              src={item.src}
+              alt={item.title}
+              width={0}
+              height={0}
+              className="min-w-[500px] h-full object-cover"
+            />
+            </SwiperSlide>
+          </div>
+        ))}
+    </Swiper>
+
+       
+      </div>
+    </div>
   );
 };
 
