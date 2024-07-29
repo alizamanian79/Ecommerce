@@ -20,19 +20,27 @@ const Layout = () => {
   return (
     <>
       
-      <BlackScreen />
-      <div
+      {/* <BlackScreen /> */}
+      {/* <div
         className={
-          statusBlackScreen != true
-            ? `relative w-100 h-[auto] flex bg-hBack flex-col blur-[0] items-center`
+          statusBlackScreen == true
+            ? `relative w-100 h-[auto] flex bg-hBack flex-col items-center`
             : `blur-[1px]`
         }
         style={{ direction: "rtl" }}
       >
+        </div> */}
+
+
+
         <Menu />
         <Slider />
 
-        <div className={"w-94 h-auto flex items-center flex-col"}>
+        <div className={"w-100 h-auto flex items-center justify-center bg-rmv flex-col"}>
+          <div className="w-94 md:w-[100%] flex justify-center items-end flex-col">
+
+
+         
           <LineTitle tprops={null} sprops={null} dprops={null} />
           <ProductCard />
 
@@ -52,9 +60,10 @@ const Layout = () => {
 
           <SendEmail />
         </div>
+        </div> 
         <Footer />
         <NavIcons />
-      </div>
+         
     </>
   );
 };

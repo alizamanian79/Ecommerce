@@ -1,5 +1,5 @@
 import React, { useState } from "react";  
-
+import { useRouter } from "next/router";
 const iconWidth = "20px";  
 const iconHeight = "20px";  
 
@@ -101,38 +101,54 @@ const UserIcon: React.FC<IconProps> = ({ colorChange, ...props }) => {
 
 const NavIcons: React.FC = () => {  
   const [data] = useState([  
-    { title: UserIcon, url: "/" },  
+    { title: UserIcon, url: "/admin-pannel" },  
     { title: ShoppingCartIcon, url: "/" },  
     { title: SearchIcon, url: "/" },  
     { title: HeartIcon, url: "/" },  
   ]);  
 
+  const router=useRouter();
   const [selected, setSelected] = useState<number | undefined>(undefined);  
 
-  const handleClick = (index: number) => {  
+  const handleClick = (index:any) => {  
     setSelected(selected === index ? undefined : index);  
+
+    let mode = index.url
+
+    switch (mode) {
+      case "/admin-pannel":
+        router.push("/login/admin-pannel")
+        break;
+    
+      default:
+        break;
+    }
+
+    
   };  
 
   return (  
     <div  
       style={{ direction: "ltr", boxShadow: "0px -2px 9px #e1e1e1" }}  
       className="
-      h-[45px] 
+      h-[60px] 
       w-[100%]
       flex
       md:hidden
       lg:hidden
-      
-      sticky bottom-0 bg-[#ffffff]  justify-center items-center border-none bg-white"  
+      sticky 
+      bottom-[0%]
+      bg-[#ffffff] 
+       justify-center items-center border-none bg-white"  
     >  
-      <ul className="flex justify-center items-center h-full w-full">  
+      <ul className="flex justify-center items-center h-full w-full ">  
         {data.map((item, index) => (  
           <li  
             onClick={() => handleClick(index)}  
             key={index}  
             className={`flex justify-center items-center h-full w-1/4 cursor-pointer ${selected === index ? 'bg-gray-800' : ''}`}  
           >  
-            <item.title colorChange={selected === index ? 'black' : undefined} />  
+            <item.title onClick={()=>handleClick(item)} colorChange={selected === index ? 'black' : undefined} />  
           </li>  
         ))}  
       </ul>  
