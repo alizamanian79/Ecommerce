@@ -19,7 +19,7 @@ const Phone: React.FC = () => {
     <>
       <div
         style={{ direction: "rtl" }}
-        className={`w-100 max-sm:h-[50px] bg-[white] md:hidden sm:flex flex
+        className={`w-100 max-sm:h-[55px] bg-[white] md:hidden sm:flex flex
            flex-wrap justify-center items-center
           sticky top-0 z-[10]`}
       >
@@ -32,7 +32,7 @@ const Phone: React.FC = () => {
             <FontAwesomeIcon
               onClick={handleClick}
               icon={faBars}
-              className={`text-[25px] text-[#504f4f]`}
+              className={`text-[25px] text-[#202020]`}
             />
           </div>
 
@@ -40,6 +40,9 @@ const Phone: React.FC = () => {
             <Image src={logo} height={100} width={100} alt="" />
           </div>
         </div>
+
+
+        
       </div>
     </>
   );

@@ -116,7 +116,14 @@ const NavIcons: React.FC = () => {
   return (  
     <div  
       style={{ direction: "ltr", boxShadow: "0px -2px 9px #e1e1e1" }}  
-      className="w-full h-16 sticky bottom-0 flex justify-center items-center border-none bg-white"  
+      className="
+      h-[45px] 
+      w-[100%]
+      flex
+      md:hidden
+      lg:hidden
+      
+      sticky bottom-0 bg-[#ffffff]  justify-center items-center border-none bg-white"  
     >  
       <ul className="flex justify-center items-center h-full w-full">  
         {data.map((item, index) => (  
@@ -125,7 +132,7 @@ const NavIcons: React.FC = () => {
             key={index}  
             className={`flex justify-center items-center h-full w-1/4 cursor-pointer ${selected === index ? 'bg-gray-800' : ''}`}  
           >  
-            <item.title colorChange={selected === index ? 'white' : undefined} />  
+            <item.title colorChange={selected === index ? 'black' : undefined} />  
           </li>  
         ))}  
       </ul>  

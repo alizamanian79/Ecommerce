@@ -38,7 +38,8 @@ const Nav: React.FC = () => {
     <>
       {isOpen && (
         <div
-          className={`absolute  top-[0] z-[19] w-100 h-screen flex bg-[#2b2b2b6e] blur-[1px]`}
+        onClick={()=>dispatch(handleChangeMenuStatus())}
+          className={`absolute  top-[0] z-[19] w-100 h-screen flex bg-[#161616d2] blure-[10px]`}
         ></div>
       )}
 
@@ -54,10 +55,10 @@ const Nav: React.FC = () => {
         <div
           className={
             isOpen == true
-              ? `w-100 px-5 h-[13%] border-b-[0.75px] border-[#a7a6a66b] flex  z-[10]
+              ? `w-100 px-5 opacity-1 h-[13%] border-b-[0.75px] border-[#a7a6a66b] flex  z-[10]
    justify-between items-center bg-[#ffffff] transition-all ease-out delay-75 translate-x-0`
-              : `w-0 px-5 h-[13%] border-b-[0.75px] border-[#a7a6a66b]   z-[10]
-              justify-between items-center bg-[#ffffff] transition-all ease-out delay-75 translate-x-0 hidden`
+              : `w-100 px-5 opacity-0 h-[13%] border-b-[0.75px] border-[#a7a6a66b] hidden  z-[10]
+              justify-between items-center bg-[#ffffff] transition-all ease-out delay-75 translate-x-0`
           }
         >
           <FontAwesomeIcon
@@ -86,7 +87,7 @@ const Nav: React.FC = () => {
             className={
               isOpen == true
                 ? "mt-[1.3rem]  flex w-100 items-center px-5  flex-col"
-                : "mt-[1.3rem] flex w-100 items-center px-5  flex-col"
+                : "mt-[1.3rem] w-0 items-center hidden px-5  flex-col"
             }
           >
             {data.map((item, index) => (

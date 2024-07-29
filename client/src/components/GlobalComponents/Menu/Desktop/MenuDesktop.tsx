@@ -10,7 +10,7 @@ const MenuDesktop = () => {
   return (
     <>
       <div
-        className={`w-100 h-62 bg-mBackColor sticky  z-10 top-0 md:flex max-sm:hidden flex justify-center items-center`}
+        className={`w-100 h-62 bg-[#ffffff] sticky  z-10 top-0 md:flex max-sm:hidden flex justify-center items-center`}
         style={{ direction: "rtl" }}
       >
         <div
