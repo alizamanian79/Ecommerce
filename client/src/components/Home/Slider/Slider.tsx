@@ -31,6 +31,9 @@ const Slider = () => {
     { title: "First Image", src: first },
     { title: "Second Image", src: second },
     { title: "Third Image", src: third },
+    { title: "First Image", src: first },
+    { title: "Second Image", src: second },
+    { title: "Third Image", src: third }
   ]);
 
   return (
@@ -44,8 +47,8 @@ const Slider = () => {
           spaceBetween={1}
           slidesPerView={1}
           pagination={{ clickable: true }}
-          autoplay={{ delay: 3000 }} // Slide change every 3 seconds
-          onSwiper={(swiper) => console.log(swiper)}
+          autoplay={{ delay: 5000 }} // Slide change every 3 seconds
+          // onSwiper={(swiper) => console.log(swiper)}
           // onSlideChange={() => console.log('slide change')}
        >
       
@@ -57,7 +60,7 @@ const Slider = () => {
               alt={item.title}
               width={0}
               height={0}
-              className="min-w-[500px] h-full object-cover"
+              className="h-full object-cover"
             />
             </SwiperSlide>
           </div>
