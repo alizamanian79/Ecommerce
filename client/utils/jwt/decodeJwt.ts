@@ -1,5 +1,5 @@
 // utils/decodeJwt.ts
-import jwt from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
 
 export const decodeJwt = (token: string): any => {
   
