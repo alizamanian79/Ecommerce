@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const requiredHeaders = ['headerLock'];
-const validApiKey = process.env.VALID_API_KEY;
 
-export const validateHeaders = (req: NextApiRequest, res: NextApiResponse): boolean => {
+
+export const validateHeaders = (req: NextApiRequest, res: NextApiResponse,validParam:any): boolean => {
   // Check for the presence of required headers
   for (const header of requiredHeaders) {
     if (!req.headers[header.toLowerCase()]) {  // Ensure case-insensitivity
@@ -11,6 +11,8 @@ export const validateHeaders = (req: NextApiRequest, res: NextApiResponse): bool
       return false;
     }
   }
+
+  const validApiKey = validParam;
 
   // Validate the API key
   const apiKey = req.headers['headerlock'];  // Convert header name to lowercase to match the check above

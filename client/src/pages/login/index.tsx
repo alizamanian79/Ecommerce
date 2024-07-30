@@ -13,82 +13,9 @@ const initFormData = {
 const MyForm: React.FC = () => {
   const [cookieValue, setCookieValue] = useState<any | undefined>(getCookie('Token'));
   const [formData, setFormData] = useState(initFormData);
-  const [isWrong, setIsWrong] = useState<any>(undefined);
+  const [isWrong, setIsWrong] = useState<any>(false);
   const [isSignUp, setisSignUp] = useState(false);
   const router = useRouter();
-
-
-
-
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if(isSignUp===true){
-       const resAdd = await fetch(
-          `/api/user/add`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              uName: formData.uName,
-              uLastName: formData.uLastName,
-              uPhone: formData.uPhone,
-              uPassword: formData.uPassword,
-            }),
-          }
-        );
-        if (resAdd.ok) {
-          setisSignUp(false)
-          alert("Your account created successfuly");
-          setIsWrong(false)
-          return
-        } else {
-          setIsWrong(true);
-          console.error("Error:", resAdd.statusText);
-          return null
-        }
-    }
-    else{
-      handleSignIn()
-    }
-  };
-
-
-const handleSignIn=async()=>{
-
-
-  const res = await fetch(
-    `/api/user/authorization`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "headerLock":`${process.env.VALID_API_KEY}`
-      },
-      body: JSON.stringify({
-        uPhone: formData.uPhone,
-        uPassword: formData.uPassword,
-      }),
-    }
-  );
-  if (res.ok) {
-    const data = await res.json();
-    setCookie('Token', data.Token, { maxAge: 86400 });
-    router.push(`/login/admin-pannel`);
-
-
-
-
-
-  } else {
-    setIsWrong(false);
-    console.error("Error:", res.statusText);
-  }
-}
-
 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,9 +27,69 @@ const handleSignIn=async()=>{
   };
 
 
-useEffect(() => {
-  cookieValue!=undefined ?router.push("/login/admin-pannel"):undefined
-}, [])
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {  
+    e.preventDefault();  
+    if (isSignUp) {
+      await handleSignUp();
+    } else {
+      await handleSignIn();
+    }
+  };
+
+
+const handleSignUp = async () => {
+  const resAdd = await fetch(
+    `/api/user/add`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        uName: formData.uName,
+        uLastName: formData.uLastName,
+        uPhone: formData.uPhone,
+        uPassword: formData.uPassword,
+      }),
+    }
+  );
+
+  if (resAdd.ok) {
+    setisSignUp(false);
+    alert("Your account created successfully");
+    setIsWrong(false);
+  } else {
+    setIsWrong(true);
+    console.error("Error:", resAdd.statusText, "Status Code:", resAdd.status);
+  }
+};
+
+const handleSignIn = async () => {
+  const res = await fetch(
+    `/api/user/authorization`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "headerLock": `${process.env.VALID_API_KEY_USER}`,
+      },
+      body: JSON.stringify({
+        uPhone: formData.uPhone,
+        uPassword: formData.uPassword,
+      }),
+    }
+  );
+
+  if (res.ok) {
+    const data = await res.json();
+    setCookie('Token', data.Token, { maxAge: 86400 });
+    router.push(`/login/admin-pannel`);
+  } else {
+    setIsWrong(true);
+    console.error("Error:", res.statusText, "Status Code:", res.status);
+  }
+};
 
 
   return (
@@ -176,7 +163,7 @@ useEffect(() => {
 
         <h4
           className="mt-3 cursor-pointer text-[blue]"
-          onClick={() => setisSignUp(!isSignUp)}
+          onClick={() => setisSignUp(isSignUp == false ? true : false)}
         >
           {isSignUp === false ? "Doesnt have an account ? signup" : "Signin"}
         </h4>

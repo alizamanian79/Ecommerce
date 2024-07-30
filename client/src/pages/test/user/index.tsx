@@ -53,7 +53,7 @@ async function userData(domain: string) {
     const res = await fetch(`${domain}/api/user/list`, {
       method: 'GET',
       headers: {
-        'headerLock': `${process.env.VALID_API_KEY}`
+        'headerLock': `${process.env.VALID_API_KEY_USER}`
       }
     });
 

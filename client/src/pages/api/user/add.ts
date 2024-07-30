@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { query } from '../../../../db-connection/db';  // Ensure this query function can handle stored procedures  
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {  
-  if (req.method === 'POST') {  
+  if (req.method === 'POST') {     
     try {  
     const {uName,uLastName,uPhone,uPassword}= req.body
       // Adjusting the way to call the stored procedure  

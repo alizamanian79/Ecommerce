@@ -15,7 +15,7 @@ export default async function handler(
       const response = await fetch(url, {
         method: 'GET',
         headers: {
-          'headerLock': `${process.env.VALID_API_KEY}`
+          'headerLock': `${process.env.VALID_API_KEY_USER}`
         }
       });
 
