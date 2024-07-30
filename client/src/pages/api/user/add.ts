@@ -10,7 +10,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(200).send("your account created successfuly.");  
     } catch (error) {  
       console.error(error);  
-      res.status(500).json({ error: 'Internal Server Error' });  
+      res.status(500).json({ error: 'This account already exist' });  
     }  
   } else {  
     res.setHeader('Allow', ['GET']);  
