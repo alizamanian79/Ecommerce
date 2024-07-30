@@ -1,22 +1,15 @@
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { query } from '../../../../db-connection/db';
-import { validateHeaders } from '../../../../utils/validateHeaders/validateHeaders'; // Adjust the path if necessary
 const apiTitle="SELLER"
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-
-    //Checking Header
-    if (!validateHeaders(req, res)) {
-      return;
-    }
-
-    const {sUID,sCode,sAddress}=req.body
+    const {sUID,sCode}=req.body
 
     try {
    
-      const result: any = await query(`CALL ${process.env.DB_NAME}.SP_${apiTitle}_ADD(?,?,?)`, [sUID,sCode,sAddress])
+      const result: any = await query(`CALL ${process.env.DB_NAME}.SP_${apiTitle}_ADD(?,?,?)`, [sUID,sCode])
       res.status(200).json(`Seller added successfully.`); 
 
 

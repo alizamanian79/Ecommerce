@@ -163,7 +163,7 @@ const handleSignIn = async () => {
 
         <h4
           className="mt-3 cursor-pointer text-[blue]"
-          onClick={() => setisSignUp(isSignUp == false ? true : false)}
+          onClick={() =>{ setisSignUp(isSignUp == false ? true : false); setIsWrong(false)}}
         >
           {isSignUp === false ? "Doesnt have an account ? signup" : "Signin"}
         </h4>
