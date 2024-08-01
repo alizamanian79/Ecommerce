@@ -13,9 +13,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       // Adjusting the way to call the stored procedure
       const rows: any = await query(`CALL ${process.env.DB_NAME}.SP_USER_LIST()`); // Use CALL for MySQL
 
-      if (!rows || rows.length === 0 || rows[0].length === 0) {
-        return res.status(404).json({ error: 'No users found' });
-      }
+      // if (!rows || rows.length === 0 || rows[0].length === 0) {
+      //   return res.status(404).json({ error: 'No users found' });
+      // }
 
       res.status(200).json(rows[0]); // Adjusted to return the first row of the result set
     } catch (error) {
