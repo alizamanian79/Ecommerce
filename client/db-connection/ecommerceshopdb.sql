@@ -48,7 +48,7 @@ CREATE TABLE `tbl_product` (
 
 LOCK TABLES `tbl_product` WRITE;
 /*!40000 ALTER TABLE `tbl_product` DISABLE KEYS */;
-INSERT INTO `tbl_product` VALUES ('e9V04dGDZQ','RvMcuJ0F8y','[\"image3\"]','شلوار بگ','فول دابل پرس','[\"نخ پنبه\"]','red','34',20,'650000',2,1),('wuJ0F9CrdB','RvMcuJ0F8y','[\"image1.jpg\", \"image2.jpg\"]','لباس اندرارمور','لباس اندر ارمور طرحدار','[\"کشدار\", \"استرچ\"]','قرمز','24',50,'6700000',2,2);
+INSERT INTO `tbl_product` VALUES ('cOiVAYYMPC','VN1xwOk257','[\"imae2\"]','کلاه کپ','جدید','[\"پارجه\"]','black','lg',5,'100000',2,2),('e9V04dGDZQ','RvMcuJ0F8y','[\"image3\"]','شلوار بگ','فول دابل پرس','[\"نخ پنبه\"]','red','34',20,'650000',2,1),('LfKSZaITaY','VN1xwOk257','[\"imae\"]','ded','e','[\"222\"]','red','small',70,'12000',1,2),('wuJ0F9CrdB','RvMcuJ0F8y','[\"image1.jpg\", \"image2.jpg\"]','لباس اندرارمور','لباس اندر ارمور طرحدار','[\"کشدار\", \"استرچ\"]','قرمز','24',50,'6700000',2,2);
 /*!40000 ALTER TABLE `tbl_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -811,4 +811,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-04 13:48:02
+-- Dump completed on 2024-08-04 18:41:19
