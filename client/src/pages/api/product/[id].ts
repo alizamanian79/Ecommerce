@@ -2,11 +2,11 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { query } from '../../../../db-connection/db';
 import { validateHeaders } from '../../../../utils/validateHeaders/validateHeaders'; // Adjust the path if necessary
 
-const apiTitle="SELLER"
+const apiTitle="PRODUCT"
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'GET') {
-    if (!validateHeaders(req, res,process.env.VALID_API_KEY_SELLER)) {
+    if (!validateHeaders(req, res,process.env.VALID_API_KEY_PRODUCT)) {
       return;
     }
 
@@ -14,13 +14,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const { id } = req.query;
 
       if (!id) {
-        return res.status(400).json({ error: 'Missing user ID' });
+        return res.status(400).json({ error: 'Missing  ID' });
       }
 
       const result: any = await query(`CALL ${process.env.DB_NAME}.SP_${apiTitle}_ID(?)`, [id]);
 
       if (!result || result.length === 0 || result[0].length === 0) {
-        return res.status(404).json({ error: 'User not found' });
+        return res.status(404).json({ error: 'ID not found' });
       }
 
       res.status(200).json(result[0][0]); 

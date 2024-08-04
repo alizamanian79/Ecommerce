@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { query } from '../../../../../db-connection/db';
 import { validateHeaders } from '../../../../../utils/validateHeaders/validateHeaders'; // Adjust the path if necessary
 
-const apiTitle = "SELLER";
+const apiTitle="PRODUCT"
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'DELETE') {
@@ -10,10 +10,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const { id } = req.query;
 
       if (!id) {
-        return res.status(400).json({ error: 'Missing user ID' });
+        return res.status(400).json({ error: 'Missing ID' });
       }
 
-      if (!validateHeaders(req, res, process.env.VALID_API_KEY_SELLER)) {
+      if (!validateHeaders(req, res, process.env.VALID_API_KEY_PRODUCT)) {
         return;
       }
 
