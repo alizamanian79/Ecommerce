@@ -14,21 +14,21 @@ interface Product {
   pImage: string;
 }
 
-const offlineData: Product[] = [
-  { pTitle: "هنسفیری بلوتوث", pPrice: "350000", pImage: "" },
-  { pTitle: "لباس زنانه مارک", pPrice: "230000", pImage: "" },
-  { pTitle: "سشوار", pPrice: "520000", pImage: "" },
-  { pTitle: "پنکیک", pPrice: "750000", pImage: "" },
-  { pTitle: "تاپیک", pPrice: "470000", pImage: "" },
-  { pTitle: "هیراکستنشن", pPrice: "69000", pImage: "" },
-];
+// const offlineData: Product[] = [
+//   { pTitle: "هنسفیری بلوتوث", pPrice: "350000", pImage: "" },
+//   { pTitle: "لباس زنانه مارک", pPrice: "230000", pImage: "" },
+//   { pTitle: "سشوار", pPrice: "520000", pImage: "" },
+//   { pTitle: "پنکیک", pPrice: "750000", pImage: "" },
+//   { pTitle: "تاپیک", pPrice: "470000", pImage: "" },
+//   { pTitle: "هیراکستنشن", pPrice: "69000", pImage: "" },
+// ];
 
 interface ShopComponentProps {
   data: any[] | undefined;
 }
 
 const ShopComponent: React.FC<ShopComponentProps> = ({data}) => {
-  const [products, setProducts] = useState<any>(offlineData);
+  const [products, setProducts] = useState<any>(data || []);
   const statusBlackScreen = useSelector<any>(
     (state) => state.blackScreen.stScreen
   );
@@ -38,6 +38,7 @@ const ShopComponent: React.FC<ShopComponentProps> = ({data}) => {
   };
 
 
+  console.log(products)
 
   return (
     <>
