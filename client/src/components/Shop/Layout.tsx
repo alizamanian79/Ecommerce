@@ -38,7 +38,7 @@ const ShopComponent: React.FC<ShopComponentProps> = ({data}) => {
   };
 
 
-  console.log(products)
+  // console.log(products)
 
   return (
     <>
