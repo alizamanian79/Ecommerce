@@ -13,7 +13,7 @@ const config: Config = {
 
       //Home
       hBack: "#f4f4f4",
-
+      black:'#1b1b1b',
       rmv: "transparent",
       mainColor: "#232629",
 

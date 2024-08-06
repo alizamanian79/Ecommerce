@@ -5,7 +5,7 @@ import img from "../../../../public/Categori/winter.png"
 
 const Footer = () => {
   return (
-    <footer className="bg-[white] w-100 flex justify-center items-end">
+    <footer className="bg-[#1b1b1b] w-100 flex text-[white] justify-center items-end">
       <div className="container mx-auto w-94 py-[3rem]">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="space-y-4">

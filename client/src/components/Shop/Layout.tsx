@@ -14,21 +14,21 @@ interface Product {
   pImage: string;
 }
 
-// const offlineData: Product[] = [
-//   { pTitle: "هنسفیری بلوتوث", pPrice: "350000", pImage: "" },
-//   { pTitle: "لباس زنانه مارک", pPrice: "230000", pImage: "" },
-//   { pTitle: "سشوار", pPrice: "520000", pImage: "" },
-//   { pTitle: "پنکیک", pPrice: "750000", pImage: "" },
-//   { pTitle: "تاپیک", pPrice: "470000", pImage: "" },
-//   { pTitle: "هیراکستنشن", pPrice: "69000", pImage: "" },
-// ];
+const offlineData: Product[] = [
+  { pTitle: "هنسفیری بلوتوث", pPrice: "350000", pImage: "" },
+  { pTitle: "لباس زنانه مارک", pPrice: "230000", pImage: "" },
+  { pTitle: "سشوار", pPrice: "520000", pImage: "" },
+  { pTitle: "پنکیک", pPrice: "750000", pImage: "" },
+  { pTitle: "تاپیک", pPrice: "470000", pImage: "" },
+  { pTitle: "هیراکستنشن", pPrice: "69000", pImage: "" },
+];
 
 interface ShopComponentProps {
-  dataShop: any[] | undefined;
+  data: any[] | undefined;
 }
 
-const ShopComponent: React.FC<ShopComponentProps> = ({ dataShop }) => {
-  const [products, setProducts] = useState<any>(dataShop);
+const ShopComponent: React.FC<ShopComponentProps> = ({data}) => {
+  const [products, setProducts] = useState<any>(offlineData);
   const statusBlackScreen = useSelector<any>(
     (state) => state.blackScreen.stScreen
   );
@@ -37,9 +37,11 @@ const ShopComponent: React.FC<ShopComponentProps> = ({ dataShop }) => {
     // console.log(data);
   };
 
+
+
   return (
     <>
-      <BlackScreen />
+      {/* <BlackScreen /> */}
       <div
         className={
           statusBlackScreen != true
@@ -56,7 +58,7 @@ const ShopComponent: React.FC<ShopComponentProps> = ({ dataShop }) => {
           ]}
         />
 
-        <Categori callbackCategori={handleFilter} />
+        {/* <Categori callbackCategori={handleFilter} /> */}
 
         <div
           className={`w-82 h-auto 
@@ -74,5 +76,8 @@ const ShopComponent: React.FC<ShopComponentProps> = ({ dataShop }) => {
     </>
   );
 };
+
+
+
 
 export default ShopComponent;

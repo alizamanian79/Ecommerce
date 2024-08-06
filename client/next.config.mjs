@@ -4,13 +4,10 @@ const nextConfig = {
 
  
   images: {
-    domains: ['https://ebuy.cabbageweb.com'],
+    domains: ['https://ebuy.cabbageweb.com','http://localhost:3000','https://ecommerceshop.liara.run'],
   },
 
-  env: {
-    HOSTADDRESS: process.env.HOSTADDRESS,
-    LOCALHOST: process.env.LOCALHOST,
-  },
+  
 };
 
 export default nextConfig;

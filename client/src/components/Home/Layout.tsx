@@ -36,7 +36,7 @@ const Layout = () => {
         <Menu />
         <Slider />
 
-        <div className={"w-100 h-auto flex items-center justify-center bg-rmv flex-col"}>
+        <div className={"w-100 h-auto flex items-center justify-center bg-[#efefef] flex-col"}>
           <div className="w-94 md:w-[100%] flex justify-center items-end flex-col">
 
 
