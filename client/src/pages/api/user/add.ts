@@ -6,10 +6,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
 
 
-    // if (!validateHeaders(req, res, process.env.VALID_API_KEY_SELLER)) {
-    //   console.error('Invalid API Key');
-    //   return res.status(403).json({ error: 'Forbidden: Invalid API Key' });
-    // }
+    if (!validateHeaders(req, res,process.env.NEXT_PUBLIC_VALID_API_KEY_USER)) {
+      return;
+    }
 
     try {
       const { uName, uLastName, uPhone, uPassword } = req.body;
@@ -18,7 +17,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       console.log('Request Body:', req.body);
 
       // Adjusting the way to call the stored procedure
-      const rows: any = await query(`CALL ${process.env.DB_NAME}.SP_USER_ADD(?,?,?,?)`, [uName, uLastName, uPhone, uPassword]); // Use CALL for MySQL
+      const rows: any = await query(`CALL ${process.env.NEXT_PUBLIC_DB_NAME}.SP_USER_ADD(?,?,?,?)`, [uName, uLastName, uPhone, uPassword]); // Use CALL for MySQL
       
       // Debugging output to verify the query result
       console.log('Query Result:', rows);

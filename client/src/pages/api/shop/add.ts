@@ -9,7 +9,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     try {
    
-      const result: any = await query(`CALL ${process.env.DB_NAME}.SP_${apiTitle}_ADD(?,?,?,?,?)`, [sellerID,shName,shDescription,shAddress,shPhone])
+      const result: any = await query(`CALL ${process.env.NEXT_PUBLIC_DB_NAME}.SP_${apiTitle}_ADD(?,?,?,?,?)`, [sellerID,shName,shDescription,shAddress,shPhone])
       res.status(200).json(`${apiTitle} added successfully.`); 
 
 

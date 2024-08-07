@@ -4,7 +4,7 @@ import { validateHeaders } from '../../../../../utils/validateHeaders/validateHe
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'DELETE') {
-    if (!validateHeaders(req, res,process.env.VALID_API_KEY_USER)) {
+    if (!validateHeaders(req, res,process.env.NEXT_PUBLIC_VALID_API_KEY_USER)) {
       return;
     }
 
@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(400).json({ error: 'Missing user ID' });
       }
 
-      const result: any = await query(`CALL ${process.env.DB_NAME}.SP_USER_DELETE(?)`, [id]);
+      const result: any = await query(`CALL ${process.env.NEXT_PUBLIC_DB_NAME}.SP_USER_DELETE(?)`, [id]);
 
       if (!result || result.length === 0 || result[0].length === 0) {
         return res.status(404).json({ error: 'User not found' });

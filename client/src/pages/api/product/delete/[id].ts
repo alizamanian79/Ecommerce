@@ -13,11 +13,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(400).json({ error: 'Missing ID' });
       }
 
-      if (!validateHeaders(req, res, process.env.VALID_API_KEY_PRODUCT)) {
+      if (!validateHeaders(req, res, process.env.NEXT_PUBLIC_VALID_API_KEY_PRODUCT)) {
         return;
       }
 
-      const result: any = await query(`CALL ${process.env.DB_NAME}.SP_${apiTitle}_DELETE(?)`, [id]);
+      const result: any = await query(`CALL ${process.env.NEXT_PUBLIC_DB_NAME}.SP_${apiTitle}_DELETE(?)`, [id]);
 
       if (result.affectedRows === 0) {
         return res.status(404).json({ error: 'ID not found' });

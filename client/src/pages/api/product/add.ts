@@ -12,7 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     try {
    
-      const result: any = await query(`CALL ${process.env.DB_NAME}.SP_${apiTitle}_ADD(?,?,?,?,?,?,?,?,?,?,?)`, [pShopID,pImages,pTitle,pDescription,pMaterials,pColor,pSize,pTotal,pPrice,pType,pSeason])
+      const result: any = await query(`CALL ${process.env.NEXT_PUBLIC_DB_NAME}.SP_${apiTitle}_ADD(?,?,?,?,?,?,?,?,?,?,?)`, [pShopID,pImages,pTitle,pDescription,pMaterials,pColor,pSize,pTotal,pPrice,pType,pSeason])
       res.status(200).json(`${apiTitle.toLowerCase()} added successfully.`); 
 
 

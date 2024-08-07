@@ -6,7 +6,7 @@ const apiName = "SELLER";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "PUT") {
-    if (!validateHeaders(req, res,process.env.VALID_API_KEY_SELLER)) {
+    if (!validateHeaders(req, res,process.env.NEXT_PUBLIC_VALID_API_KEY_SELLER)) {
       return;
     }
 
@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       // Adjusting the way to call the stored procedure
 
       const rows: any = await query(
-        `CALL ${process.env.DB_NAME}.SP_${apiName}_UPDATE(?,?,?)`,
+        `CALL ${process.env.NEXT_PUBLIC_DB_NAME}.SP_${apiName}_UPDATE(?,?,?)`,
         [sID, sUID, sCode]
       ); // Use CALL for MySQL
       res.status(200).send("Your account information updated successfully.");

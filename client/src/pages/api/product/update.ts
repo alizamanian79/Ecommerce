@@ -6,7 +6,7 @@ const apiName = "PRODUCT";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "PUT") {
-    if (!validateHeaders(req, res,process.env.VALID_API_KEY_PRODUCT)) {
+    if (!validateHeaders(req, res,process.env.NEXT_PUBLIC_VALID_API_KEY_PRODUCT)) {
       return;
     }
 
@@ -16,7 +16,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       // Adjusting the way to call the stored procedure
 
       const rows: any = await query(
-        `CALL ${process.env.DB_NAME}.SP_${apiName}_UPDATE(?,?,?,?,?,?,?,?,?,?,?,?)`,
+        `CALL ${process.env.NEXT_PUBLIC_DB_NAME}.SP_${apiName}_UPDATE(?,?,?,?,?,?,?,?,?,?,?,?)`,
         [pID,pShopID,pImages,pTitle,pDescription,pMaterials,pColor,pSize,pTotal,pPrice,pType,pSeason]
       ); // Use CALL for MySQL
       res.status(200).send(`Your ${apiName.toLowerCase()} information updated successfully.`);

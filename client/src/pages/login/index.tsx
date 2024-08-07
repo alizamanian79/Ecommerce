@@ -72,7 +72,7 @@ const handleSignIn = async () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "headerLock": `${process.env.VALID_API_KEY_USER}`,
+        "headerLock": `${process.env.NEXT_PUBLIC_VALID_API_KEY_USER}`,
       },
       body: JSON.stringify({
         uPhone: formData.uPhone,

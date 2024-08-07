@@ -28,8 +28,8 @@ const Shop: React.FC<SHOPIF> = ({ initialData }) => {
 };
 
 async function fetchingProducts() {
-  let Domain = process.env.DOMAIN;
-  let APIKEY = process.env.VALID_API_KEY_PRODUCT;
+  let Domain = process.env.NEXT_PUBLIC_DOMAIN;
+  let APIKEY = process.env.NEXT_PUBLIC_VALID_API_KEY_PRODUCT;
   try {
     const res = await fetch(`${Domain}/api/product/list`, {
       method: "GET",
