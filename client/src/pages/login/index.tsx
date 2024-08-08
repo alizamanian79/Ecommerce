@@ -40,7 +40,7 @@ const MyForm: React.FC = () => {
 
 const handleSignUp = async () => {
   const resAdd = await fetch(
-    `${process.env.NEXT_PUBLIC_DOMAIN}/api/user/add`,
+    `http://localhost:3000/api/user/add`,
     {
       method: "POST",
       headers: {
@@ -68,7 +68,8 @@ const handleSignUp = async () => {
 
 const handleSignIn = async () => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_DOMAIN}/api/user/authorization`,
+    `http://localhost:3000/api/user/authorization`,
+
     {
       method: "POST",
       headers: {
