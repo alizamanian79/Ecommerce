@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Menu from "../GlobalComponents/Menu/Menu";
-import SendEmail from "../GlobalComponents/SendEmail/SendEmail";
-import AddressBar from "../GlobalComponents/AddressBar/AddressBar";
 import { getCookie, removeCookie } from "../../../utils/cookie/cookieUtils";
 import { useRouter } from "next/router";
 

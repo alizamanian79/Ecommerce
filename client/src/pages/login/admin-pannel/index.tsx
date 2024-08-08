@@ -1,5 +1,5 @@
 // components/CookieManager.tsx
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Spacing from '@/components/GlobalComponents/Spacing/Spacing';
 import Adminpannel from "../../../components/Admin-pannel/Layout"
 const AdminPannel: React.FC = () => {

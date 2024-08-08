@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ShopComponent from "@/components/Shop/Layout";
 
 interface SHOPIF {
-  initialData?: undefined | any[];
+  initialData?: any[]; // Removed 'undefined' as it's covered by optional type
 }
 
 const Shop: React.FC<SHOPIF> = ({ initialData }) => {
@@ -16,12 +16,11 @@ const Shop: React.FC<SHOPIF> = ({ initialData }) => {
 };
 
 async function fetchingProducts() {
-  let APIKEY = process.env.NEXT_PUBLIC_VALID_API_KEY_PRODUCT;
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/product/list`, {
       method: "GET",
       headers: {
-        headerLock: `${APIKEY}`,
+        headerLock: `${process.env.NEXT_PUBLIC_VALID_API_KEY_PRODUCT}`, // If this is a custom header, it's fine, otherwise consider 'Authorization'
       },
     });
 
@@ -32,7 +31,7 @@ async function fetchingProducts() {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.error("Error fetching user data:", error);
+    console.error("Error fetching product data:", error); // Changed log message for clarity
     return [];
   }
 }
@@ -48,7 +47,8 @@ export async function getServerSideProps() {
   } catch (error: any) {
     return {
       props: {
-        error: error.message,
+        initialData: [], // Return empty array if there's an error to avoid undefined issues
+        error: error.message, // Include error message if needed
       },
     };
   }
