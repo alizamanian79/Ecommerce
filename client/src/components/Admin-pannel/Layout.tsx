@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { getCookie, removeCookie } from "../../../utils/cookie/cookieUtils";
+import { getCookie } from "../../../utils/cookie/cookieUtils";
 import { useRouter } from "next/router";
 
+interface DecodedData {
+  uName: string;
+  // Add other properties of the decoded JWT data if needed
+}
+
 const ProfileComponent: React.FC = () => {
-  const [data, setData] = useState<any>(undefined);
+  const [data, setData] = useState<DecodedData | undefined>(undefined);
   const router = useRouter();
 
   useEffect(() => {
@@ -20,21 +25,19 @@ const ProfileComponent: React.FC = () => {
                 "Content-Type": "application/json",
                 headerLock: `${process.env.NEXT_PUBLIC_JWT_SECRET_KEY}`,
               },
-              body: JSON.stringify({
-                token,
-              }),
+              body: JSON.stringify({ token }),
             }
           );
 
           if (res.ok) {
-            const decodedData = await res.json();
+            const decodedData: DecodedData = await res.json();
             setData(decodedData);
           } else {
-            console.error("Failed to decode JWT: ", await res.text());
+            console.error("Failed to decode JWT:", await res.text());
             router.push("/login");
           }
         } catch (error) {
-          console.error("Error during fetch: ", error);
+          console.error("Error during fetch:", error);
           router.push("/login");
         }
       } else {
@@ -46,8 +49,10 @@ const ProfileComponent: React.FC = () => {
     // Initial check
     checkCookie();
 
-    // Set up interval to check cookie periodically
-    const interval = setInterval(checkCookie, 3600);
+    // Set up interval to check cookie periodically (only if necessary)
+    const interval = setInterval(() => {
+      checkCookie();
+    }, 3600000); // 3600000 ms = 1 hour
 
     // Clear the interval on component unmount
     return () => clearInterval(interval);
@@ -57,10 +62,10 @@ const ProfileComponent: React.FC = () => {
     <>
       {data && (
         <div
-          className="relative w-100 min-h-screen flex bg-hBack flex-col blur-[0] items-center"
+          className="relative w-full min-h-screen flex bg-hBack flex-col items-center"
           style={{ direction: "rtl" }}
         >
-          <div className="w-100 bg-[white] h-auto flex items-center flex-col">
+          <div className="w-full bg-white h-auto flex items-center flex-col">
             Salam {data.uName}
           </div>
         </div>
