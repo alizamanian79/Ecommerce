@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { encodeJwt } from "../../../../utils/jwt/encodeJwt";
 
 const requestMethod = "POST";
-const url = `http://localhost:3000/api/user/list`;
+const url = `${process.env.NEXT_PUBLIC_DOMAIN}/api/user/list`;
 
 export default async function handler(
   req: NextApiRequest,
