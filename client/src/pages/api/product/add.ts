@@ -1,6 +1,7 @@
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { query } from '../../../../db-connection/db';
+import { validateHeaders } from '../../../../utils/validateHeaders/validateHeaders';
 const apiTitle="PRODUCT"
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -8,11 +9,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const {pShopID,pImages,pTitle,pDescription,pMaterials,pColor,pSize,pTotal,pPrice,pType,pSeason}=req.body
 
 
-    
+    if (!validateHeaders(req, res,process.env.NEXT_PUBLIC_VALID_API_KEY_PRODUCT)) {
+      return;
+    }
 
     try {
    
-      const result: any = await query(`CALL ${process.env.DB_NAME}.SP_${apiTitle}_ADD(?,?,?,?,?,?,?,?,?,?,?)`, [pShopID,pImages,pTitle,pDescription,pMaterials,pColor,pSize,pTotal,pPrice,pType,pSeason])
+      const result: any = await query(`CALL ${process.env.NEXT_PUBLIC_DB_NAME}.SP_${apiTitle}_ADD(?,?,?,?,?,?,?,?,?,?,?)`, [pShopID,pImages,pTitle,pDescription,pMaterials,pColor,pSize,pTotal,pPrice,pType,pSeason])
       res.status(200).json(`${apiTitle.toLowerCase()} added successfully.`); 
 
 

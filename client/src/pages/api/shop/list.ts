@@ -8,14 +8,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'GET') {
 
     //Checking Header
-    if (!validateHeaders(req, res,process.env.VALID_API_KEY_SHOP)) {
+    if (!validateHeaders(req, res,process.env.NEXT_PUBLIC_VALID_API_KEY_SHOP)) {
       return;
     }
 
 
     try {
    
-      const result: any = await query(`CALL ${process.env.DB_NAME}.SP_${apiTitle}_LIST()`)
+      const result: any = await query(`CALL ${process.env.NEXT_PUBLIC_DB_NAME}.SP_${apiTitle}_LIST()`)
       res.status(200).json(result[0]); 
 
 

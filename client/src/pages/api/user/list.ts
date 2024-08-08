@@ -5,13 +5,13 @@ import { validateHeaders } from '../../../../utils/validateHeaders/validateHeade
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === 'GET') {
-  if (!validateHeaders(req, res,process.env.VALID_API_KEY_USER)) {
+  if (!validateHeaders(req, res,process.env.NEXT_PUBLIC_VALID_API_KEY_USER)) {
     return;
   }
 
     try {
       // Adjusting the way to call the stored procedure
-      const rows: any = await query(`CALL ${process.env.DB_NAME}.SP_USER_LIST()`); // Use CALL for MySQL
+      const rows: any = await query(`CALL ${process.env.NEXT_PUBLIC_DB_NAME}.SP_USER_LIST()`); // Use CALL for MySQL
 
       // if (!rows || rows.length === 0 || rows[0].length === 0) {
       //   return res.status(404).json({ error: 'No users found' });

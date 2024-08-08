@@ -8,18 +8,6 @@ interface SHOPIF {
 const Shop: React.FC<SHOPIF> = ({ initialData }) => {
   const [data, setData] = useState<any[]>(initialData || []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const initialData = await fetchingProducts();
-      setData(initialData);
-    };
-
-    // Set interval to fetch data every 10 seconds
-    const interval = setInterval(fetchData, 10000);
-
-    // Clean up interval on component unmount
-    return () => clearInterval(interval);
-  }, []);
   return (
     <>
       <ShopComponent data={data} />
@@ -28,8 +16,8 @@ const Shop: React.FC<SHOPIF> = ({ initialData }) => {
 };
 
 async function fetchingProducts() {
-  let Domain = process.env.DOMAIN;
-  let APIKEY = process.env.VALID_API_KEY_PRODUCT;
+  let Domain = process.env.NEXT_PUBLIC_DOMAIN;
+  let APIKEY = process.env.NEXT_PUBLIC_VALID_API_KEY_PRODUCT;
   try {
     const res = await fetch(`${Domain}/api/product/list`, {
       method: "GET",

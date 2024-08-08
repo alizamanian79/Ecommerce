@@ -40,11 +40,12 @@ const MyForm: React.FC = () => {
 
 const handleSignUp = async () => {
   const resAdd = await fetch(
-    `/api/user/add`,
+    `${process.env.NEXT_PUBLIC_DOMAIN}/api/user/add`,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "headerLock": `${process.env.NEXT_PUBLIC_VALID_API_KEY_USER}`,
       },
       body: JSON.stringify({
         uName: formData.uName,
@@ -67,12 +68,11 @@ const handleSignUp = async () => {
 
 const handleSignIn = async () => {
   const res = await fetch(
-    `/api/user/authorization`,
+    `${process.env.NEXT_PUBLIC_DOMAIN}/api/user/authorization`,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "headerLock": `${process.env.VALID_API_KEY_USER}`,
       },
       body: JSON.stringify({
         uPhone: formData.uPhone,
