@@ -27,7 +27,7 @@ export default async function handler(
 
         case "encode":
         const {data} = req.body
-        const jwtCode = encodeJwt(data,'1m')
+        const jwtCode = encodeJwt(data,'7d')
           // Implement your encoding logic here
           // const encodedResult = encodeJwt(payload); // Assuming payload comes from req.body or other sources
           return res.status(200).json({code:jwtCode});
