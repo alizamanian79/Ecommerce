@@ -8,6 +8,17 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  // Set CORS headers to allow requests from any origin
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, headerLock');
+
+  // Handle preflight OPTIONS request
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
   if (req.method === requestMethod) {
     const data = { uPhone: req.body.uPhone, uPassword: req.body.uPassword };
 
@@ -36,8 +47,8 @@ export default async function handler(
       );
 
       if (user) {
-        const Token = encodeJwt(user,'7d')
-        res.status(200).json({"Token":Token});
+        const Token = encodeJwt(user, '7d');
+        res.status(200).json({ "Token": Token });
       } else {
         res.status(401).json({ message: "Invalid phone number or password" });
       }

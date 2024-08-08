@@ -1,12 +1,22 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { query } from '../../../../db-connection/db';  // Ensure this query function can handle stored procedures
+import { query } from '../../../../db-connection/db';  
 import { validateHeaders } from '../../../../utils/validateHeaders/validateHeaders';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+
+  // Set CORS headers to allow requests from your frontend
+  res.setHeader('Access-Control-Allow-Origin', 'https://ecommerceshop.liara.run');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, headerLock');
+
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
   if (req.method === 'POST') {
-
-
-    if (!validateHeaders(req, res,process.env.NEXT_PUBLIC_VALID_API_KEY_USER)) {
+    if (!validateHeaders(req, res, process.env.NEXT_PUBLIC_VALID_API_KEY_USER)) {
       return;
     }
 
@@ -17,7 +27,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       console.log('Request Body:', req.body);
 
       // Adjusting the way to call the stored procedure
-      const rows: any = await query(`CALL ${process.env.NEXT_PUBLIC_DB_NAME}.SP_USER_ADD(?,?,?,?)`, [uName, uLastName, uPhone, uPassword]); // Use CALL for MySQL
+      const rows: any = await query(`CALL ${process.env.NEXT_PUBLIC_DB_NAME}.SP_USER_ADD(?,?,?,?)`, [uName, uLastName, uPhone, uPassword]);
       
       // Debugging output to verify the query result
       console.log('Query Result:', rows);
