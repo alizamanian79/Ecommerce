@@ -8,18 +8,6 @@ interface SHOPIF {
 const Shop: React.FC<SHOPIF> = ({ initialData }) => {
   const [data, setData] = useState<any[]>(initialData || []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const initialData = await fetchingProducts();
-      setData(initialData);
-    };
-
-    // Set interval to fetch data every 10 seconds
-    const interval = setInterval(fetchData, 10000);
-
-    // Clean up interval on component unmount
-    return () => clearInterval(interval);
-  }, []);
   return (
     <>
       <ShopComponent data={data} />

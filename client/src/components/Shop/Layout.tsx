@@ -6,30 +6,23 @@ import NavIcons from "../GlobalComponents/Menu/Phone/NavIcons";
 import Spacing from "../GlobalComponents/Spacing/Spacing";
 import { CiFilter } from "react-icons/ci";
 import { FaFilter } from "react-icons/fa";
-interface Product {
-  pTitle: string;
-  pPrice: string;
-  pImage: string;
-}
 
 const initialCheckboxes = {
   cap: false,
   clothes: false,
-  pants:false,
-  woman:false,
-  man:false,
-  child:false
+  pants: false,
+  woman: false,
+  man: false,
+  child: false,
 };
 
 interface ShopComponentProps {
-  data: Product[] | undefined;
+  data: any[] | undefined;
 }
 
 const ShopComponent: React.FC<ShopComponentProps> = ({ data }) => {
-  const [products, setProducts] = useState<Product[]>(data || []);
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>(
-    data || []
-  );
+  const [products, setProducts] = useState<any[]>(data || []);
+  const [filteredProducts, setFilteredProducts] = useState<any[]>(data || []);
   const [state, setState] = useState(initialCheckboxes);
 
   useEffect(() => {
@@ -40,10 +33,6 @@ const ShopComponent: React.FC<ShopComponentProps> = ({ data }) => {
         item.pTitle.includes("کلاه")
       );
     }
- 
-
-
-
 
     if (state.clothes) {
       updatedProducts = updatedProducts.filter((item) =>
@@ -57,28 +46,31 @@ const ShopComponent: React.FC<ShopComponentProps> = ({ data }) => {
       );
     }
 
-
-
     if (state.woman) {
-      updatedProducts = updatedProducts.filter((item) =>
-        item.pTitle.includes("زنانه")
-      );
+      updatedProducts = updatedProducts.filter((item) => item.pType == 2);
     }
     if (state.man) {
-      updatedProducts = updatedProducts.filter((item) =>
-        item.pTitle.includes("مردانه")
-      );
+      updatedProducts = updatedProducts.filter((item) => item.pType == 1);
     }
     if (state.child) {
-      updatedProducts = updatedProducts.filter((item) =>
-        item.pTitle.includes("بچه گانه")
-      );
+      updatedProducts = updatedProducts.filter((item) => item.pType == 3);
     }
-
-
 
     setFilteredProducts(updatedProducts);
   }, [state, products]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const initialData = await fetchingProducts();
+      setProducts(initialData);
+    };
+
+    // Set interval to fetch data every 10 seconds
+    const interval = setInterval(fetchData, 10000);
+
+    // Clean up interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({
@@ -97,32 +89,36 @@ const ShopComponent: React.FC<ShopComponentProps> = ({ data }) => {
         ]}
       />
       <Spacing>
-        <div className="w-100 h-auto flex mt-2 flex-wrap-reverse">
-
-
-          <div className="w-[100%] md:w-80 
+        <div className="w-100 relative h-auto flex mt-2 flex-wrap-reverse ">
+          <div
+            className="w-[100%] md:w-80 
           h-auto flex flex-row  flex-wrap
           
-          md:justify-end justify-end">
+          md:justify-end justify-end"
+          >
             {filteredProducts.length === 0 ? (
               <p>Not found</p>
             ) : (
-              filteredProducts.map((item: Product, index: number) => (
+              filteredProducts.map((item: any, index: number) => (
                 <Card key={index} data={item} />
               ))
             )}
           </div>
 
           {/* Filters Part */}
+
           <div
             className="
+            absolute
+            top-0
+            right-0
             w-[100%] h-[auto]
             md:w-[20%]
            hidden
             md:flex md:h-[500px]
             
               flex-col
-           bg-[#f5f5f5] rounded-md px-4 py-4"
+           bg-[#f9f9f9] rounded-md px-4 py-4"
             style={{ direction: "rtl" }}
           >
             <div className="flex justify-between items-center">
@@ -140,7 +136,10 @@ const ShopComponent: React.FC<ShopComponentProps> = ({ data }) => {
               />
               <p className="font-[yekanBakht] text-[18px] mr-1 mt-1">کلاه</p>
             </label>
-            <label htmlFor="clothes" className="flex w-100 h-[auto]  items-center">
+            <label
+              htmlFor="clothes"
+              className="flex w-100 h-[auto]  items-center"
+            >
               <input
                 type="checkbox"
                 onChange={handleChange}
@@ -149,7 +148,10 @@ const ShopComponent: React.FC<ShopComponentProps> = ({ data }) => {
               />
               <p className="font-[yekanBakht] text-[18px] mr-1 mt-1">لباس</p>
             </label>
-            <label htmlFor="pants" className="flex w-100 h-[auto]  items-center">
+            <label
+              htmlFor="pants"
+              className="flex w-100 h-[auto]  items-center"
+            >
               <input
                 type="checkbox"
                 onChange={handleChange}
@@ -159,10 +161,11 @@ const ShopComponent: React.FC<ShopComponentProps> = ({ data }) => {
               <p className="font-[yekanBakht] text-[18px] mr-1 mt-1">شلوار</p>
             </label>
 
-
-
             <p className="font-[yekanBakht] text-[20px]">برحسب نوع جنسیت</p>
-            <label htmlFor="woman" className="flex w-100 h-[auto]  items-center">
+            <label
+              htmlFor="woman"
+              className="flex w-100 h-[auto]  items-center"
+            >
               <input
                 type="checkbox"
                 onChange={handleChange}
@@ -171,7 +174,6 @@ const ShopComponent: React.FC<ShopComponentProps> = ({ data }) => {
               />
               <p className="font-[yekanBakht] text-[18px] mr-1 mt-1">زنانه</p>
             </label>
-
 
             <label htmlFor="man" className="flex w-100 h-[auto]  items-center">
               <input
@@ -183,19 +185,20 @@ const ShopComponent: React.FC<ShopComponentProps> = ({ data }) => {
               <p className="font-[yekanBakht] text-[18px] mr-1 mt-1">مردانه</p>
             </label>
 
-
-            <label htmlFor="child" className="flex w-100 h-[auto]  items-center">
+            <label
+              htmlFor="child"
+              className="flex w-100 h-[auto]  items-center"
+            >
               <input
                 type="checkbox"
                 onChange={handleChange}
                 name="child"
                 checked={state.child}
               />
-              <p className="font-[yekanBakht] text-[18px] mr-1 mt-1">بچه گانه</p>
+              <p className="font-[yekanBakht] text-[18px] mr-1 mt-1">
+                بچه گانه
+              </p>
             </label>
-
-
-
           </div>
         </div>
       </Spacing>
@@ -203,5 +206,28 @@ const ShopComponent: React.FC<ShopComponentProps> = ({ data }) => {
     </>
   );
 };
+
+async function fetchingProducts() {
+  let Domain = process.env.NEXT_PUBLIC_DOMAIN;
+  let APIKEY = process.env.NEXT_PUBLIC_VALID_API_KEY_PRODUCT;
+  try {
+    const res = await fetch(`${Domain}/api/product/list`, {
+      method: "GET",
+      headers: {
+        headerLock: `${APIKEY}`,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    return [];
+  }
+}
 
 export default ShopComponent;

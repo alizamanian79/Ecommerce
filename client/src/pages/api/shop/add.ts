@@ -1,11 +1,18 @@
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { query } from '../../../../db-connection/db';
+import { validateHeaders } from '../../../../utils/validateHeaders/validateHeaders';
 const apiTitle="SHOP"
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     const {sellerID,shName,shDescription,shAddress,shPhone}=req.body
+
+
+    if (!validateHeaders(req, res,process.env.NEXT_PUBLIC_VALID_API_KEY_SHOP)) {
+      return;
+    }
+
 
     try {
    

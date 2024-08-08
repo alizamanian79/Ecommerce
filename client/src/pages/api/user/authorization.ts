@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { encodeJwt } from "../../../../utils/jwt/encodeJwt";
 
 const requestMethod = "POST";
-const url = 'http://localhost:3000/api/user/list';
+const url = `${process.env.NEXT_PUBLIC_DOMAIN}/api/user/list`;
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,7 +15,8 @@ export default async function handler(
       const response = await fetch(url, {
         method: 'GET',
         headers: {
-          'headerLock': `${process.env.NEXT_PUBLIC_VALID_API_KEY_USER}`
+          "Content-Type": "application/json",
+          "headerLock": `${process.env.NEXT_PUBLIC_VALID_API_KEY_USER}`,
         }
       });
 
@@ -35,7 +36,7 @@ export default async function handler(
       );
 
       if (user) {
-        const Token = encodeJwt(user)
+        const Token = encodeJwt(user,'3600s')
         res.status(200).json({"Token":Token});
       } else {
         res.status(401).json({ message: "Invalid phone number or password" });
