@@ -1,17 +1,10 @@
 import { GetServerSideProps } from 'next';
 import React, { useState, useEffect } from 'react';
 
-interface User {
-  uID:string;
-  uName: string;
-  uLastName: string;
-  uPhone: string;
-  uPassword: string;
-  uGmail: string;
-}
+
 
 interface Datas {
-  listData: User[];
+  listData: any[];
   domain: string;
 }
 
@@ -21,11 +14,11 @@ const [data, setData] = useState(listData)
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await userData();
+        const res = await fetchData();
         setData(data)
-        // console.log(data)
+        console.log(data)
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error('Error fetching seller data:', error);
       }
     };
 
@@ -42,6 +35,10 @@ const [data, setData] = useState(listData)
 
   return (
     <>
+
+
+
+
       <div>UserPages {domain}</div>
       {data &&
       (
@@ -49,10 +46,11 @@ const [data, setData] = useState(listData)
           <>
           <br/>
           <div key={item.uID} className='flex flex-col'>
-            <label htmlFor="" onClick={()=>handleCopy(item.uName)}>Name: {item.uName}</label>
-            <label htmlFor="" onClick={()=>handleCopy(item.uLastName)}>lastName: {item.uLastName}</label>
-            <label htmlFor="" onClick={()=>handleCopy(item.uPhone)}>Phone: {item.uPhone}</label>
-            <label htmlFor="" onClick={()=>handleCopy(item.uPassword)}>Password: {item.uPassword}</label>
+            <label htmlFor="" onClick={()=>handleCopy(item.sID)}>sID: {item.sID}</label>
+            <label htmlFor="" onClick={()=>handleCopy(item.sCode)}>sCode: {item.sCode}</label>
+            <label htmlFor="" onClick={()=>handleCopy(item.uID)}>userID: {item.uID}</label>
+            <label htmlFor="" onClick={()=>handleCopy(item.uName)}>owner: {item.uName} - {item.uLastName}</label>
+            <label htmlFor="" onClick={()=>handleCopy(item.uAddress)}>Address: {item.uAddress}</label>
           </div>
           <br/>
           </>
@@ -65,12 +63,12 @@ const [data, setData] = useState(listData)
   );
 };
 
-async function userData() {
+async function fetchData() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/user/list`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/seller/list`, {
       method: 'GET',
       headers: {
-        'headerLock': `${process.env.NEXT_PUBLIC_VALID_API_KEY_USER}`
+        'headerLock': `${process.env.NEXT_PUBLIC_VALID_API_KEY_SELLER}`
       }
     });
 
@@ -85,7 +83,7 @@ async function userData() {
 export const getServerSideProps: GetServerSideProps = async () => {
  
   try {
-    const listData = await userData();
+    const listData = await fetchData();
     return {
       props: { listData },
     };
