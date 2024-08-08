@@ -36,7 +36,7 @@ export default async function handler(
       );
 
       if (user) {
-        const Token = encodeJwt(user,'3600s')
+        const Token = encodeJwt(user,'7d')
         res.status(200).json({"Token":Token});
       } else {
         res.status(401).json({ message: "Invalid phone number or password" });

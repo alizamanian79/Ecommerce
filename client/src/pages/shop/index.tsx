@@ -16,10 +16,9 @@ const Shop: React.FC<SHOPIF> = ({ initialData }) => {
 };
 
 async function fetchingProducts() {
-  let Domain = process.env.NEXT_PUBLIC_DOMAIN;
   let APIKEY = process.env.NEXT_PUBLIC_VALID_API_KEY_PRODUCT;
   try {
-    const res = await fetch(`${Domain}/api/product/list`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/product/list`, {
       method: "GET",
       headers: {
         headerLock: `${APIKEY}`,
