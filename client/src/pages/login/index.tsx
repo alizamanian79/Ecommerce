@@ -84,7 +84,7 @@ const handleSignIn = async () => {
   if (res.ok) {
     const data = await res.json();
     setCookie('Token', data.Token, { maxAge: 86400 });
-    // router.push(`/login/admin-pannel`);
+    router.push(`/login/admin-pannel`);
   } else {
     setIsWrong(true);
     console.error("Error:", res.statusText, "Status Code:", res.status);
