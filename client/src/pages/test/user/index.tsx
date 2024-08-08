@@ -67,7 +67,7 @@ const [data, setData] = useState(listData)
 
 async function userData() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/user/list`, {
+    const res = await fetch(`http://localhost:3000/api/user/list`, {
       method: 'GET',
       headers: {
         'headerLock': `${process.env.NEXT_PUBLIC_VALID_API_KEY_USER}`

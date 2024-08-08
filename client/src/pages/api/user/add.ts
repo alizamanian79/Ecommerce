@@ -4,11 +4,6 @@ import { validateHeaders } from '../../../../utils/validateHeaders/validateHeade
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
-  // Set CORS headers to allow requests from your frontend
-  res.setHeader('Access-Control-Allow-Origin', 'https://ecommerceshop.liara.run');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, headerLock');
-
   // Handle preflight requests
   if (req.method === 'OPTIONS') {
     res.status(200).end();
