@@ -61,7 +61,12 @@ const ShopComponent: React.FC<ShopComponentProps> = ({ data }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-  
+      try {
+        const initialData = await fetchingProducts();
+        setProducts(initialData);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     // Set interval to fetch data every 10 seconds
@@ -207,9 +212,8 @@ const ShopComponent: React.FC<ShopComponentProps> = ({ data }) => {
 };
 
 async function fetchingProducts() {
-  let APIKEY = process.env.NEXT_PUBLIC_VALID_API_KEY_PRODUCT;
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/product/list`, {
+    const res = await fetch(`/api/product/list`, {
       method: "GET",
       headers: {
         headerLock: `${process.env.NEXT_PUBLIC_VALID_API_KEY_PRODUCT}`,

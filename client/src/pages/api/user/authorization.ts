@@ -1,57 +1,45 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { encodeJwt } from "../../../../utils/jwt/encodeJwt";
+import type { NextApiRequest, NextApiResponse } from "next";  
+import { encodeJwt } from "../../../../utils/jwt/encodeJwt";  
 
-const requestMethod = "POST";
-const url = `${process.env.NEXT_PUBLIC_DOMAIN}/api/user/list`;
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(  
+  req: NextApiRequest,  
+  res: NextApiResponse  
+) {  
+  
 
-  // Handle preflight OPTIONS request
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
-  }
+  if (req.method === "POST") {  
+    const {uPhone,uPassword} = req.body;  
 
-  if (req.method === requestMethod) {
-    const data = { uPhone: req.body.uPhone, uPassword: req.body.uPassword };
+    try {  
+      const response = await fetch("http://localhost:3000/api/user/list", {  
+        method: 'GET', 
+        headers: {  
+          "Content-Type": "application/json",  
+          "headerLock": `${process.env.NEXT_PUBLIC_VALID_API_KEY_USER}`,  
+        },  
+      });  
 
-    try {
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          "Content-Type": "application/json",
-          "headerLock": `${process.env.NEXT_PUBLIC_VALID_API_KEY_USER}`,
-        }
-      });
+      if (!response.ok) {  
+        throw new Error(`Error fetching data: ${response.statusText}`);  
+      }  
 
-      if (!response.ok) {
-        throw new Error(`Error fetching data: ${response.statusText}`);
-      }
+      const users = await response.json();  
 
-      const users = await response.json();
+      const user = users.find((item: any) =>  
+        item.uPhone === uPhone && item.uPassword === uPassword  
+      );  
 
-      if (!Array.isArray(users)) {
-        throw new Error('Fetched data is not an array');
-      }
-
-      const user = users.find(
-        (item: any) =>
-          item.uPhone === data.uPhone && item.uPassword === data.uPassword
-      );
-
-      if (user) {
-        const Token = encodeJwt(user, '7d');
-        res.status(200).json({ "Token": Token });
-      } else {
-        res.status(401).json({ message: "Invalid phone number or password" });
-      }
-    } catch (error: any) {
-      res.status(500).json({ message: "Internal server error", error: error.message });
-    }
-  } else {
-    res.status(405).json({ message: "Request method not allowed" });
-  }
+      if (user) {  
+        const Token = encodeJwt(user, '7d');  
+        res.status(200).json({"Token":Token});  
+      } else {  
+        res.status(401).json({ message: "Invalid phone number or password" });  
+      }  
+    } catch (error: any) {  
+      res.status(500).json({ message: "Internal server error", error: error.message });  
+    }  
+  } else {  
+    res.status(405).json({ message: "Request method not allowed" });  
+  }  
 }

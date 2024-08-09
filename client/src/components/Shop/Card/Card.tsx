@@ -11,6 +11,9 @@ interface CARDIF {
   data: any;
 }
 
+
+
+
 const Card: React.FC<CARDIF> = ({ data }) => {
   let number = parseInt(data.pPrice);
 
@@ -27,6 +30,8 @@ const Card: React.FC<CARDIF> = ({ data }) => {
   const handleAddToFavorite = (data: any) => {
     alert(data.pTitle);
   };
+
+
 
   return (
     <div
@@ -69,7 +74,7 @@ const Card: React.FC<CARDIF> = ({ data }) => {
 <div className="w-100 h-[50%] object-cover flex justify-center items-center">
  <Image
         className={`w-[100%] flex justify-center items-center h-[100%]  object-cover`}
-        src={`data:image/png;base64,${defaultProductImage}`}
+        src={data.pImages.length != 0 ?`data:image/png;base64,${data.pImages[0]}`: `data:image/png;base64,${defaultProductImage}`}
         // src={data.pImages[1]!==null? `data:image/png;base64,${data.pImages[1]}`:`data:image/png;base64,${defaultProductImage}`}
 
         width={0}

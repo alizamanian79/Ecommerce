@@ -17,7 +17,7 @@ const Shop: React.FC<SHOPIF> = ({ initialData }) => {
 
 async function fetchingProducts() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/product/list`, {
+    const res = await fetch(`http://localhost:3000/api/product/list`, {
       method: "GET",
       headers: {
         headerLock: `${process.env.NEXT_PUBLIC_VALID_API_KEY_PRODUCT}`, // If this is a custom header, it's fine, otherwise consider 'Authorization'
