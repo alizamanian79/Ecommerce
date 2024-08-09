@@ -18,7 +18,7 @@ const ProfileComponent: React.FC = () => {
       if (token) {
         try {
           const res = await fetch(
-            `${process.env.NEXT_PUBLIC_DOMAIN}/api/jwt/decode`,
+            `/api/jwt/decode`,
             {
               method: "POST",
               headers: {

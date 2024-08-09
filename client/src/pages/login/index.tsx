@@ -172,13 +172,13 @@ const MyForm: React.FC = () => {
         </label>  
 
         {isWrong && (  
-          <h4 className="mt-3 text-red-500">Incorrect Phone number or Password. Please try again.</h4>  
+          <h4 className="mt-3 text-[red]">Incorrect Phone number or Password. Please try again.</h4>  
         )}  
 
         {!isSignUp && <h4 className="mt-3 cursor-pointer text-blue-500">Forgot password?</h4>}  
 
         <h4  
-          className="mt-3 cursor-pointer text-blue-500"  
+          className="mt-3 cursor-pointer text-[#3598ef]"  
           onClick={() => {  
             setIsSignUp(!isSignUp);  
             setIsWrong(false); // Reset error state on switch  
