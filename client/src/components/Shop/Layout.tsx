@@ -61,8 +61,7 @@ const ShopComponent: React.FC<ShopComponentProps> = ({ data }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const initialData = await fetchingProducts();
-      setProducts(initialData);
+  
     };
 
     // Set interval to fetch data every 10 seconds
